@@ -58,7 +58,7 @@ const HomePage = () => {
                     </h1>
                     <p className="hero__subtitle">
                         Hostel, Food, Health &amp; Laundry — all managed from a single,
-                        simple platform built specifically for student life in Sri Lanka.
+                        simple platform built specifically for student life at SLIIT.
                     </p>
                     <div className="hero__cta">
                         <a href="#services" className="hero-btn hero-btn--primary">
