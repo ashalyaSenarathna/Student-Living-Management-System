@@ -127,7 +127,7 @@ const HomePage = () => {
                 <div className="cta__content">
                     <h2 className="cta__title">Ready to simplify your student life?</h2>
                     <p className="cta__subtitle">
-                        Join thousands of students already using StudentLive across Sri Lanka.
+                        Join thousands of students already using StudentLive across SLIIT.
                     </p>
                     <a href="#register" className="hero-btn hero-btn--primary">
                         Sign Up Free
