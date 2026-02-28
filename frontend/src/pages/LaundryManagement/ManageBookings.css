@@ -1,0 +1,183 @@
+.manage-bookings-page {
+    min-height: 100vh;
+    padding: 120px 2rem 60px;
+    background: #060a1f;
+    color: #fff;
+}
+
+.manage-header {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    text-align: center;
+}
+
+.manage-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff, rgba(255, 255, 255, 0.7));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.manage-header p {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.bookings-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.bookings-table-wrapper {
+    background: rgba(13, 18, 43, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 1.5rem;
+    overflow-x: auto;
+}
+
+.bookings-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.bookings-table th {
+    text-align: left;
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.bookings-table td {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.student-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.student-name {
+    font-weight: 600;
+}
+
+.student-email {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.service-tags-mini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.service-tag-xs {
+    background: rgba(108, 99, 255, 0.1);
+    color: #6c63ff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+.pickup-time-cell {
+    display: flex;
+    flex-direction: column;
+}
+
+.pickup-time-cell .date {
+    font-weight: 600;
+}
+
+.pickup-time-cell .time {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.price-tag {
+    color: #10b981;
+    font-weight: 700;
+}
+
+.status-badge-lg {
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.status-badge-lg.pending {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+}
+
+.status-badge-lg.confirmed {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+.status-badge-lg.picked-up {
+    background: rgba(168, 85, 247, 0.1);
+    color: #a855f7;
+}
+
+.status-badge-lg.in-progress {
+    background: rgba(236, 72, 153, 0.1);
+    color: #ec4899;
+}
+
+.status-badge-lg.ready {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.status-badge-lg.completed {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.status-badge-lg.cancelled {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.status-select {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+.manage-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.no-bookings {
+    text-align: center;
+    padding: 5rem;
+}
+
+.no-bookings h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.no-bookings p {
+    color: rgba(255, 255, 255, 0.5);
+}

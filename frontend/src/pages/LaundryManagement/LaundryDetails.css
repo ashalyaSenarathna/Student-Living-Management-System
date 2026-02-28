@@ -1,0 +1,349 @@
+.laundry-details-page {
+    background: #060a1f;
+    color: #fff;
+    min-height: 100vh;
+    padding-bottom: 5rem;
+}
+
+.details-hero {
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: flex-end;
+    padding: 4rem 2rem;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.hero-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-meta span {
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.rating-pill {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.reviews-pill {
+    background: rgba(108, 99, 255, 0.2);
+    color: #a78bfa;
+}
+
+.status-pill.open {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.status-pill.closed {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.hero-address,
+.hero-contact {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.details-grid {
+    max-width: 1200px;
+    margin: -4rem auto 0;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.details-main section {
+    background: rgba(13, 18, 43, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.details-main h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.service-item:last-child {
+    border-bottom: none;
+}
+
+.service-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.4rem;
+}
+
+.service-info p {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+}
+
+.service-price {
+    text-align: right;
+}
+
+.service-price .amount {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #6c63ff;
+}
+
+.service-price .unit {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Review Form */
+.add-review-box {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 3rem;
+}
+
+.add-review-box h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+
+.rating-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.star {
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.star.active {
+    color: #f59e0b;
+}
+
+.comment-input textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    color: #fff;
+    min-height: 120px;
+    margin-bottom: 1.5rem;
+    font-family: inherit;
+}
+
+.submit-review-btn {
+    background: linear-gradient(135deg, #6c63ff, #a855f7);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.review-status {
+    margin-top: 1rem;
+    color: #10b981;
+}
+
+/* Reviews List */
+.review-card {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.user-initial {
+    width: 45px;
+    height: 45px;
+    background: #6c63ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.user-meta h4 {
+    margin-bottom: 0.2rem;
+}
+
+.review-stars {
+    color: #f59e0b;
+    font-size: 0.9rem;
+}
+
+.review-date {
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.85rem;
+}
+
+.review-comment {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/* Sidebar */
+.details-sidebar>div {
+    background: rgba(13, 18, 43, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.booking-card h3,
+.info-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.booking-card p {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+}
+
+.book-now-btn {
+    width: 100%;
+    background: #fff;
+    color: #060a1f;
+    border: none;
+    padding: 1.25rem;
+    border-radius: 16px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+}
+
+.book-now-btn:hover {
+    background: #6c63ff;
+    color: #fff;
+}
+
+.perks-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+}
+
+.booking-success-mini {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 16px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+.booking-success-mini p {
+    color: #10b981;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.book-again-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.book-again-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.perks-list li {
+    margin-bottom: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+.hours-list {
+    list-style: none;
+    padding: 0;
+}
+
+.hours-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 992px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}

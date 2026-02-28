@@ -1,140 +1,102 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './HomePage.css';
-
-const services = [
-    {
-        id: 1,
-        icon: '🏠',
-        title: 'Hostel',
-        desc: 'Find and manage your student accommodation with ease. Browse available rooms, book instantly, and handle all rental matters from one dashboard.',
-        color: '#6c63ff',
-        features: ['Room Booking', 'Lease Management', 'Room Transfers'],
-    },
-    {
-        id: 2,
-        icon: '🍽️',
-        title: 'Food',
-        desc: 'Never skip a meal. Order from your hostel canteen, track meal plans, and get nutritious food delivered right to your room.',
-        color: '#f59e0b',
-        features: ['Meal Plans', 'Online Ordering', 'Dietary Preferences'],
-    },
-    {
-        id: 3,
-        icon: '❤️',
-        title: 'Health',
-        desc: 'Your wellness matters. Book appointments with campus health professionals, access medical records, and stay on top of your health.',
-        color: '#ef4444',
-        features: ['Doctor Appointments', 'Health Records', '24/7 Emergency'],
-    },
-    {
-        id: 4,
-        icon: '👕',
-        title: 'Laundry',
-        desc: 'Schedule laundry pickups, track your clothes, and get them back fresh and folded — without ever leaving your room.',
-        color: '#10b981',
-        features: ['Pickup Scheduling', 'Real-time Tracking', 'Express Service'],
-    },
-];
 
 const HomePage = () => {
     return (
-        <main className="homepage">
-            {/* ── Background Orbs ── */}
-            <div className="bg-orb orb-1" />
-            <div className="bg-orb orb-2" />
-            <div className="bg-orb orb-3" />
+        <div className="homepage">
+            {/* Hero Section */}
+            <section className="hero">
+                <div className="hero__background">
+                    <div className="blob blob-1"></div>
+                    <div className="blob blob-2"></div>
+                    <div className="blob blob-3"></div>
+                </div>
 
-            {/* ── HERO ── */}
-            <section className="hero" id="home">
                 <div className="hero__content">
-                    <div className="hero__badge">
-                        <span className="badge__dot" />
-                        Your All-in-One Student Living Platform
-                    </div>
+                    <div className="hero__badge">✨ The Future of Student Living</div>
                     <h1 className="hero__title">
-                        Everything You Need,
-                        <br />
-                        <span className="hero__gradient">Right Here.</span>
+                        Elevate Your <span className="text-gradient">University Experience</span>
                     </h1>
                     <p className="hero__subtitle">
-                        Hostel, Food, Health &amp; Laundry — all managed from a single,
-                        simple platform built specifically for student life at SLIIT.
+                        Seamlessly manage your student life. From premium laundry services to social hubs,
+                        everything you need is just one click away.
                     </p>
-                    <div className="hero__cta">
-                        <a href="#services" className="hero-btn hero-btn--primary">
-                            Explore Services <span>↓</span>
-                        </a>
-                        <a href="#register" className="hero-btn hero-btn--outline">
-                            Get Started Free
-                        </a>
+                    <div className="hero__actions">
+                        <Link to="/register" className="btn-primary-large">Get Started Now</Link>
+                        <Link to="/laundry" className="btn-secondary-large">Explore Services</Link>
+                    </div>
+
+                    <div className="hero__stats">
+                        <div className="hero__stat-item">
+                            <span className="stat-num">500+</span>
+                            <span className="stat-label">Happy Students</span>
+                        </div>
+                        <div className="divider-v"></div>
+                        <div className="hero__stat-item">
+                            <span className="stat-num">24/7</span>
+                            <span className="stat-label">Support</span>
+                        </div>
+                        <div className="divider-v"></div>
+                        <div className="hero__stat-item">
+                            <span className="stat-num">100%</span>
+                            <span className="stat-label">Safe & Secure</span>
+                        </div>
                     </div>
                 </div>
 
-                {/* Mini stats */}
-                <div className="hero__stats">
-                    {[
-                        { value: '2,500+', label: 'Students' },
-                        { value: '4', label: 'Services' },
-                        { value: '150+', label: 'Hostels' },
-                        { value: '98%', label: 'Satisfaction' },
-                    ].map((s, i) => (
-                        <div key={i} className="hero__stat">
-                            <span className="hero__stat-value">{s.value}</span>
-                            <span className="hero__stat-label">{s.label}</span>
+                <div className="hero__image-container">
+                    <div className="glass-card main-card">
+                        <div className="card-header">
+                            <div className="dots"><span></span><span></span><span></span></div>
                         </div>
-                    ))}
-                </div>
-            </section>
-
-            {/* ── SERVICES ── */}
-            <section className="services section" id="services">
-                <div className="section__header">
-                    <span className="eyebrow">What We Offer</span>
-                    <h2 className="section__title">Our Services</h2>
-                    <p className="section__subtitle">
-                        Four core services designed to make student living simpler, safer, and more comfortable.
-                    </p>
-                </div>
-
-                <div className="services__grid">
-                    {services.map((svc) => (
-                        <div key={svc.id} className="service-card" style={{ '--accent': svc.color }}>
-                            <div className="service-card__icon" style={{ background: svc.color + '20', color: svc.color }}>
-                                {svc.icon}
+                        <div className="card-mockup">
+                            <div className="mockup-row header"></div>
+                            <div className="mockup-grid">
+                                <div className="mockup-item"></div>
+                                <div className="mockup-item"></div>
+                                <div className="mockup-item"></div>
+                                <div className="mockup-item"></div>
                             </div>
-                            <h3 className="service-card__title">{svc.title}</h3>
-                            <p className="service-card__desc">{svc.desc}</p>
-                            <ul className="service-card__features">
-                                {svc.features.map((f, i) => (
-                                    <li key={i}>
-                                        <span className="feature-dot" style={{ background: svc.color }} />
-                                        {f}
-                                    </li>
-                                ))}
-                            </ul>
-                            <a href={`#${svc.title.toLowerCase()}`} className="service-card__link" style={{ color: svc.color }}>
-                                Learn more →
-                            </a>
                         </div>
-                    ))}
+                    </div>
+                    <div className="glass-card floating-card-1">
+                        <div className="icon">🧺</div>
+                        <div className="text">Laundry ready!</div>
+                    </div>
+                    <div className="glass-card floating-card-2">
+                        <div className="icon">💳</div>
+                        <div className="text">Payment safe</div>
+                    </div>
                 </div>
             </section>
 
-            {/* ── CTA ── */}
-            <section className="cta-section">
-                <div className="cta-orb cta-orb-1" />
-                <div className="cta-orb cta-orb-2" />
-                <div className="cta__content">
-                    <h2 className="cta__title">Ready to simplify your student life?</h2>
-                    <p className="cta__subtitle">
-                        Join thousands of students already using StudentLive across SLIIT.
-                    </p>
-                    <a href="#register" className="hero-btn hero-btn--primary">
-                        Sign Up Free
-                    </a>
+            {/* Features Section */}
+            <section className="features" id="services">
+                <div className="section-header">
+                    <h2>Premium Features</h2>
+                    <p>Designed specifically for the modern student lifestyle.</p>
+                </div>
+
+                <div className="features__grid">
+                    <div className="feature-card">
+                        <div className="feature-icon">🧼</div>
+                        <h3>Smart Laundry</h3>
+                        <p>Schedule, track, and pay for your laundry services without leaving your room.</p>
+                    </div>
+                    <div className="feature-card">
+                        <div className="feature-icon">🤝</div>
+                        <h3>Community Hub</h3>
+                        <p>Connect with fellow residents and discover local student events effortlessly.</p>
+                    </div>
+                    <div className="feature-card">
+                        <div className="feature-icon">🛡️</div>
+                        <h3>24/7 Security</h3>
+                        <p>Your safety is our priority. Integrated emergency services and secure access.</p>
+                    </div>
                 </div>
             </section>
-        </main>
+        </div>
     );
 };
 

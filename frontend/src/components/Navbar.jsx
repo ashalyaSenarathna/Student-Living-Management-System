@@ -1,67 +1,118 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [user, setUser] = useState(null);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll);
+
+        // Load user info from localStorage
+        const storedUser = localStorage.getItem('userInfo');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [location.pathname]);
+
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        setUser(null);
+        window.location.reload();
+    };
 
     return (
         <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
             <div className="navbar__container">
-                {/* Logo */}
-                <a href="#home" className="navbar__logo">
+                <Link to="/" className="navbar__logo">
                     <div className="navbar__logo-icon">🏠</div>
-                    <span className="navbar__logo-text">
-                        Student<span className="navbar__logo-accent">Live</span>
-                    </span>
-                </a>
+                    <span className="navbar__logo-text">Student<span className="navbar__logo-accent">Living</span></span>
+                </Link>
 
-                {/* Desktop Nav Links */}
-                <ul className="navbar__links">
-                    <li><a href="#home" className="navbar__link navbar__link--active">Home</a></li>
-                    <li><a href="#features" className="navbar__link">Features</a></li>
-                    <li><a href="#services" className="navbar__link">Services</a></li>
-                    <li><a href="#testimonials" className="navbar__link">Testimonials</a></li>
-                    <li><a href="#contact" className="navbar__link">Contact</a></li>
-                </ul>
-
-                {/* CTA Buttons */}
-                <div className="navbar__actions">
-                    <a href="#login" className="btn btn--ghost">Login</a>
-                    <a href="#register" className="btn btn--primary">Get Started</a>
+                <div className={`navbar__menu ${menuOpen ? 'navbar__menu--active' : ''}`}>
+                    <ul className="navbar__list">
+                        <li><Link to="/" className={`navbar__link ${location.pathname === '/' ? 'navbar__link--active' : ''}`}>Home</Link></li>
+                        <li><Link to="/laundry" className={`navbar__link ${location.pathname === '/laundry' ? 'navbar__link--active' : ''}`}>Laundry</Link></li>
+                        {user && user.role?.toUpperCase() !== 'PROVIDER' && user.role?.toUpperCase() !== 'ADMIN' && (
+                            <li><Link to="/my-bookings" className={`navbar__link ${location.pathname === '/my-bookings' ? 'navbar__link--active' : ''}`}>My Bookings</Link></li>
+                        )}
+                        {user && user.role?.toUpperCase() === 'PROVIDER' && (
+                            <>
+                                <li><Link to="/add-laundry" className={`navbar__link ${location.pathname === '/add-laundry' ? 'navbar__link--active' : ''}`}>Manage Shop</Link></li>
+                                <li><Link to="/manage-bookings" className={`navbar__link ${location.pathname === '/manage-bookings' ? 'navbar__link--active' : ''}`}>Bookings</Link></li>
+                            </>
+                        )}
+                        {user && user.role?.toUpperCase() === 'ADMIN' && (
+                            <li><Link to="/admin" className={`navbar__link ${location.pathname === '/admin' ? 'navbar__link--active' : ''}`}>Admin</Link></li>
+                        )}
+                    </ul>
                 </div>
 
-                {/* Hamburger */}
-                <button
-                    className={`navbar__hamburger ${menuOpen ? 'open' : ''}`}
-                    onClick={() => setMenuOpen(!menuOpen)}
-                    aria-label="Toggle menu"
-                >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <div className="navbar__actions">
+                    {user ? (
+                        <div className="navbar__user-profile">
+                            <Link to="/profile" className="user-info">
+                                <span className="user-name">Hi, {user.username}</span>
+                                <div className="user-avatar">
+                                    {user.username.charAt(0).toUpperCase()}
+                                </div>
+                            </Link>
+                            <button onClick={handleLogout} className="btn-logout">
+                                <span className="logout-icon">⏻</span>
+                                Logout
+                            </button>
+                        </div>
+                    ) : (
+                        <>
+                            <Link to="/login" className="btn btn--ghost">Login</Link>
+                            <Link to="/register" className="btn btn--primary">Get Started</Link>
+                        </>
+                    )}
+
+                    <button className="navbar__toggle" onClick={() => setMenuOpen(!menuOpen)}>
+                        <div className={`hamburger ${menuOpen ? 'hamburger--open' : ''}`}></div>
+                    </button>
+                </div>
             </div>
 
-            {/* Mobile Menu */}
-            <div className={`navbar__mobile-menu ${menuOpen ? 'navbar__mobile-menu--open' : ''}`}>
-                <ul>
-                    <li><a href="#home" onClick={() => setMenuOpen(false)}>Home</a></li>
-                    <li><a href="#features" onClick={() => setMenuOpen(false)}>Features</a></li>
-                    <li><a href="#services" onClick={() => setMenuOpen(false)}>Services</a></li>
-                    <li><a href="#testimonials" onClick={() => setMenuOpen(false)}>Testimonials</a></li>
-                    <li><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a></li>
-                    <li><a href="#login" className="mobile-btn-ghost" onClick={() => setMenuOpen(false)}>Login</a></li>
-                    <li><a href="#register" className="mobile-btn-primary" onClick={() => setMenuOpen(false)}>Get Started</a></li>
-                </ul>
+            {/* Mobile Menu Overlay */}
+            <div className={`navbar__mobile-overlay ${menuOpen ? 'navbar__mobile-overlay--open' : ''}`}>
+                <div className="mobile-menu-content">
+                    <ul className="mobile-nav-list">
+                        <li><Link to="/laundry" onClick={() => setMenuOpen(false)}>Laundry Services</Link></li>
+                        {user && user.role?.toUpperCase() !== 'PROVIDER' && user.role?.toUpperCase() !== 'ADMIN' && (
+                            <li><Link to="/my-bookings" onClick={() => setMenuOpen(false)}>My Bookings</Link></li>
+                        )}
+                        {user && user.role?.toUpperCase() === 'PROVIDER' && (
+                            <>
+                                <li><Link to="/add-laundry" onClick={() => setMenuOpen(false)}>Manage Laundry Shop</Link></li>
+                                <li><Link to="/manage-bookings" onClick={() => setMenuOpen(false)}>Manage Bookings</Link></li>
+                            </>
+                        )}
+                        {user && user.role?.toUpperCase() === 'ADMIN' && (
+                            <li><Link to="/admin" onClick={() => setMenuOpen(false)}>Admin Panel</Link></li>
+                        )}
+                        {user ? (
+                            <>
+                                <li><Link to="/profile" onClick={() => setMenuOpen(false)}>My Profile</Link></li>
+                                <li><button onClick={handleLogout} className="mobile-logout-btn">Logout</button></li>
+                            </>
+                        ) : (
+                            <>
+                                <li><Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
+                                <li><Link to="/register" className="mobile-btn-primary" onClick={() => setMenuOpen(false)}>Get Started</Link></li>
+                            </>
+                        )}
+                    </ul>
+                </div>
             </div>
         </nav>
     );
