@@ -26,7 +26,8 @@ const registerUser = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            role: role || 'USER'
+            role: role || 'USER',
+            isApproved: (role === 'PROVIDER' || role === 'HOSTEL_OWNER') ? false : true
         });
 
         if (user) {
@@ -58,6 +59,11 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ username }).select('+password');
 
         if (user && (await bcrypt.compare(password, user.password))) {
+            // Check if provider or hostel owner is approved
+            if ((user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER') && !user.isApproved) {
+                return res.status(403).json({ message: 'Your account is pending admin approval. Please wait for the administrator to approve your account.' });
+            }
+
             res.json({
                 _id: user.id,
                 name: user.name,
@@ -95,12 +101,35 @@ const approveProvider = async (req, res) => {
         const { isApproved } = req.body;
         const user = await User.findById(req.params.id);
 
-        if (user && user.role === 'PROVIDER') {
+        if (user && (user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER')) {
             user.isApproved = isApproved;
             await user.save();
             res.json({ message: `Provider ${isApproved ? 'approved' : 'rejected'}` });
         } else {
-            res.status(404).json({ message: 'Provider not found' });
+            res.status(404).json({ message: 'Laundry or Hostel provider not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Delete user
+// @route   DELETE /api/users/:id
+// @access  Private/Admin
+const deleteUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+
+        if (user) {
+            // Prevent admin from deleting themselves (optional but recommended)
+            if (user._id.toString() === req.user._id.toString()) {
+                return res.status(400).json({ message: 'You cannot delete yourself' });
+            }
+
+            await User.findByIdAndDelete(req.params.id);
+            res.json({ message: 'User removed successfully' });
+        } else {
+            res.status(404).json({ message: 'User not found' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -118,5 +147,6 @@ module.exports = {
     registerUser,
     loginUser,
     getAllUsers,
-    approveProvider
+    approveProvider,
+    deleteUser
 };
