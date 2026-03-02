@@ -1,0 +1,192 @@
+/* ===========================
+   HOSTEL DETAILS STYLES
+   =========================== */
+
+.hostel-details-page {
+    padding-top: 100px;
+    min-height: 100vh;
+    background: #060a1f;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.details-hero {
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 1rem 0;
+    font-family: 'Outfit', sans-serif;
+}
+
+.back-link {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+}
+
+.back-link:hover { background: rgba(255, 255, 255, 0.2); }
+
+.hero-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.location-pill {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    background: rgba(108, 99, 255, 0.2);
+    color: #a78bfa;
+    border: 1px solid rgba(108, 99, 255, 0.3);
+}
+
+.gender-pill {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.1);
+}
+.gender-pill.boys { color: #60a5fa; }
+.gender-pill.girls { color: #f472b6; }
+.gender-pill.mixed { color: #a78bfa; }
+
+.details-container {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+}
+
+.info-section {
+    margin-bottom: 3rem;
+}
+
+.info-section h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.info-section p {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.8;
+}
+
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+.facility-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #0d122b;
+    padding: 1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.facility-icon { color: #6c63ff; }
+
+.table-container {
+    background: #0d122b;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rooms-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rooms-table th {
+    background: rgba(255, 255, 255, 0.03);
+    text-align: left;
+    padding: 1.25rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rooms-table td {
+    padding: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status-tag {
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.status-tag.available { background: rgba(16, 185, 129, 0.1); color: #10b981; }
+.status-tag.full { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+.pricing-card {
+    background: #151a3a;
+    padding: 2.5rem;
+    border-radius: 24px;
+    position: sticky;
+    top: 120px;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.price-label { color: rgba(255, 255, 255, 0.4); margin-bottom: 0.5rem; }
+.price-value { font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem; }
+.currency { font-size: 1.2rem; color: #a78bfa; margin-right: 0.5rem; }
+.period { font-size: 1rem; color: rgba(255, 255, 255, 0.4); font-weight: 400; }
+
+.contact-info h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+.contact-info p { font-size: 1.2rem; color: #fff; margin-bottom: 2rem; }
+
+.book-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #6c63ff, #a855f7);
+    color: #fff;
+    border: none;
+    padding: 1.25rem;
+    border-radius: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.book-btn:hover {
+    box-shadow: 0 0 30px rgba(108, 99, 255, 0.4);
+    transform: scale(1.02);
+}
+
+@media (max-width: 968px) {
+    .details-container { grid-template-columns: 1fr; }
+    .hero-content h1 { font-size: 2.5rem; }
+    .pricing-card { position: static; }
+}

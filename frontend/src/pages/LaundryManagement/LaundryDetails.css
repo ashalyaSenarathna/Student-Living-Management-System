@@ -2,6 +2,8 @@
     background: #060a1f;
     color: #fff;
     min-height: 100vh;
+    padding-top: 100px;
+    /* Space for fixed navbar */
     padding-bottom: 5rem;
 }
 
