@@ -6,7 +6,10 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [user, setUser] = useState(null);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const location = useLocation();
+
+    const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -40,18 +43,30 @@ const Navbar = () => {
                 <div className={`navbar__menu ${menuOpen ? 'navbar__menu--active' : ''}`}>
                     <ul className="navbar__list">
                         <li><Link to="/" className={`navbar__link ${location.pathname === '/' ? 'navbar__link--active' : ''}`}>Home</Link></li>
-                        <li><Link to="/laundry" className={`navbar__link ${location.pathname === '/laundry' ? 'navbar__link--active' : ''}`}>Laundry</Link></li>
-                        {user && user.role?.toUpperCase() !== 'PROVIDER' && user.role?.toUpperCase() !== 'ADMIN' && (
-                            <li><Link to="/my-bookings" className={`navbar__link ${location.pathname === '/my-bookings' ? 'navbar__link--active' : ''}`}>My Bookings</Link></li>
+                        {user?.role?.toUpperCase() !== 'HOSTEL_OWNER' && (
+                            <li><Link to="/laundry" className={`navbar__link ${location.pathname === '/laundry' ? 'navbar__link--active' : ''}`}>Laundry</Link></li>
                         )}
+                        <li><Link to="/hostel" className={`navbar__link ${location.pathname === '/hostel' ? 'navbar__link--active' : ''}`}>Hostel</Link></li>
+                        {user &&
+                            user.role?.toUpperCase() !== 'PROVIDER' &&
+                            user.role?.toUpperCase() !== 'HOSTEL_OWNER' &&
+                            user.role?.toUpperCase() !== 'ADMIN' && (
+                                <li><Link to="/my-bookings" className={`navbar__link ${location.pathname === '/my-bookings' ? 'navbar__link--active' : ''}`}>My Bookings</Link></li>
+                            )}
                         {user && user.role?.toUpperCase() === 'PROVIDER' && (
                             <>
                                 <li><Link to="/add-laundry" className={`navbar__link ${location.pathname === '/add-laundry' ? 'navbar__link--active' : ''}`}>Manage Shop</Link></li>
                                 <li><Link to="/manage-bookings" className={`navbar__link ${location.pathname === '/manage-bookings' ? 'navbar__link--active' : ''}`}>Bookings</Link></li>
                             </>
                         )}
+                        {user && user.role?.toUpperCase() === 'HOSTEL_OWNER' && (
+                            <li><Link to="/hostel-owner" className={`navbar__link ${location.pathname === '/hostel-owner' ? 'navbar__link--active' : ''}`}>Hostel Owner</Link></li>
+                        )}
                         {user && user.role?.toUpperCase() === 'ADMIN' && (
-                            <li><Link to="/admin" className={`navbar__link ${location.pathname === '/admin' ? 'navbar__link--active' : ''}`}>Admin</Link></li>
+                            <>
+                                <li><Link to="/admin" className={`navbar__link ${location.pathname === '/admin' ? 'navbar__link--active' : ''}`}>Admin</Link></li>
+                                <li><Link to="/hostel-admin" className={`navbar__link ${location.pathname === '/hostel-admin' ? 'navbar__link--active' : ''}`}>Hostel Admin</Link></li>
+                            </>
                         )}
                     </ul>
                 </div>
@@ -87,18 +102,30 @@ const Navbar = () => {
             <div className={`navbar__mobile-overlay ${menuOpen ? 'navbar__mobile-overlay--open' : ''}`}>
                 <div className="mobile-menu-content">
                     <ul className="mobile-nav-list">
-                        <li><Link to="/laundry" onClick={() => setMenuOpen(false)}>Laundry Services</Link></li>
-                        {user && user.role?.toUpperCase() !== 'PROVIDER' && user.role?.toUpperCase() !== 'ADMIN' && (
-                            <li><Link to="/my-bookings" onClick={() => setMenuOpen(false)}>My Bookings</Link></li>
+                        {user?.role?.toUpperCase() !== 'HOSTEL_OWNER' && (
+                            <li><Link to="/laundry" onClick={() => setMenuOpen(false)}>Laundry Services</Link></li>
                         )}
+                        <li><Link to="/hostel" onClick={() => setMenuOpen(false)}>Hostel & Boarding</Link></li>
+                        {user &&
+                            user.role?.toUpperCase() !== 'PROVIDER' &&
+                            user.role?.toUpperCase() !== 'HOSTEL_OWNER' &&
+                            user.role?.toUpperCase() !== 'ADMIN' && (
+                                <li><Link to="/my-bookings" onClick={() => setMenuOpen(false)}>My Bookings</Link></li>
+                            )}
                         {user && user.role?.toUpperCase() === 'PROVIDER' && (
                             <>
                                 <li><Link to="/add-laundry" onClick={() => setMenuOpen(false)}>Manage Laundry Shop</Link></li>
                                 <li><Link to="/manage-bookings" onClick={() => setMenuOpen(false)}>Manage Bookings</Link></li>
                             </>
                         )}
+                        {user && user.role?.toUpperCase() === 'HOSTEL_OWNER' && (
+                            <li><Link to="/hostel-owner" onClick={() => setMenuOpen(false)}>Hostel Owner Dashboard</Link></li>
+                        )}
                         {user && user.role?.toUpperCase() === 'ADMIN' && (
-                            <li><Link to="/admin" onClick={() => setMenuOpen(false)}>Admin Panel</Link></li>
+                            <>
+                                <li><Link to="/admin" onClick={() => setMenuOpen(false)}>Admin Panel</Link></li>
+                                <li><Link to="/hostel-admin" onClick={() => setMenuOpen(false)}>Hostel Admin</Link></li>
+                            </>
                         )}
                         {user ? (
                             <>

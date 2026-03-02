@@ -27,7 +27,18 @@ const Login = () => {
 
             if (response.ok) {
                 localStorage.setItem('userInfo', JSON.stringify(data))
-                navigate('/')
+
+                // Role-based redirection
+                if (data.role === 'HOSTEL_OWNER') {
+                    navigate('/hostel-owner')
+                } else if (data.role === 'ADMIN') {
+                    navigate('/admin')
+                } else if (data.role === 'PROVIDER') {
+                    navigate('/add-laundry') // Or appropriate provider dashboard
+                } else {
+                    navigate('/')
+                }
+
                 window.location.reload() // Ensure navbar updates
             } else {
                 setError(data.message || 'Invalid credentials. Please try again.')

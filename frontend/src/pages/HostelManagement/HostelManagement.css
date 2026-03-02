@@ -1,15 +1,15 @@
 /* ===========================
-   LAUNDRY LIST STYLES
+   HOSTEL MANAGEMENT STYLES
    =========================== */
 
-.laundry-page {
+.hostel-page {
     padding-top: 100px;
     min-height: 100vh;
     background: #060a1f;
     color: #fff;
 }
 
-.laundry-header {
+.hostel-header {
     padding: 6rem 2rem 4rem;
     text-align: center;
     background: linear-gradient(to bottom, rgba(108, 99, 255, 0.1), transparent);
@@ -31,7 +31,7 @@
     font-size: 1.1rem;
 }
 
-.filters-bar {
+.hostel-controls {
     max-width: 1200px;
     margin: 0 auto 3rem;
     padding: 0 2rem;
@@ -40,6 +40,11 @@
     align-items: center;
     gap: 2rem;
     flex-wrap: wrap;
+}
+
+.filter-group {
+    display: flex;
+    gap: 1rem;
 }
 
 .filter-btn {
@@ -76,7 +81,7 @@
     background: rgba(108, 99, 255, 0.05);
 }
 
-.providers-grid {
+.hostel-grid {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem 6rem;
@@ -85,31 +90,33 @@
     gap: 2rem;
 }
 
-.provider-card {
+.hostel-card {
     background: #0d122b;
     border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 24px;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
 }
 
-.provider-card:hover {
+.hostel-card:hover {
     transform: translateY(-10px);
     border-color: rgba(108, 99, 255, 0.3);
 }
 
-.provider-image {
+.hostel-image {
     position: relative;
     height: 200px;
 }
 
-.provider-image img {
+.hostel-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.status-badge {
+.gender-badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -118,132 +125,111 @@
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
 }
 
-.status-badge.open {
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-}
+.gender-badge.boys { color: #60a5fa; }
+.gender-badge.girls { color: #f472b6; }
+.gender-badge.mixed { color: #a78bfa; }
 
-.status-badge.closed {
-    background: rgba(239, 68, 68, 0.2);
-    color: #ef4444;
-}
-
-.provider-info {
+.hostel-info {
     padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.provider-name-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.hostel-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
-.provider-name-row h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-}
-
-.rating {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.2rem 0.6rem;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.shop-address {
+.hostel-location {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.4);
     margin-bottom: 1.25rem;
 }
 
-.services-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+.hostel-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    line-height: 1.5;
     margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
-.service-tag {
-    font-size: 0.75rem;
-    background: rgba(108, 99, 255, 0.1);
-    color: #a78bfa;
-    padding: 0.25rem 0.75rem;
-    border-radius: 50px;
-}
-
-.provider-footer {
+.hostel-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 1.25rem;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    margin-bottom: 1.5rem;
+    margin-top: auto;
 }
 
 .price-info .price {
     font-size: 1.1rem;
     font-weight: 800;
+    color: #fff;
 }
 
-.book-btn {
-    width: 100%;
+.price-info .unit {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-left: 4px;
+}
+
+.view-btn {
     background: linear-gradient(135deg, #6c63ff, #a855f7);
     color: #fff;
     border: none;
-    padding: 0.85rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 12px;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s;
 }
 
-.laundry-loading {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15vw;
+.view-btn:hover {
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.5);
+    transform: scale(1.05);
 }
 
 .loader {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-top-color: #6c63ff;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(108, 99, 255, 0.1);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin-bottom: 1.5rem;
+    border-top-color: #6c63ff;
+    animation: spin 1s ease-in-out infinite;
+    margin: 2rem auto;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
 
 .error-display {
     background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
     color: #ef4444;
     padding: 1rem;
     border-radius: 12px;
-    text-align: center;
-    max-width: 1200px;
     margin: 0 auto 2rem;
+    max-width: 600px;
+    text-align: center;
 }
 
-@media (max-width: 768px) {
-    .filters-bar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .search-box input {
-        width: 100%;
-    }
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 0;
+    color: rgba(255, 255, 255, 0.4);
 }
+
