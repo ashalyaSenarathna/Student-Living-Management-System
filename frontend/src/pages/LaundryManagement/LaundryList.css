@@ -77,62 +77,70 @@
 
 .search-container-premium {
     flex: 1;
-    max-width: 500px;
+    max-width: 550px;
+    position: relative;
 }
 
 .search-box-luxe {
     position: relative;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    border-radius: 24px;
-    padding: 0.25rem 0.25rem 0.25rem 1.25rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.search-box-luxe:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(108, 99, 255, 0.3);
 }
 
 .search-box-luxe:focus-within {
     border-color: #6c63ff;
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 5px rgba(108, 99, 255, 0.15);
-    transform: scale(1.02);
+    background: rgba(13, 18, 43, 0.8);
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.15),
+                0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px);
 }
 
 .search-icon {
-    color: rgba(255, 255, 255, 0.6);
-    transition: color 0.3s;
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s;
 }
 
 .search-box-luxe:focus-within .search-icon {
     color: #6c63ff;
+    transform: scale(1.1);
 }
 
 .search-box-luxe input {
-    background: transparent;
-    border: none;
-    color: #fff;
-    padding: 1rem 1rem;
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
+    background: transparent !important;
+    border: none !important;
+    color: #fff !important;
+    padding: 0.8rem 1rem !important;
+    width: 100% !important;
+    font-size: 1.05rem !important;
+    font-weight: 500 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .search-box-luxe input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.search-box-luxe input:focus {
-    outline: none;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 400;
 }
 
 .clear-search-btn {
     background: rgba(255, 255, 255, 0.05);
     border: none;
     color: rgba(255, 255, 255, 0.4);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,7 +150,7 @@
 }
 
 .clear-search-btn:hover {
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(239, 68, 68, 0.15);
     color: #ef4444;
     transform: rotate(90deg);
 }

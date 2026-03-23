@@ -11,9 +11,12 @@ const Profile = () => {
         name: '',
         email: '',
         username: '',
-        profilePic: ''
+        profilePic: '',
+        password: '',
+        confirmPassword: ''
     });
     const [message, setMessage] = useState('');
+    const [msgType, setMsgType] = useState('success');
 
     const navigate = useNavigate();
 
@@ -28,10 +31,12 @@ const Profile = () => {
         // For now, we use localStorage as start
         setUser(userInfo);
         setFormData({
-            name: userInfo.name,
-            email: userInfo.email,
-            username: userInfo.username,
-            profilePic: userInfo.profilePic || ''
+            name: userInfo.name || '',
+            email: userInfo.email || '',
+            username: userInfo.username || '',
+            profilePic: userInfo.profilePic || '',
+            password: '',
+            confirmPassword: ''
         });
         setLoading(false);
     }, [navigate]);
@@ -53,17 +58,52 @@ const Profile = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        setMessage('Updating profile...');
+        setMessage('');
 
-        // Simulating an update
-        setTimeout(() => {
-            const updatedUser = { ...user, ...formData };
-            localStorage.setItem('userInfo', JSON.stringify(updatedUser));
-            setUser(updatedUser);
-            setIsEditing(false);
-            setMessage('Profile updated successfully!');
-            setTimeout(() => setMessage(''), 3000);
-        }, 1000);
+        if (formData.password && formData.password !== formData.confirmPassword) {
+            setMessage('Passwords do not match');
+            setMsgType('error');
+            return;
+        }
+
+        try {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            const response = await fetch('http://localhost:5000/api/users/profile', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${userInfo.token}`
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    username: formData.username,
+                    password: formData.password
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Update local storage with new info (keep the token)
+                const updatedUser = { ...data, token: userInfo.token };
+                localStorage.setItem('userInfo', JSON.stringify(updatedUser));
+                setUser(updatedUser);
+                setIsEditing(false);
+                setMessage('Profile updated successfully!');
+                setMsgType('success');
+                setTimeout(() => setMessage(''), 3000);
+                
+                // Clear password fields
+                setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
+            } else {
+                setMessage(data.message || 'Update failed');
+                setMsgType('error');
+            }
+        } catch (err) {
+            setMessage('Connection error');
+            setMsgType('error');
+        }
     };
 
     if (loading) return <div className="profile-loading">Loading...</div>;
@@ -109,7 +149,7 @@ const Profile = () => {
                         </div>
                     </div>
 
-                    {message && <div className="status-message">{message}</div>}
+                    {message && <div className={`status-message ${msgType}`}>{message}</div>}
 
                     <div className="profile-content">
                         {isEditing ? (
@@ -125,6 +165,17 @@ const Profile = () => {
                                 <div className="input-group">
                                     <label>Email Address</label>
                                     <input type="email" name="email" value={formData.email} onChange={handleInputChange} required />
+                                </div>
+                                <div className="password-divider">
+                                    <span>Change Password (Leave blank to keep current)</span>
+                                </div>
+                                <div className="input-group">
+                                    <label>New Password</label>
+                                    <input type="password" name="password" value={formData.password} onChange={handleInputChange} placeholder="Enter new password" />
+                                </div>
+                                <div className="input-group">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleInputChange} placeholder="Confirm new password" />
                                 </div>
                                 <div className="form-actions">
                                     <button type="submit" className="save-btn">Save Changes</button>

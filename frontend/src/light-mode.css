@@ -498,24 +498,36 @@ body.light-mode {
     border: 1px solid rgba(108, 99, 255, 0.18) !important;
 }
 
-.light-mode .search-box-luxe,
-.light-mode .search-box input {
+.light-mode .search-box-luxe {
     background: #ffffff !important;
-    border: 1px solid rgba(108, 99, 255, 0.18) !important;
-    color: #101426 !important;
+    border: 1px solid rgba(108, 99, 255, 0.15) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02) !important;
+}
+
+.light-mode .search-box-luxe:focus-within {
+    background: #ffffff !important;
+    border-color: #6c63ff !important;
+    box-shadow: 0 10px 25px rgba(108, 99, 255, 0.1) !important;
 }
 
 .light-mode .search-box-luxe input {
     color: #101426 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-.light-mode .search-box-luxe input::placeholder,
-.light-mode .search-box input::placeholder {
+.light-mode .search-box-luxe input::placeholder {
     color: #94a3b8 !important;
 }
 
 .light-mode .search-icon {
     color: #94a3b8 !important;
+}
+
+.light-mode .clear-search-btn {
+    background: #f1f5f9 !important;
+    color: #64748b !important;
 }
 
 .light-mode .provider-card {
@@ -766,6 +778,28 @@ body.light-mode {
 
 .light-mode .info-item .label {
     color: #525b78 !important;
+}
+
+.light-mode .info-item .value {
+    color: #101426 !important;
+}
+
+.light-mode .edit-form label {
+    color: #525b78 !important;
+}
+
+.light-mode .edit-form input {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .password-divider::after {
+    background: rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .password-divider span {
+    color: #6366f1 !important;
 }
 
 .light-mode .info-item .value {
