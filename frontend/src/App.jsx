@@ -15,6 +15,7 @@ import HostelDetails from './pages/HostelManagement/HostelDetails';
 import OwnerDashboard from './pages/HostelManagement/OwnerDashboard';
 import HostelAdmin from './pages/HostelManagement/HostelAdmin';
 import './App.css';
+import './light-mode.css'; // Global light mode overrides
 
 import { Navigate } from 'react-router-dom';
 

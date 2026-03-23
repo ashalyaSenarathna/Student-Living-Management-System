@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -7,9 +8,23 @@ const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
     const location = useLocation();
 
     const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+    useEffect(() => {
+        if (theme === 'light') {
+            document.body.classList.add('light-mode');
+        } else {
+            document.body.classList.remove('light-mode');
+        }
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -72,6 +87,14 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar__actions">
+                    <button 
+                        onClick={toggleTheme} 
+                        className="theme-toggle-btn"
+                        aria-label="Toggle Theme"
+                    >
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
+                    
                     {user ? (
                         <div className="navbar__user-profile">
                             <Link to="/profile" className="user-info">
@@ -142,6 +165,14 @@ const Navbar = () => {
                                 <li><Link to="/register" className="mobile-btn-primary" onClick={() => setMenuOpen(false)}>Get Started</Link></li>
                             </>
                         )}
+                        <li>
+                            <button 
+                                onClick={() => { toggleTheme(); setMenuOpen(false); }} 
+                                className="mobile-theme-toggle-btn"
+                            >
+                                {theme === 'dark' ? <><Sun size={20} /> Switch to Light Mode</> : <><Moon size={20} /> Switch to Dark Mode</>}
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -1,0 +1,1506 @@
+/* ============================================================ */
+/* USER-FRIENDLY DARK MODE REFINEMENTS */
+/* Replaces harsh #060a1f and #0d122b with soft Slate palettes */
+/* ============================================================ */
+body,
+.homepage-premium,
+.login-container,
+.laundry-page,
+.laundry-details-page,
+.laundry-list-container,
+.hostel-page,
+.profile-page,
+.dashboard-layout,
+.bookings-page,
+.main-content,
+.admin-dashboard,
+.add-laundry-page,
+.manage-bookings-page,
+.ha-container,
+.my-bookings-page {
+    background-color: #101426 !important;
+    /* Soft Slate 900 */
+    color: #f3f5fa !important;
+}
+
+.form-card,
+.main-device-mockup,
+.service-card-luxe,
+.floating-ui,
+.provider-card,
+.details-main section,
+.details-sidebar>div,
+.add-review-box,
+.hostel-card,
+.profile-card,
+.profile-content,
+.booking-card,
+.detail-card,
+.stats-card,
+.admin-sidebar,
+.stat-card,
+.admin-content,
+.ha-sidebar,
+.ha-header-new,
+.ha-stat-card,
+.ha-content-card,
+.ha-pending-card,
+.ha-card-footer,
+.premium-form,
+.timing-container-premium,
+.image-dropbox,
+.service-card-premium,
+.order-card,
+.bookings-table-wrapper-luxe,
+.order-details-box,
+.booking-modal {
+    background-color: #1e293b !important;
+    /* Slate 800 */
+    border-color: #334155 !important;
+}
+
+.input-wrapper-icon input,
+.input-wrapper-icon select,
+.card-field input,
+.card-field select,
+.edit-form input,
+.search-box input,
+.search-box-luxe,
+.comment-input textarea,
+.search-bar input,
+.qty-input input,
+.modal-input-group input,
+.modal-section textarea,
+.status-dropdown-luxe,
+.bookings-table-modern td,
+.ha-modern-table tr {
+    background-color: #101426 !important;
+    border-color: #334155 !important;
+    color: #f3f5fa !important;
+}
+
+.modal-overlay {
+    background: rgba(15, 23, 42, 0.85) !important;
+}
+
+.navbar--scrolled,
+.left-section {
+    background-color: rgba(15, 23, 42, 0.9) !important;
+    border-color: #334155 !important;
+}
+
+/* GLOBAL LIGHT MODE OVERRIDES */
+
+body.light-mode {
+    background-color: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .App {
+    background-color: transparent !important;
+}
+
+/* Navbar */
+.light-mode .navbar--scrolled {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .navbar__logo-text {
+    color: #101426 !important;
+}
+
+.light-mode .navbar__link {
+    color: #394160 !important;
+}
+
+.light-mode .navbar__link:hover,
+.light-mode .navbar__link--active {
+    color: #101426 !important;
+}
+
+.light-mode .user-name {
+    color: #101426 !important;
+}
+
+.light-mode .user-info {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .user-info:hover {
+    background: rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .btn--ghost {
+    color: #101426 !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.light-mode .btn--ghost:hover {
+    background: rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .hamburger::before,
+.light-mode .hamburger::after,
+.light-mode .hamburger {
+    background: #101426 !important;
+}
+
+.light-mode .navbar__mobile-overlay {
+    background: #f3f5fa !important;
+}
+
+.light-mode .mobile-nav-list a {
+    color: #101426 !important;
+}
+
+.light-mode .mobile-nav-list a:hover {
+    color: #6366f1 !important;
+}
+
+/* Home Page */
+.light-mode .homepage-premium {
+    background: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .hero-title-max {
+    color: #101426 !important;
+}
+
+.light-mode .hero-lead {
+    color: #394160 !important;
+}
+
+.light-mode .text-gradient {
+    background: linear-gradient(135deg, #101426 30%, var(--accent-p), #a855f7) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-mode .btn-subtle {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .btn-subtle:hover {
+    background: rgba(108, 99, 255, 0.12) !important;
+    border-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.light-mode .m-num {
+    color: #101426 !important;
+}
+
+.light-mode .m-label {
+    color: #525b78 !important;
+}
+
+.light-mode .m-divider {
+    background: rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .brand-trust-bar p {
+    color: #525b78 !important;
+}
+
+.light-mode .brand-strip span {
+    color: #94a3b8 !important;
+}
+
+.light-mode .dot-sep {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.light-mode .sec-h2 {
+    color: #101426 !important;
+}
+
+.light-mode .service-card-luxe {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .service-card-luxe h3 {
+    color: #101426 !important;
+}
+
+.light-mode .service-card-luxe p {
+    color: #394160 !important;
+}
+
+.light-mode .s-perks li {
+    color: #394160 !important;
+}
+
+.light-mode .service-card-luxe.highlight {
+    background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), #ffffff) !important;
+    border-color: rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .main-device-mockup {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    box-shadow: 0 40px 80px rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .mockup-header {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .mockup-controls span {
+    background: rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .shimmer-row {
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.03), rgba(108, 99, 255, 0.12), rgba(0, 0, 0, 0.03)) !important;
+}
+
+.light-mode .shimmer-box {
+    background: rgba(0, 0, 0, 0.03) !important;
+}
+
+.light-mode .floating-ui {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.12) !important;
+}
+
+.light-mode .f-text span {
+    color: #525b78 !important;
+    opacity: 1 !important;
+}
+
+/* Generic Fallbacks for other pages */
+.light-mode .table,
+.light-mode .card,
+.light-mode .panel,
+.light-mode .modal,
+.light-mode .container-box {
+    background: #ffffff !important;
+    color: #101426 !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode input,
+.light-mode select,
+.light-mode textarea {
+    background: #ffffff !important;
+    color: #101426 !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode input:focus,
+.light-mode select:focus,
+.light-mode textarea:focus {
+    border-color: var(--accent-p) !important;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2) !important;
+}
+
+.light-mode input::placeholder,
+.light-mode textarea::placeholder {
+    color: #94a3b8 !important;
+}
+
+.light-mode label {
+    color: #334155 !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode h5,
+.light-mode h6,
+.light-mode .title,
+.light-mode .heading {
+    color: #101426 !important;
+}
+
+.light-mode .text-muted,
+.light-mode .subtitle,
+.light-mode .description {
+    color: #394160 !important;
+}
+
+.light-mode hr,
+.light-mode .divider {
+    border-color: rgba(108, 99, 255, 0.18) !important;
+    background-color: rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .sidebar,
+.light-mode .side-menu {
+    background: #ffffff !important;
+    border-right: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+/* Custom overrides for typical dashboard styles */
+.light-mode .dashboard-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode table th {
+    background: #eceef8 !important;
+    color: #394160 !important;
+    border-bottom: 2px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode table td {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+    color: #334155 !important;
+}
+
+.light-mode .badge {
+    background: #eceef8 !important;
+    color: #394160 !important;
+}
+
+/* Auth Cards */
+.light-mode .auth-card,
+.light-mode .login-card,
+.light-mode .register-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.08) !important;
+}
+
+/* Laundry and Hostel grids */
+.light-mode .laundry-item,
+.light-mode .hostel-item,
+.light-mode .list-item {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* ============================================================ */
+/* NEW OVERRIDES FOR ALL PAGES */
+/* ============================================================ */
+
+/* Login & Register Overrides */
+.light-mode .login-container {
+    background: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .left-section {
+    background: linear-gradient(to right, rgba(248, 250, 252, 1), rgba(248, 250, 252, 0.8)) !important;
+}
+
+.light-mode .left-content h1 {
+    background: linear-gradient(to bottom, #101426 40%, rgba(15, 23, 42, 0.7)) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-mode .left-content p,
+.light-mode .stat-label {
+    color: #394160 !important;
+}
+
+.light-mode .stat-value {
+    color: #101426 !important;
+}
+
+.light-mode .form-card {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    box-shadow: 0 40px 100px -20px rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .form-header h2 {
+    color: #101426 !important;
+}
+
+.light-mode .form-header p {
+    color: #394160 !important;
+}
+
+.light-mode .social-btn {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .divider {
+    color: #94a3b8 !important;
+}
+
+.light-mode .role-option {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .role-option span {
+    color: #394160 !important;
+}
+
+.light-mode .role-option.active {
+    background: rgba(108, 99, 255, 0.1) !important;
+    border-color: #6c63ff !important;
+}
+
+.light-mode .role-option.active span {
+    color: #101426 !important;
+}
+
+.light-mode .input-container label {
+    color: #334155 !important;
+}
+
+.light-mode .input-wrapper input {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+/* Laundry List Overrides */
+.light-mode .laundry-page,
+.light-mode .laundry-details,
+.light-mode .laundry-list-container {
+    background: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .header-content h1 {
+    background: linear-gradient(135deg, #101426, rgba(15, 23, 42, 0.7)) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-mode .header-content p {
+    color: #394160 !important;
+}
+
+.light-mode .filter-btn {
+    color: #394160 !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .filter-btn.active {
+    background: #6c63ff !important;
+    color: #ffffff !important;
+}
+
+.light-mode .filter-group {
+    background: rgba(108, 99, 255, 0.08) !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .search-box-luxe,
+.light-mode .search-box input {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .search-box-luxe input {
+    color: #101426 !important;
+}
+
+.light-mode .search-box-luxe input::placeholder,
+.light-mode .search-box input::placeholder {
+    color: #94a3b8 !important;
+}
+
+.light-mode .search-icon {
+    color: #94a3b8 !important;
+}
+
+.light-mode .provider-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .provider-name-row h3 {
+    color: #101426 !important;
+}
+
+.light-mode .shop-address,
+.light-mode .price-info .unit {
+    color: #394160 !important;
+}
+
+.light-mode .price-info .price {
+    color: #101426 !important;
+}
+
+.light-mode .no-results {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border: 1px dashed rgba(108, 99, 255, 0.18) !important;
+    color: #394160 !important;
+}
+
+/* Hostel Management Overrides */
+.light-mode .hostel-page {
+    background: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .hostel-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .hostel-info h3 {
+    color: #101426 !important;
+}
+
+.light-mode .hostel-location,
+.light-mode .hostel-desc {
+    color: #394160 !important;
+}
+
+.light-mode .gender-badge {
+    background: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 2px 5px rgba(108, 99, 255, 0.18) !important;
+}
+
+/* MyBookings, Dashboard backgrounds */
+.light-mode .dashboard-layout,
+.light-mode .bookings-page,
+.light-mode .profile-container,
+.light-mode .main-content {
+    background: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .booking-card,
+.light-mode .profile-card,
+.light-mode .detail-card,
+.light-mode .stats-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    box-shadow: 0 4px 12px rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode h4,
+.light-mode p {
+    color: inherit;
+}
+
+/* ============================================================ */
+/* NEW SPECIFIC OVERRIDES FOR ADMIN DASHBOARD & PROFILE */
+/* ============================================================ */
+
+/* Admin Dashboard Specific */
+.light-mode .admin-dashboard {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+.light-mode .admin-sidebar {
+    background: #ffffff !important;
+    border-right: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .sidebar-logo h2 {
+    color: #101426 !important;
+}
+
+.light-mode .nav-item {
+    color: #394160 !important;
+}
+
+.light-mode .nav-item:hover {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode .nav-item.active {
+    background: rgba(99, 102, 241, 0.1) !important;
+    color: #6366f1 !important;
+    border-left-color: #6366f1 !important;
+}
+
+.light-mode .sidebar-footer {
+    border-top: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .header-title h1 {
+    background: linear-gradient(135deg, #101426 0%, #394160 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-mode .header-title p {
+    color: #525b78 !important;
+}
+
+.light-mode .stat-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02) !important;
+}
+
+.light-mode .stat-card:hover {
+    background: #ffffff !important;
+    border-color: rgba(99, 102, 241, 0.3) !important;
+    box-shadow: 0 10px 15px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .stat-label {
+    color: #525b78 !important;
+}
+
+.light-mode .stat-value {
+    color: #101426 !important;
+}
+
+.light-mode .admin-content {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02) !important;
+}
+
+.light-mode .content-toolbar {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.12) !important;
+}
+
+.light-mode .search-bar input {
+    background: #f3f5fa !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .search-bar input:focus {
+    background: #ffffff !important;
+    border-color: #6366f1 !important;
+}
+
+.light-mode .search-bar svg {
+    color: #94a3b8 !important;
+}
+
+.light-mode .admin-dashboard .filter-btn {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #394160 !important;
+}
+
+.light-mode .admin-dashboard .filter-btn:hover {
+    background: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .admin-dashboard .filter-btn.active {
+    background: #6366f1 !important;
+    color: #ffffff !important;
+    border-color: #6366f1 !important;
+}
+
+.light-mode .users-table th {
+    color: #525b78 !important;
+    border-bottom: 1px solid rgba(108, 99, 255, 0.12) !important;
+    background: #f3f5fa !important;
+}
+
+.light-mode .users-table tbody tr {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .users-table tbody tr:hover {
+    background: #f3f5fa !important;
+}
+
+.light-mode .users-table td {
+    color: #101426 !important;
+}
+
+.light-mode .admin-loading {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+.light-mode .admin-loading .loader {
+    border: 5px solid rgba(108, 99, 255, 0.1) !important;
+    border-bottom-color: #6366f1 !important;
+}
+
+/* Profile Page Specific */
+.light-mode .profile-page {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+.light-mode .profile-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 10px 25px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .profile-header {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.12) !important;
+}
+
+.light-mode .header-text-block h2 {
+    color: #101426 !important;
+}
+
+.light-mode .profile-content {
+    background: #f3f5fa !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .info-item {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .info-item .label {
+    color: #525b78 !important;
+}
+
+.light-mode .info-item .value {
+    color: #101426 !important;
+}
+
+.light-mode .edit-form label {
+    color: #394160 !important;
+}
+
+.light-mode .edit-form input {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .edit-form input:focus {
+    border-color: #6366f1 !important;
+    background: #ffffff !important;
+}
+
+.light-mode .cancel-btn {
+    background: #ffffff !important;
+    color: #101426 !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .cancel-btn:hover {
+    background: #eceef8 !important;
+}
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR HOSTEL ADMIN PAGE */
+/* ============================================================ */
+.light-mode .ha-container {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+.light-mode .ha-sidebar {
+    background: #ffffff !important;
+    border-right: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .sidebar-brand {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.12) !important;
+}
+
+.light-mode .sidebar-brand h3 {
+    color: #101426 !important;
+}
+
+.light-mode .ha-nav-item {
+    color: #394160 !important;
+}
+
+.light-mode .ha-nav-item:hover {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode .ha-nav-item.active {
+    background: #6c63ff !important;
+    color: #ffffff !important;
+}
+
+.light-mode .ha-header-new {
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(108, 99, 255, 0.12) !important;
+}
+
+.light-mode .header-info h2 {
+    color: #101426 !important;
+}
+
+.light-mode .header-info p {
+    color: #525b78 !important;
+}
+
+.light-mode .ha-stat-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02) !important;
+}
+
+.light-mode .ha-stat-label {
+    color: #525b78 !important;
+}
+
+.light-mode .ha-stat-val {
+    color: #101426 !important;
+}
+
+.light-mode .ha-content-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 10px 25px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .ha-card-head h3 {
+    color: #101426 !important;
+}
+
+.light-mode .ha-count-pill {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: #394160 !important;
+}
+
+.light-mode .ha-count-pill.danger {
+    background: #fee2e2 !important;
+    color: #b91c1c !important;
+}
+
+.light-mode .ha-count-pill.success {
+    background: #d1fae5 !important;
+    color: #065f46 !important;
+}
+
+.light-mode .ha-pending-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02) !important;
+}
+
+.light-mode .ha-card-body h4 {
+    color: #101426 !important;
+}
+
+.light-mode .ha-meta {
+    color: #525b78 !important;
+}
+
+.light-mode .ha-price-tag {
+    color: #101426 !important;
+}
+
+.light-mode .ha-card-footer {
+    background: #f3f5fa !important;
+    border-top: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .ha-btn-action.ghost {
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #394160 !important;
+}
+
+.light-mode .ha-btn-action.ghost:hover {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode .ha-modern-table th {
+    color: #525b78 !important;
+}
+
+.light-mode .ha-modern-table tr {
+    background: #ffffff !important;
+}
+
+.light-mode .ha-modern-table td {
+    border-top: 1px solid rgba(108, 99, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode .ha-modern-table td:first-child {
+    border-left: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .ha-modern-table td:last-child {
+    border-right: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .ha-avatar {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode .ha-user-details span {
+    color: #525b78 !important;
+}
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR ADD LAUNDRY PAGE */
+/* ============================================================ */
+.light-mode .add-laundry-page {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+.light-mode .add-laundry-page .form-header h1 {
+    background: linear-gradient(135deg, #101426, #394160) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-mode .premium-form {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 50px 100px -20px rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .section-title-wrapper {
+    border-bottom: 2px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .section-title-wrapper h3 {
+    color: #101426 !important;
+}
+
+.light-mode .input-group label,
+.light-mode .card-field label,
+.light-mode .timing-control-item label {
+    color: #394160 !important;
+}
+
+.light-mode .field-icon {
+    color: #94a3b8 !important;
+}
+
+.light-mode .input-wrapper-icon input,
+.light-mode .input-wrapper-icon select,
+.light-mode .card-field input,
+.light-mode .card-field select {
+    background: #ffffff !important;
+    border: 2px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .input-wrapper-icon input:focus,
+.light-mode .input-wrapper-icon select:focus,
+.light-mode .card-field input:focus,
+.light-mode .card-field select:focus {
+    border-color: #6c63ff !important;
+    background: #f3f5fa !important;
+}
+
+.light-mode .timing-container-premium {
+    background: #f3f5fa !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .timing-container-premium:hover {
+    background: #eceef8 !important;
+}
+
+.light-mode .timing-separator {
+    color: #94a3b8 !important;
+}
+
+.light-mode .image-dropbox {
+    background: #f3f5fa !important;
+    border: 2px dashed rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .dropbox-text h4 {
+    color: #101426 !important;
+}
+
+.light-mode .dropbox-text p {
+    color: #525b78 !important;
+}
+
+.light-mode .upload-specs {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: #394160 !important;
+}
+
+.light-mode .image-preview-standalone {
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .overlay-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.light-mode .service-card-premium {
+    background: #f3f5fa !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .service-card-premium:hover {
+    background: #ffffff !important;
+    border-color: rgba(108, 99, 255, 0.3) !important;
+}
+
+.light-mode .unit-options-grid {
+    background: #eceef8 !important;
+    border: 1.5px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .unit-opt-btn {
+    color: #525b78 !important;
+}
+
+.light-mode .unit-opt-btn:hover {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: #101426 !important;
+}
+
+.light-mode .unit-opt-btn.active {
+    background: linear-gradient(135deg, #6c63ff, #8b5cf6) !important;
+    color: #ffffff !important;
+}
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR LAUNDRY DETAILS PAGE */
+/* ============================================================ */
+.light-mode .laundry-details-page {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+/* Note: hero-content is over an image, so its text MUST remain white */
+.light-mode .hero-content h1,
+.light-mode .hero-content p,
+.light-mode .hero-address,
+.light-mode .hero-contact {
+    color: #ffffff !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+}
+.light-mode .back-btn {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.light-mode .details-main section,
+.light-mode .details-sidebar>div {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .details-main h2,
+.light-mode .service-info h3,
+.light-mode .booking-card h3,
+.light-mode .info-card h3,
+.light-mode .add-review-box h3,
+.light-mode .user-meta h4 {
+    color: #101426 !important;
+}
+
+.light-mode .service-item,
+.light-mode .review-card {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .service-info p,
+.light-mode .service-price .unit,
+.light-mode .booking-card p,
+.light-mode .perks-list li,
+.light-mode .hours-list li,
+.light-mode .review-date {
+    color: #394160 !important;
+}
+
+.light-mode .review-comment,
+.light-mode .no-reviews,
+.light-mode .review-card p {
+    color: #101426 !important; /* This MUST be dark to be seen on the white background */
+    opacity: 1 !important;
+    font-weight: 500 !important;
+}
+
+.light-mode .add-review-box {
+    background: #f3f5fa !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .rating-input {
+    background: #f3f5fa !important;
+    border: 1px dashed rgba(108, 99, 255, 0.2) !important;
+}
+.light-mode .star {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+    color: #94a3b8 !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02) !important;
+}
+.light-mode .star:hover {
+    background: rgba(245, 158, 11, 0.05) !important;
+    border-color: rgba(245, 158, 11, 0.2) !important;
+    color: #f59e0b !important;
+}
+.light-mode .star.active {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+    box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2) !important;
+}
+
+.light-mode .comment-input textarea {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .comment-input textarea:focus {
+    border-color: #6366f1 !important;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1) !important;
+}
+
+.light-mode .comment-input textarea::placeholder {
+    color: #94a3b8 !important;
+}
+
+.light-mode .book-now-btn {
+    background: #6c63ff !important;
+    color: #ffffff !important;
+}
+
+.light-mode .book-now-btn:hover {
+    background: #5b54d6 !important;
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.3) !important;
+}
+
+.light-mode .book-again-btn {
+    background: #ffffff !important;
+    color: #394160 !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .book-again-btn:hover {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR MY BOOKINGS PAGE */
+/* ============================================================ */
+.light-mode .my-bookings-page {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+.light-mode .my-bookings-header h1 {
+    background: linear-gradient(135deg, #101426, #394160) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-mode .my-bookings-header p {
+    color: #525b78 !important;
+}
+
+.light-mode .order-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .order-card:hover {
+    border-color: rgba(108, 99, 255, 0.3) !important;
+    box-shadow: 0 15px 40px rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .shop-info-mini h3 {
+    color: #101426 !important;
+}
+
+.light-mode .shop-info-mini p {
+    color: #394160 !important;
+}
+
+.light-mode .delete-booking-btn {
+    border: 1px solid rgba(239, 68, 68, 0.3) !important;
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+}
+
+.light-mode .delete-booking-btn:hover {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+}
+
+.light-mode .step-icon {
+    background: rgba(108, 99, 255, 0.08) !important;
+    border: 2px solid rgba(108, 99, 255, 0.18) !important;
+    color: #94a3b8 !important;
+}
+
+.light-mode .step-label {
+    color: #525b78 !important;
+}
+
+.light-mode .step-line {
+    background: rgba(108, 99, 255, 0.18) !important;
+}
+
+.light-mode .track-step.completed .step-icon {
+    background: #10b981 !important;
+    border-color: #10b981 !important;
+    color: #ffffff !important;
+}
+
+.light-mode .track-step.completed .step-label {
+    color: #10b981 !important;
+}
+
+.light-mode .track-step.completed .step-line {
+    background: #10b981 !important;
+}
+
+.light-mode .track-step.current .step-icon {
+    background: #6c63ff !important;
+    border-color: #6c63ff !important;
+    color: #ffffff !important;
+}
+
+.light-mode .track-step.current .step-label {
+    color: #6c63ff !important;
+}
+
+.light-mode .order-details-box {
+    background: #f3f5fa !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .details-row {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .details-row .label {
+    color: #525b78 !important;
+}
+
+.light-mode .details-row .value {
+    color: #101426 !important;
+}
+
+.light-mode .details-row.total .amount {
+    color: #059669 !important;
+}
+
+.light-mode .order-notes-box {
+    background: rgba(245, 158, 11, 0.1) !important;
+    border-left: 3px solid #f59e0b !important;
+    color: #101426 !important;
+}
+
+.light-mode .order-footer {
+    border-top: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #94a3b8 !important;
+}
+
+.light-mode .no-orders {
+    color: #394160 !important;
+}
+
+.light-mode .browse-btn {
+    background: #6c63ff !important;
+    color: #ffffff !important;
+}
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR BOOKING MODAL */
+/* ============================================================ */
+.light-mode .modal-overlay {
+    background: rgba(248, 250, 252, 0.85) !important;
+}
+
+.light-mode .booking-modal {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    box-shadow: 0 50px 100px rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .close-modal {
+    color: #94a3b8 !important;
+}
+
+.light-mode .close-modal:hover {
+    color: #101426 !important;
+}
+
+.light-mode .modal-header h2 {
+    color: #101426 !important;
+}
+
+.light-mode .modal-header p,
+.light-mode .modal-section h3 {
+    color: #525b78 !important;
+}
+
+.light-mode .modal-service-item {
+    background: #f3f5fa !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .service-price,
+.light-mode .qty-input label,
+.light-mode .modal-input-group label,
+.light-mode .total-display span {
+    color: #525b78 !important;
+}
+
+.light-mode .qty-input input,
+.light-mode .modal-input-group input,
+.light-mode .modal-section textarea {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.18) !important;
+    color: #101426 !important;
+}
+
+.light-mode .qty-input input:focus,
+.light-mode .modal-input-group input:focus,
+.light-mode .modal-section textarea:focus {
+    border-color: #6366f1 !important;
+    background: #f3f5fa !important;
+}
+
+.light-mode .modal-input-group input::-webkit-calendar-picker-indicator {
+    filter: invert(0) !important;
+}
+
+.light-mode .modal-footer {
+    border-top: 1px solid rgba(108, 99, 255, 0.18) !important;
+}
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR MANAGE BOOKINGS PAGE */
+/* ============================================================ */
+.light-mode .manage-bookings-page {
+    background: #eceef8 !important;
+    color: #101426 !important;
+}
+
+.light-mode .manage-header-premium h1 {
+    background: linear-gradient(135deg, #101426, #394160) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-mode .manage-header-premium p {
+    color: #525b78 !important;
+}
+
+/* Stat Cards are handled by previous generic overrides mostly, but we refine here */
+.light-mode .manage-bookings-page .stat-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02) !important;
+}
+
+.light-mode .manage-bookings-page .stat-card:hover {
+    background: #f3f5fa !important;
+    border-color: rgba(108, 99, 255, 0.3) !important;
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .manage-bookings-page .stat-info .count {
+    color: #101426 !important;
+}
+
+.light-mode .manage-bookings-page .stat-info .label {
+    color: #525b78 !important;
+}
+
+.light-mode .bookings-table-wrapper-luxe {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.12) !important;
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .bookings-table-modern th {
+    color: #525b78 !important;
+}
+
+.light-mode .bookings-table-modern td {
+    background: #f3f5fa !important;
+    border-top: 1px solid rgba(108, 99, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .bookings-table-modern td:first-child {
+    border-left: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .bookings-table-modern td:last-child {
+    border-right: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .bookings-table-modern tr:hover td {
+    background: #ffffff !important;
+    border-color: rgba(108, 99, 255, 0.2) !important;
+}
+
+.light-mode .student-details .name {
+    color: #101426 !important;
+}
+
+.light-mode .student-details .email {
+    color: #525b78 !important;
+}
+
+.light-mode .service-pill-mini .qty {
+    color: #101426 !important;
+}
+
+.light-mode .date-badge {
+    color: #101426 !important;
+}
+
+.light-mode .time-pill {
+    color: #394160 !important;
+}
+
+.light-mode .status-dropdown-luxe {
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    color: #101426 !important;
+}
+
+.light-mode .status-dropdown-luxe:focus {
+    border-color: #6c63ff !important;
+    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .status-dropdown-luxe option {
+    background: #ffffff !important;
+    color: #101426 !important;
+}
+
+.light-mode .no-bookings-fancy {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border: 1px dashed rgba(108, 99, 255, 0.18) !important;
+    color: #394160 !important;
+}
+
+.light-mode .no-bookings-icon {
+    background: rgba(108, 99, 255, 0.08) !important;
+    color: rgba(0, 0, 0, 0.2) !important;
+}
