@@ -77,7 +77,11 @@ const Navbar = () => {
                             <Link to="/profile" className="user-info">
                                 <span className="user-name">Hi, {user.username}</span>
                                 <div className="user-avatar">
-                                    {user.username.charAt(0).toUpperCase()}
+                                    {user.profilePic ? (
+                                        <img src={user.profilePic} alt="Profile" className="nav-avatar-img" />
+                                    ) : (
+                                        user.name ? user.name.charAt(0).toUpperCase() : user.username.charAt(0).toUpperCase()
+                                    )}
                                 </div>
                             </Link>
                             <button onClick={handleLogout} className="btn-logout">

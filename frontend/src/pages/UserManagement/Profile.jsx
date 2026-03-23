@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Camera, User, Mail, Shield, BadgeCheck, PencilLine } from 'lucide-react';
 import './Profile.css';
 
 const Profile = () => {
@@ -9,7 +10,8 @@ const Profile = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        username: ''
+        username: '',
+        profilePic: ''
     });
     const [message, setMessage] = useState('');
 
@@ -28,13 +30,25 @@ const Profile = () => {
         setFormData({
             name: userInfo.name,
             email: userInfo.email,
-            username: userInfo.username
+            username: userInfo.username,
+            profilePic: userInfo.profilePic || ''
         });
         setLoading(false);
     }, [navigate]);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData(prev => ({ ...prev, profilePic: reader.result }));
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleUpdate = async (e) => {
@@ -64,11 +78,35 @@ const Profile = () => {
             <div className="profile-container">
                 <div className="profile-card">
                     <div className="profile-header">
-                        <div className="profile-avatar">
-                            {user.name.charAt(0).toUpperCase()}
+                        <div className="avatar-wrapper">
+                            <div className="profile-avatar-luxe">
+                                {formData.profilePic ? (
+                                    <img src={formData.profilePic} alt="Profile" className="avatar-img" />
+                                ) : (
+                                    <span className="avatar-letter">{user.name.charAt(0).toUpperCase()}</span>
+                                )}
+                                {isEditing && (
+                                    <label className="avatar-edit-overlay">
+                                        <Camera size={20} />
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleImageChange}
+                                            hidden
+                                        />
+                                    </label>
+                                )}
+                            </div>
                         </div>
-                        <h2>{user.name}</h2>
-                        <span className="role-tag">{user.role}</span>
+                        <div className="header-text-block">
+                            <h2>{user.name}</h2>
+                            <div className="badge-pills">
+                                <span className="role-chip"><Shield size={12} /> {user.role}</span>
+                                {user.role === 'PROVIDER' && user.isApproved && (
+                                    <span className="verified-chip"><BadgeCheck size={12} /> Verified</span>
+                                )}
+                            </div>
+                        </div>
                     </div>
 
                     {message && <div className="status-message">{message}</div>}
