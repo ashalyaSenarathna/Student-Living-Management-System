@@ -150,13 +150,24 @@
 }
 
 .status-select {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
     color: #fff;
-    padding: 6px 10px;
-    border-radius: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
     outline: none;
     cursor: pointer;
+    transition: all 0.3s;
+}
+
+.status-select:focus {
+    border-color: #6c63ff;
+    background: rgba(108, 99, 255, 0.1);
+}
+
+.status-select option {
+    background-color: #1e1b4b;
+    color: #fff;
 }
 
 .manage-loading {

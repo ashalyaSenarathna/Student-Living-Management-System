@@ -39,7 +39,7 @@ const MyBookings = () => {
     }, [navigate]);
 
     const getStatusStep = (status) => {
-        const steps = ['Pending', 'Confirmed', 'Picked Up', 'In Progress', 'Ready', 'Completed'];
+        const steps = ['Pending', 'Confirmed', 'Ready', 'Completed'];
         return steps.indexOf(status);
     };
 
@@ -108,17 +108,16 @@ const MyBookings = () => {
                             </div>
 
                             <div className="order-tracking-visual">
-                                {['Pending', 'Confirmed', 'Processing', 'Ready'].map((step, index) => {
+                                {['Pending', 'Confirmed', 'Ready'].map((step, index) => {
                                     const currentStep = getStatusStep(booking.status);
                                     let stepStatus = 'upcoming';
                                     if (currentStep > index || booking.status === 'Completed') stepStatus = 'completed';
                                     else if (currentStep === index) stepStatus = 'current';
 
-                                    // Mapping complex statuses to simplified 4-step UI
+                                    // Mapping complex statuses to simplified 3-step UI
                                     const displaySteps = [
                                         { label: 'Pending', icon: '🕒' },
                                         { label: 'Confirmed', icon: '✅' },
-                                        { label: 'Processing', icon: '🧺' },
                                         { label: 'Ready', icon: '👕' }
                                     ];
 
@@ -126,7 +125,7 @@ const MyBookings = () => {
                                         <div key={index} className={`track-step ${stepStatus}`}>
                                             <div className="step-icon">{displaySteps[index].icon}</div>
                                             <div className="step-label">{displaySteps[index].label}</div>
-                                            {index < 3 && <div className="step-line"></div>}
+                                            {index < 2 && <div className="step-line"></div>}
                                         </div>
                                     );
                                 })}

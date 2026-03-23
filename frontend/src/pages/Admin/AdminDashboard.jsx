@@ -7,8 +7,6 @@ import {
     Briefcase,
     ShieldAlert,
     Search,
-    LayoutDashboard,
-    Settings,
     LogOut,
     Menu,
     X,
@@ -27,7 +25,6 @@ const AdminDashboard = () => {
     const [error, setError] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
     const [activeFilter, setActiveFilter] = useState('ALL');
-    const [activeTab, setActiveTab] = useState('USERS');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -145,19 +142,9 @@ const AdminDashboard = () => {
                 </div>
 
                 <nav className="sidebar-nav">
-                    <button
-                        className={`nav-item ${activeTab === 'USERS' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('USERS')}
-                    >
+                    <button className="nav-item active">
                         <Users size={20} />
                         <span>User Management</span>
-                    </button>
-                    <button
-                        className={`nav-item ${activeTab === 'ANALYTICS' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('ANALYTICS')}
-                    >
-                        <LayoutDashboard size={20} />
-                        <span>System Overview</span>
                     </button>
                     <button
                         className="nav-item"
@@ -165,10 +152,6 @@ const AdminDashboard = () => {
                     >
                         <Home size={20} />
                         <span>Hostel Admin</span>
-                    </button>
-                    <button className="nav-item">
-                        <Settings size={20} />
-                        <span>Global Settings</span>
                     </button>
                 </nav>
 

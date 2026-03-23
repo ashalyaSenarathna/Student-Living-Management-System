@@ -132,8 +132,6 @@ const ManageBookings = () => {
                                             >
                                                 <option value="Pending">Pending</option>
                                                 <option value="Confirmed">Confirmed</option>
-                                                <option value="Picked Up">Picked Up</option>
-                                                <option value="In Progress">In Progress</option>
                                                 <option value="Ready">Ready</option>
                                                 <option value="Completed">Completed</option>
                                                 <option value="Cancelled">Cancelled</option>
