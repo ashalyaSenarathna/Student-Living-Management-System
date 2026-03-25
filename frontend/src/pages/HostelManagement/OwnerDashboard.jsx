@@ -53,7 +53,28 @@ const OwnerDashboard = () => {
         fetchMy();
     }, [token]);
 
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        let newValue = value;
+
+        if (name === 'location' || name === 'name') {
+            newValue = value.replace(/[^a-zA-Z\s]/g, '');
+        } else if (name === 'contact') {
+            newValue = value.replace(/\D/g, '').slice(0, 10);
+        }
+
+        setForm({ ...form, [name]: newValue });
+    };
+
+    const handleContactBlur = () => {
+        if (form.contact.length > 0 && form.contact.length < 10) {
+            setError('Contact number must be exactly 10 digits.');
+        } else if (form.contact.length === 10 || form.contact.length === 0) {
+            if (error === 'Contact number must be exactly 10 digits.') {
+                setError('');
+            }
+        }
+    };
 
     const handleFacilityChange = (e) => {
         const { name, checked } = e.target;
@@ -124,6 +145,10 @@ const OwnerDashboard = () => {
     const validateForm = () => {
         if (!form.name || !form.location || !form.price || !form.contact) {
             setError('Please fill in Name, Location, Price, and Contact Number.');
+            return false;
+        }
+        if (form.contact.length !== 10) {
+            setError('Contact number must be exactly 10 digits.');
             return false;
         }
         if (form.images.filter(img => img !== null).length === 0) {
@@ -274,7 +299,7 @@ const OwnerDashboard = () => {
                                         </div>
                                         <div className="form-group">
                                             <label>Contact Number *</label>
-                                            <input name="contact" value={form.contact} onChange={handleChange} required placeholder="0712345678" />
+                                            <input name="contact" value={form.contact} onChange={handleChange} onBlur={handleContactBlur} required placeholder="0712345678" />
                                         </div>
                                     </div>
                                 </section>
