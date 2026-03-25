@@ -336,20 +336,7 @@ const AddLaundry = () => {
                                                     <input type="file" onChange={handleFileChange} accept="image/*" />
                                                     <ImagePlus size={18} />
                                                     <span>Change Image</span>
-                                                </label>
-                                                <button
-                                                    type="button"
-                                                    className="overlay-btn remove"
-                                                    onClick={() => {
-                                                        setImageFile(null);
-                                                        setImagePreview('');
-                                                        setFormData({ ...formData, image: '' });
-                                                    }}
-                                                >
-                                                    <X size={18} />
-                                                    <span>Remove</span>
-                                                </button>
-                                            </div>
+                                                </label>                                            </div>
                                         </div>
                                         <div className="preview-status-pill">
                                             <Camera size={14} /> Ready to Showcase

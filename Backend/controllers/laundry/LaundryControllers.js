@@ -77,7 +77,7 @@ const updateLaundry = async (req, res) => {
             laundry.address = req.body.address || laundry.address;
             laundry.contactNumber = req.body.contactNumber || laundry.contactNumber;
             laundry.services = req.body.services || laundry.services;
-            laundry.image = req.body.image || laundry.image;
+            laundry.image = req.body.image !== undefined ? req.body.image : laundry.image;
             laundry.isOpen = req.body.isOpen !== undefined ? req.body.isOpen : laundry.isOpen;
             laundry.openingTime = req.body.openingTime || laundry.openingTime;
             laundry.closingTime = req.body.closingTime || laundry.closingTime;
