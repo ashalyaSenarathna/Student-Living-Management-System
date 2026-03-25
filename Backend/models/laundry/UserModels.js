@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
     },
     isApproved: {
         type: Boolean,
-        default: true
+        default: false
     },
     createdAt: {
         type: Date,

@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
-const User = require('./models/UserModels');
+const User = require('./models/laundry/UserModels');
 require('dotenv').config();
 
 const seedAdmin = async () => {
     try {
-        await mongoose.connect("mongodb+srv://admin:xRLfibGWd5Jzy0im@cluster0.ucmx19s.mongodb.net/");
+        await mongoose.connect("mongodb+srv://admin:xRLfibGWd5Jzy0im@cluster0.ucmx19s.mongodb.net/student_living");
 
         console.log('Connected to MongoDB...');
 

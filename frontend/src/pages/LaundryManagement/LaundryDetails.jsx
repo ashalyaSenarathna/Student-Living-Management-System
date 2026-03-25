@@ -28,25 +28,37 @@ const LaundryDetails = () => {
         const currentTime = now.getHours() * 60 + now.getMinutes();
 
         const daysMap = {
-            'Sunday': 0, 'Monday': 1, 'Tuesday': 2, 'Wednesday': 3,
-            'Thursday': 4, 'Friday': 5, 'Saturday': 6
+            'Sunday': 0, 'Sun': 0,
+            'Monday': 1, 'Mon': 1,
+            'Tuesday': 2, 'Tue': 2,
+            'Wednesday': 3, 'Wed': 3,
+            'Thursday': 4, 'Thu': 4,
+            'Friday': 5, 'Fri': 5,
+            'Saturday': 6, 'Sat': 6
         };
 
-        const days = openingDays.split(' - ');
+        const days = openingDays.split('-').map(d => d.trim());
         const startDay = daysMap[days[0]];
         const endDay = daysMap[days[1]];
+
+        // If days are not recognized, default to open
+        if (startDay === undefined || endDay === undefined) return true;
 
         let dayInRange = false;
         if (startDay <= endDay) {
             dayInRange = currentDay >= startDay && currentDay <= endDay;
         } else {
+            // Handle ranges like Friday - Monday
             dayInRange = currentDay >= startDay || currentDay <= endDay;
         }
 
         if (!dayInRange) return false;
 
         const parseTime = (timeStr) => {
-            const [time, modifier] = timeStr.split(' ');
+            if (!timeStr) return 0;
+            const parts = timeStr.split(' ');
+            if (parts.length !== 2) return 0;
+            const [time, modifier] = parts;
             let [hours, minutes] = time.split(':');
             hours = parseInt(hours);
             minutes = parseInt(minutes);
@@ -257,8 +269,6 @@ const LaundryDetails = () => {
                         )}
                         <ul className="perks-list">
                             <li>✨ Quality Guarantee</li>
-                            <li>🚚 Quick Delivery</li>
-                            <li>💳 Secure Payment</li>
                         </ul>
                     </div>
 
