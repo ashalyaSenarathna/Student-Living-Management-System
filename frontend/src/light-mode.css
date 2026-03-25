@@ -1538,3 +1538,14 @@ body.light-mode {
     background: rgba(108, 99, 255, 0.08) !important;
     color: rgba(0, 0, 0, 0.2) !important;
 }
+
+/* Fix for Rating Pill visibility in light mode */
+.light-mode .rating-pill {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #394160 !important;
+}
+
+.light-mode .rating-pill.high {
+    background: rgba(251, 191, 36, 0.15) !important;
+    color: #d97706 !important;
+}
