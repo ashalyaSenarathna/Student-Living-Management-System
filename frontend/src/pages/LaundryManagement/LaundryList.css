@@ -102,7 +102,7 @@
     border-color: #6c63ff;
     background: rgba(13, 18, 43, 0.8);
     box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.15),
-                0 20px 40px rgba(0, 0, 0, 0.3);
+        0 20px 40px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
 }
 
@@ -317,7 +317,7 @@
 }
 
 .shop-address {
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.4);
     margin-bottom: 1.5rem;
     display: flex;
@@ -373,8 +373,8 @@
 
 .book-btn-premium {
     width: 100%;
-    background: #fff;
-    color: #0d122b;
+    background: linear-gradient(45deg, #6c63ff, #8b5cf6, #d946ef);
+    color: #fdfdfd;
     border: none;
     padding: 1.25rem;
     border-radius: 20px;
@@ -386,7 +386,7 @@
 }
 
 .book-btn-premium:hover {
-    background: #6c63ff;
+    background: linear-gradient(45deg, #1308f1, #3d5dec, #2ddeeb);
     color: #fff;
     transform: scale(1.02);
     box-shadow: 0 15px 30px rgba(108, 99, 255, 0.3);

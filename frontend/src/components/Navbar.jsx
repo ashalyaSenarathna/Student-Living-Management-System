@@ -66,7 +66,7 @@ const Navbar = () => {
                             user.role?.toUpperCase() !== 'PROVIDER' &&
                             user.role?.toUpperCase() !== 'HOSTEL_OWNER' &&
                             user.role?.toUpperCase() !== 'ADMIN' && (
-                                <li><Link to="/my-bookings" className={`navbar__link ${location.pathname === '/my-bookings' ? 'navbar__link--active' : ''}`}>My Bookings</Link></li>
+                                <li><Link to="/my-bookings" className={`navbar__link ${location.pathname === '/my-bookings' ? 'navbar__link--active' : ''}`}>My Laundry Bookings</Link></li>
                             )}
                         {user && user.role?.toUpperCase() === 'PROVIDER' && (
                             <>
@@ -87,14 +87,14 @@ const Navbar = () => {
                 </div>
 
                 <div className="navbar__actions">
-                    <button 
-                        onClick={toggleTheme} 
+                    <button
+                        onClick={toggleTheme}
                         className="theme-toggle-btn"
                         aria-label="Toggle Theme"
                     >
                         {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
-                    
+
                     {user ? (
                         <div className="navbar__user-profile">
                             <Link to="/profile" className="user-info">
@@ -166,8 +166,8 @@ const Navbar = () => {
                             </>
                         )}
                         <li>
-                            <button 
-                                onClick={() => { toggleTheme(); setMenuOpen(false); }} 
+                            <button
+                                onClick={() => { toggleTheme(); setMenuOpen(false); }}
                                 className="mobile-theme-toggle-btn"
                             >
                                 {theme === 'dark' ? <><Sun size={20} /> Switch to Light Mode</> : <><Moon size={20} /> Switch to Dark Mode</>}
