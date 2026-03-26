@@ -1679,3 +1679,84 @@ body.light-mode {
     background: #ffffff !important;
     border: 1px solid rgba(108, 99, 255, 0.1) !important;
 }
+
+.light-mode .form-header-flex h3 {
+    color: #101426 !important;
+}
+
+.light-mode .btn-cancel-edit {
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #475569 !important;
+}
+
+.light-mode .btn-cancel-edit:hover {
+    background: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+}
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR HOSTEL DETAILS PAGE */
+/* ============================================================ */
+
+.light-mode .hostel-details-page {
+    background: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .info-section h2,
+.light-mode .pricing-card h3 {
+    color: #101426 !important;
+}
+
+.light-mode .info-section p,
+.light-mode .no-data,
+.light-mode .price-label,
+.light-mode .period {
+    color: #394160 !important;
+}
+
+.light-mode .facility-item {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+    color: #101426 !important;
+}
+
+.light-mode .table-container {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .rooms-table th {
+    background: #f3f5fa !important;
+    color: #525b78 !important;
+}
+
+.light-mode .rooms-table td {
+    color: #101426 !important;
+    border-top-color: rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .pricing-card {
+    background: #ffffff !important;
+    border-color: rgba(108, 99, 255, 0.3) !important;
+    box-shadow: 0 10px 40px rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .price-value {
+    color: #101426 !important;
+}
+
+.light-mode .contact-info p {
+    color: #101426 !important;
+}
+
+.light-mode .hostel-gallery-grid .gallery-item {
+    background: #ffffff !important;
+    border-color: rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .gallery-item:hover {
+    border-color: #6c63ff !important;
+}
