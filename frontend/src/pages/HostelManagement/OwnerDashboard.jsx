@@ -24,6 +24,8 @@ const OwnerDashboard = () => {
         images: [null, null, null]
     });
     const [previews, setPreviews] = useState([null, null, null]);
+    const [isEditing, setIsEditing] = useState(false);
+    const [editHostelId, setEditHostelId] = useState(null);
 
     const token = (() => {
         try {
@@ -110,7 +112,8 @@ const OwnerDashboard = () => {
         const newPreviews = [...previews];
 
         files.forEach(file => {
-            const firstEmpty = newImages.findIndex(img => img === null);
+            // Find the first slot that doesn't have a file AND doesn't have an existing preview
+            const firstEmpty = newPreviews.findIndex(p => p === null);
             if (firstEmpty !== -1) {
                 newImages[firstEmpty] = file;
                 newPreviews[firstEmpty] = URL.createObjectURL(file);
@@ -142,6 +145,55 @@ const OwnerDashboard = () => {
         });
     };
 
+    const handleEdit = (hostel) => {
+        setIsEditing(true);
+        setEditHostelId(hostel._id || hostel.id);
+        setForm({
+            name: hostel.name || '',
+            location: hostel.location || '',
+            description: hostel.description || '',
+            price: hostel.price || '',
+            contact: hostel.contact || '',
+            gender: hostel.gender || 'mixed',
+            facilities: hostel.facilities || {
+                wifi: false,
+                meals: false,
+                water: false,
+                electricity: false,
+                parking: false
+            },
+            rooms: hostel.rooms && hostel.rooms.length > 0 ? hostel.rooms : [{ roomNo: '', totalBeds: '', availableBeds: '' }],
+            images: [null, null, null] // Reuse existing images logic or handle differently if needed
+        });
+        
+        // Show existing images in previews if available
+        if (hostel.images && Array.isArray(hostel.images)) {
+            const newPreviews = [null, null, null];
+            hostel.images.forEach((img, idx) => {
+                if (idx < 3) newPreviews[idx] = img;
+            });
+            setPreviews(newPreviews);
+        } else {
+            setPreviews([null, null, null]);
+        }
+        
+        setActiveTab('add');
+    };
+
+    const cancelEdit = () => {
+        setIsEditing(false);
+        setEditHostelId(null);
+        setForm({
+            name: '', location: '', description: '', price: '', contact: '',
+            gender: 'mixed',
+            facilities: { wifi: false, meals: false, water: false, electricity: false, parking: false },
+            rooms: [{ roomNo: '', totalBeds: '', availableBeds: '' }],
+            images: [null, null, null]
+        });
+        setPreviews([null, null, null]);
+        setActiveTab('list');
+    };
+
     const validateForm = () => {
         if (!form.name || !form.location || !form.price || !form.contact) {
             setError('Please fill in Name, Location, Price, and Contact Number.');
@@ -151,10 +203,16 @@ const OwnerDashboard = () => {
             setError('Contact number must be exactly 10 digits.');
             return false;
         }
-        if (form.images.filter(img => img !== null).length === 0) {
+        
+        // Check if there's at least one image (either a new File in form.images OR an existing URL/base64 in previews)
+        const hasNewImage = form.images.some(img => img !== null);
+        const hasExistingImage = previews.some(p => p !== null && (typeof p === 'string'));
+        
+        if (!hasNewImage && !hasExistingImage) {
             setError('Please upload at least one image.');
             return false;
         }
+
         for (const room of form.rooms) {
             if (!room.roomNo || !room.totalBeds || !room.availableBeds) {
                 setError('Please fill in all room details.');
@@ -179,12 +237,30 @@ const OwnerDashboard = () => {
         if (!validateForm()) return;
 
         try {
-            const imageBase64s = await Promise.all(
-                form.images.filter(img => img).map(img => fileToBase64(img))
-            );
+            let imagesToUpload = [];
+            
+            // Handle images: if they are files (new), convert to base64. If strings (existing), keep as is.
+            const imagePromises = form.images.map(async (img, idx) => {
+                if (img instanceof File) {
+                    return await fileToBase64(img);
+                } else if (previews[idx] && typeof previews[idx] === 'string' && previews[idx].startsWith('http')) {
+                    return previews[idx]; // Keep existing URL
+                } else if (previews[idx] && typeof previews[idx] === 'string' && previews[idx].startsWith('data:image')) {
+                    return previews[idx]; // Keep already converted base64 if any
+                }
+                return null;
+            });
 
-            const res = await fetch('http://localhost:5000/api/hostel', {
-                method: 'POST',
+            const processedImages = (await Promise.all(imagePromises)).filter(img => img !== null);
+
+            const url = isEditing 
+                ? `http://localhost:5000/api/hostel/${editHostelId}`
+                : 'http://localhost:5000/api/hostel';
+            
+            const method = isEditing ? 'PUT' : 'POST';
+
+            const res = await fetch(url, {
+                method: method,
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
@@ -198,13 +274,20 @@ const OwnerDashboard = () => {
                     gender: form.gender,
                     facilities: form.facilities,
                     rooms: form.rooms,
-                    images: imageBase64s
+                    images: processedImages
                 })
             });
             const data = await res.json();
             if (res.ok) {
-                setHostels(prev => [data, ...prev]);
-                setSuccessMsg('Hostel submitted successfully! It will appear after admin approval.');
+                if (isEditing) {
+                    setHostels(prev => prev.map(h => (h._id === editHostelId || h.id === editHostelId) ? data : h));
+                    setSuccessMsg('Hostel updated successfully!');
+                } else {
+                    setHostels(prev => [data, ...prev]);
+                    setSuccessMsg('Hostel submitted successfully! It will appear after admin approval.');
+                }
+                
+                // Reset form
                 setForm({
                     name: '', location: '', description: '', price: '', contact: '',
                     gender: 'mixed',
@@ -213,9 +296,12 @@ const OwnerDashboard = () => {
                     images: [null, null, null]
                 });
                 setPreviews([null, null, null]);
+                setIsEditing(false);
+                setEditHostelId(null);
+                
                 setTimeout(() => { setActiveTab('list'); setSuccessMsg(''); }, 2000);
             } else {
-                setError(data.message || 'Failed to add hostel. Please check you are logged in.');
+                setError(data.message || `Failed to ${isEditing ? 'update' : 'add'} hostel.`);
             }
         } catch (err) {
             setError('Could not connect to server. Make sure the backend is running.');
@@ -243,9 +329,12 @@ const OwnerDashboard = () => {
                     </button>
                     <button
                         className={`nav-item ${activeTab === 'add' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('add')}
+                        onClick={() => {
+                            setActiveTab('add');
+                            if (isEditing) cancelEdit();
+                        }}
                     >
-                        <span className="icon">➕</span> Add New
+                        <span className="icon">➕</span> {isEditing ? 'Editing...' : 'Add New'}
                     </button>
                 </nav>
             </aside>
@@ -278,7 +367,10 @@ const OwnerDashboard = () => {
 
                     {activeTab === 'add' && (
                         <div className="owner-form-card">
-                            <h3>Add New Hostel / Boarding</h3>
+                            <div className="form-header-flex">
+                                <h3>{isEditing ? 'Edit Hostel / Boarding' : 'Add New Hostel / Boarding'}</h3>
+                                {isEditing && <button className="btn-cancel-edit" onClick={cancelEdit}>Cancel Edit</button>}
+                            </div>
                             {error && <div className="form-error-banner">⚠️ {error}</div>}
                             {successMsg && <div className="form-success-banner">✅ {successMsg}</div>}
                             <form onSubmit={handleSubmit} className="hostel-form-complex">
@@ -390,7 +482,9 @@ const OwnerDashboard = () => {
 
                                 <div className="form-footer-actions">
                                     <p className="approval-notice">Listing will be visible after <strong>Admin Approval</strong>.</p>
-                                    <button type="submit" className="btn-submit-hostel">Submit for Approval</button>
+                                    <button type="submit" className="btn-submit-hostel">
+                                        {isEditing ? 'Update Hostel' : 'Submit for Approval'}
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -414,7 +508,7 @@ const OwnerDashboard = () => {
                                                     <p className="loc">📍 {h.location}</p>
                                                     <p className="price">Rs. {h.price || '—'}</p>
                                                     <div className="card-actions">
-                                                        <button className="btn-edit-sm">Edit</button>
+                                                        <button className="btn-edit-sm" onClick={() => handleEdit(h)}>Edit</button>
                                                         <button className="btn-delete-sm">Delete</button>
                                                     </div>
                                                 </div>

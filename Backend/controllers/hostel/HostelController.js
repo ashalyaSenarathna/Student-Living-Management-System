@@ -178,6 +178,39 @@ exports.dismissReport = async (req, res) => {
     }
 };
 
+// @desc Update hostel (Owner)
+// @route PUT /api/hostel/:id
+// @access Private (Owner)
+exports.updateHostel = async (req, res) => {
+    try {
+        const { name, location, description, price, contact, gender, facilities, rooms, images } = req.body;
+        
+        const hostel = await Hostel.findById(req.params.id);
+        if (!hostel) return res.status(404).json({ message: 'Hostel not found' });
+
+        // Check if the user is the owner
+        if (hostel.owner.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ message: 'Not authorized to update this hostel' });
+        }
+
+        hostel.name = name || hostel.name;
+        hostel.location = location || hostel.location;
+        hostel.description = description || hostel.description;
+        hostel.price = price || hostel.price;
+        hostel.contact = contact || hostel.contact;
+        hostel.gender = gender || hostel.gender;
+        hostel.facilities = facilities || hostel.facilities;
+        hostel.rooms = rooms || hostel.rooms;
+        hostel.images = images || hostel.images;
+        hostel.status = 'pending'; // Re-verify after update
+
+        const updatedHostel = await hostel.save();
+        res.status(200).json(updatedHostel);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 // @desc Delete hostel (Owner or Admin)
 // @route DELETE /api/hostel/:id
 // @access Private

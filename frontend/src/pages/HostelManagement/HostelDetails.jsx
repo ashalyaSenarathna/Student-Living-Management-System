@@ -78,6 +78,19 @@ const HostelDetails = () => {
                         <p>{hostel.description || 'This premium student accommodation offers a comfortable and secure living environment with modern amenities and convenient access to local facilities.'}</p>
                     </section>
 
+                    {hostel.images && hostel.images.length > 0 && (
+                        <section className="info-section">
+                            <h2>Photo Gallery</h2>
+                            <div className="hostel-gallery-grid">
+                                {hostel.images.map((img, idx) => (
+                                    <div key={idx} className="gallery-item">
+                                        <img src={img} alt={`${hostel.name} view ${idx + 1}`} onClick={() => window.open(img, '_blank')} />
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    )}
+
                     <section className="info-section">
                         <h2>Facilities & Amenities</h2>
                         <div className="facilities-grid">

@@ -9,6 +9,7 @@ router.get('/', hostelController.getHostels);
 // Private (Owner) routes — must be BEFORE /:id to avoid being matched as a param
 router.get('/mine', protect, hostelController.getMyHostels);
 router.post('/', protect, hostelController.addHostel);
+router.put('/:id', protect, hostelController.updateHostel);
 
 // Admin-only routes — must be BEFORE /:id
 router.get('/admin/pending', protect, admin, hostelController.getPendingHostels);
