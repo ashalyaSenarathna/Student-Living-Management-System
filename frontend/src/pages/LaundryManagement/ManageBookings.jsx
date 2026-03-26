@@ -213,7 +213,7 @@ const ManageBookings = () => {
                                                         <option value="Pending">⏱ Pending Approval</option>
                                                         <option value="Confirmed">📦 Confirm Booking</option>
                                                         <option value="Ready">⚡ Mark as Ready</option>
-                                                        <option value="Completed">✅ Close Order</option>
+                                                        <option value="Completed">✅ Completed</option>
                                                         <option value="Cancelled">❌ Cancel Order</option>
                                                     </select>
                                                 </div>

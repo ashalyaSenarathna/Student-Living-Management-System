@@ -135,12 +135,24 @@ const AddLaundry = () => {
             return;
         }
 
+        if (name === 'shopName') {
+            // Remove numbers
+            const sanitizedValue = value.replace(/[0-9]/g, '');
+            setFormData({ ...formData, [name]: sanitizedValue });
+            return;
+        }
+
         setFormData({ ...formData, [name]: value });
     };
 
     const handleServiceChange = (index, field, value) => {
         const newServices = [...services];
-        newServices[index][field] = value;
+        if (field === 'name') {
+            // Remove numbers
+            newServices[index][field] = value.replace(/[0-9]/g, '');
+        } else {
+            newServices[index][field] = value;
+        }
         setServices(newServices);
     };
 
@@ -336,20 +348,7 @@ const AddLaundry = () => {
                                                     <input type="file" onChange={handleFileChange} accept="image/*" />
                                                     <ImagePlus size={18} />
                                                     <span>Change Image</span>
-                                                </label>
-                                                <button
-                                                    type="button"
-                                                    className="overlay-btn remove"
-                                                    onClick={() => {
-                                                        setImageFile(null);
-                                                        setImagePreview('');
-                                                        setFormData({ ...formData, image: '' });
-                                                    }}
-                                                >
-                                                    <X size={18} />
-                                                    <span>Remove</span>
-                                                </button>
-                                            </div>
+                                                </label>                                            </div>
                                         </div>
                                         <div className="preview-status-pill">
                                             <Camera size={14} /> Ready to Showcase
