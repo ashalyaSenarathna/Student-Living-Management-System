@@ -159,18 +159,8 @@ const HomePage = () => {
             </section>
 
             {/* Social Proof */}
-            <div className="brand-trust-bar">
-                <p>Loved by students across top universities</p>
-                <div className="brand-strip">
-                    <span>UNIVERSITY OF OXFORD</span>
-                    <div className="dot-sep"></div>
-                    <span>MIT CAMPUS</span>
-                    <div className="dot-sep"></div>
-                    <span>STANFORD LIVING</span>
-                    <div className="dot-sep"></div>
-                    <span>NSBM HUB</span>
-                </div>
-            </div>
+
+
 
             {/* Core Services */}
             <section className="services-showcase">
