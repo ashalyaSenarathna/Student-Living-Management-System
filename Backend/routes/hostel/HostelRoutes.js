@@ -25,3 +25,6 @@ router.get('/:id', hostelController.getHostelById);
 router.delete('/:id', protect, hostelController.deleteHostel);
 
 module.exports = router;
+
+
+
