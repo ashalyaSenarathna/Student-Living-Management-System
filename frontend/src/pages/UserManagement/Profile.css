@@ -2,213 +2,292 @@
     min-height: 100vh;
     padding: 120px 2rem 60px;
     background: #060a1f;
-    display: flex;
-    justify-content: center;
+    color: #fff;
     position: relative;
     overflow: hidden;
 }
 
 .profile-bg-blobs .blob {
     position: absolute;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    filter: blur(100px);
+    filter: blur(80px);
     opacity: 0.15;
     z-index: 0;
 }
 
 .blob-1 {
+    width: 500px;
+    height: 500px;
+    background: #6c63ff;
     top: -100px;
     left: -100px;
-    background: #6c63ff;
 }
 
 .blob-2 {
-    bottom: -100px;
-    right: -100px;
-    background: #a855f7;
+    width: 400px;
+    height: 400px;
+    background: #ec4899;
+    bottom: -50px;
+    right: -50px;
 }
 
 .profile-container {
-    width: 100%;
-    max-width: 600px;
+    max-width: 900px;
+    margin: 0 auto;
     position: relative;
     z-index: 1;
 }
 
 .profile-card {
-    background: rgba(13, 18, 43, 0.7);
-    backdrop-filter: blur(20px);
+    background: rgba(13, 18, 43, 0.6);
+    backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 32px;
+    border-radius: 40px;
     padding: 3rem;
-    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
-    animation: profileFadeIn 0.8s ease;
-}
-
-@keyframes profileFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
 }
 
 .profile-header {
-    text-align: center;
-    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.profile-avatar {
-    width: 100px;
-    height: 100px;
+.avatar-wrapper {
+    position: relative;
+}
+
+.profile-avatar-luxe {
+    width: 140px;
+    height: 140px;
     background: linear-gradient(135deg, #6c63ff, #a855f7);
+    border: 4px solid rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    font-weight: 800;
-    color: #fff;
-    margin: 0 auto 1.5rem;
-    box-shadow: 0 10px 25px rgba(108, 99, 255, 0.4);
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.3);
 }
 
-.profile-header h2 {
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-letter {
+    font-size: 4rem;
+    font-weight: 900;
     font-family: 'Outfit', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
 }
 
-.role-tag {
-    display: inline-block;
-    background: rgba(108, 99, 255, 0.15);
-    color: #6c63ff;
-    padding: 0.4rem 1.2rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
+.avatar-edit-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.avatar-wrapper:hover .avatar-edit-overlay {
+    opacity: 1;
+}
+
+.header-text-block h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 0.75rem;
+}
+
+.badge-pills {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.role-chip,
+.verified-chip {
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 6px;
     text-transform: uppercase;
-    letter-spacing: 1px;
+}
+
+.role-chip {
+    background: rgba(108, 99, 255, 0.15);
+    color: #a78bfa;
+}
+
+.verified-chip {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
 }
 
 .profile-content {
-    margin-top: 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 24px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.status-message {
+    padding: 1rem;
+    border-radius: 14px;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.status-message.success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.status-message.error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
 }
 
 .info-item {
     display: flex;
     justify-content: space-between;
-    padding: 1.25rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.info-item:last-child {
+    border-bottom: none;
 }
 
 .info-item .label {
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(238, 238, 238);
     font-weight: 600;
 }
 
 .info-item .value {
-    color: #fff;
     font-weight: 700;
+    color: #fff;
 }
 
-.status-active {
-    color: #10b981;
-}
-
-.status-pending {
-    color: #f59e0b;
+.edit-btn,
+.save-btn,
+.cancel-btn {
+    padding: 1rem 2rem;
+    border-radius: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 .edit-btn {
+    background: #6c63ff;
+    color: #fff;
+    border: none;
+    margin-top: 2rem;
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+}
+
+.save-btn {
+    background: #10b981;
+    color: #fff;
+    border: none;
+    flex: 1;
+}
+
+.cancel-btn {
+    background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
-    padding: 1rem;
-    border-radius: 16px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 2.5rem;
-    transition: all 0.3s;
-}
-
-.edit-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-}
-
-/* Edit Form */
-.input-group {
-    margin-bottom: 1.5rem;
-}
-
-.input-group label {
-    display: block;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 0.5rem;
-    margin-left: 0.5rem;
-}
-
-.input-group input {
-    width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1.5px solid rgba(255, 255, 255, 0.05);
-    border-radius: 14px;
-    padding: 0.85rem 1.25rem;
-    color: #fff;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.input-group input:focus {
-    outline: none;
-    border-color: #6c63ff;
-    box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.1);
+    flex: 1;
 }
 
 .form-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
     gap: 1rem;
     margin-top: 2.5rem;
 }
 
-.save-btn {
-    background: linear-gradient(135deg, #6c63ff, #a855f7);
-    color: #fff;
-    border: none;
-    padding: 1rem;
-    border-radius: 16px;
+.edit-form .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.edit-form label {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
     font-weight: 700;
-    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.edit-form input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 1.1rem;
+    border-radius: 16px;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.edit-form input:focus {
+    border-color: #6c63ff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .cancel-btn {
     background: rgba(255, 255, 255, 0.05);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 1rem;
     border-radius: 16px;
     font-weight: 700;
     cursor: pointer;
 }
 
 .status-message {
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
     padding: 0.75rem;
     border-radius: 12px;
     text-align: center;
     margin-bottom: 2rem;
     font-weight: 600;
+}
+
+.password-divider {
+    margin: 2rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.password-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.password-divider span {
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #6c63ff;
+    letter-spacing: 1.5px;
 }

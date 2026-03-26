@@ -17,15 +17,37 @@ const Register = () => {
     const navigate = useNavigate()
 
     const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        // Prevent numbers in first name and last name
+        if ((name === 'firstName' || name === 'lastName') && /\d/.test(value)) {
+            return;
+        }
+
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [name]: value
         })
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
+
+        // Name validation (double check)
+        if (/\d/.test(formData.firstName) || /\d/.test(formData.lastName)) {
+            return setError('First and last names cannot contain numbers')
+        }
+
+        // Email validation
+        if (!formData.email.includes('@')) {
+            return setError('Please enter a valid email address with @')
+        }
+
+        // Password validation
+        if (formData.password.length < 6) {
+            return setError('Password must be at least 6 characters long')
+        }
 
         if (formData.password !== formData.confirmPassword) {
             return setError('Passwords do not match')
@@ -102,13 +124,13 @@ const Register = () => {
                             <div className="input-container">
                                 <label>First Name</label>
                                 <div className="input-wrapper">
-                                    <input type="text" name="firstName" placeholder="John" onChange={handleChange} required />
+                                    <input type="text" name="firstName" placeholder="John" value={formData.firstName} onChange={handleChange} required />
                                 </div>
                             </div>
                             <div className="input-container">
                                 <label>Last Name</label>
                                 <div className="input-wrapper">
-                                    <input type="text" name="lastName" placeholder="Doe" onChange={handleChange} required />
+                                    <input type="text" name="lastName" placeholder="Doe" value={formData.lastName} onChange={handleChange} required />
                                 </div>
                             </div>
                         </div>
@@ -116,14 +138,14 @@ const Register = () => {
                         <div className="input-container">
                             <label>Username</label>
                             <div className="input-wrapper">
-                                <input type="text" name="username" placeholder="johndoe123" onChange={handleChange} required />
+                                <input type="text" name="username" placeholder="johndoe123" value={formData.username} onChange={handleChange} required />
                             </div>
                         </div>
 
                         <div className="input-container">
                             <label>Email Address</label>
                             <div className="input-wrapper">
-                                <input type="email" name="email" placeholder="john@university.edu" onChange={handleChange} required />
+                                <input type="email" name="email" placeholder="john@university.edu" value={formData.email} onChange={handleChange} required />
                             </div>
                         </div>
 
@@ -149,13 +171,13 @@ const Register = () => {
                             <div className="input-container">
                                 <label>Password</label>
                                 <div className="input-wrapper">
-                                    <input type="password" name="password" placeholder="••••••••" onChange={handleChange} required />
+                                    <input type="password" name="password" placeholder="••••••••" value={formData.password} onChange={handleChange} required />
                                 </div>
                             </div>
                             <div className="input-container">
                                 <label>Confirm</label>
                                 <div className="input-wrapper">
-                                    <input type="password" name="confirmPassword" placeholder="••••••••" onChange={handleChange} required />
+                                    <input type="password" name="confirmPassword" placeholder="••••••••" value={formData.confirmPassword} onChange={handleChange} required />
                                 </div>
                             </div>
                         </div>

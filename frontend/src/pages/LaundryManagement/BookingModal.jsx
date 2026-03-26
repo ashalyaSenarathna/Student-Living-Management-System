@@ -40,6 +40,19 @@ const BookingModal = ({ isOpen, onClose, laundry, onBookingSuccess }) => {
             return;
         }
 
+        const today = new Date().toLocaleDateString('sv-SE');
+        if (pickupDate === today) {
+            const now = new Date();
+            const currentHours = now.getHours();
+            const currentMinutes = now.getMinutes();
+            const [selectedHours, selectedMinutes] = pickupTime.split(':').map(Number);
+
+            if (selectedHours < currentHours || (selectedHours === currentHours && selectedMinutes < currentMinutes)) {
+                setError('Cannot select a time in the past');
+                return;
+            }
+        }
+
         const userInfo = JSON.parse(localStorage.getItem('userInfo'));
         if (!userInfo) {
             setError('Please login to continue');
@@ -133,14 +146,47 @@ const BookingModal = ({ isOpen, onClose, laundry, onBookingSuccess }) => {
                                     <input
                                         type="date"
                                         value={pickupDate}
-                                        onChange={(e) => setPickupDate(e.target.value)}
-                                        min={new Date().toISOString().split('T')[0]}
+                                        onChange={(e) => {
+                                            const newDate = e.target.value;
+                                            setPickupDate(newDate);
+
+                                            if (newDate === new Date().toLocaleDateString('sv-SE') && pickupTime) {
+                                                const now = new Date();
+                                                const [selH, selM] = pickupTime.split(':').map(Number);
+                                                if (selH < now.getHours() || (selH === now.getHours() && selM < now.getMinutes())) {
+                                                    setPickupTime('');
+                                                    setError('Time reset: Cannot select a time in the past');
+                                                }
+                                            }
+                                        }}
+                                        min={new Date().toLocaleDateString('sv-SE')}
                                         required
                                     />
                                 </div>
                                 <div className="modal-input-group">
                                     <label>Time</label>
-                                    <input type="time" value={pickupTime} onChange={(e) => setPickupTime(e.target.value)} required />
+                                    <input
+                                        type="time"
+                                        value={pickupTime}
+                                        onChange={(e) => {
+                                            const selectedTime = e.target.value;
+                                            const today = new Date().toLocaleDateString('sv-SE');
+
+                                            if (pickupDate === today) {
+                                                const now = new Date();
+                                                const [selH, selM] = selectedTime.split(':').map(Number);
+                                                if (selH < now.getHours() || (selH === now.getHours() && selM < now.getMinutes())) {
+                                                    setError('Cannot select a time in the past');
+                                                    setPickupTime('');
+                                                    return;
+                                                }
+                                            }
+                                            setError('');
+                                            setPickupTime(selectedTime);
+                                        }}
+                                        min={pickupDate === new Date().toLocaleDateString('sv-SE') ? new Date().toTimeString().slice(0, 5) : ''}
+                                        required
+                                    />
                                 </div>
                             </div>
                         </div>

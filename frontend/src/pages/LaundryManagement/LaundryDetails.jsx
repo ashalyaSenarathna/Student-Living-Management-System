@@ -269,8 +269,6 @@ const LaundryDetails = () => {
                         )}
                         <ul className="perks-list">
                             <li>✨ Quality Guarantee</li>
-                            <li>🚚 Quick Delivery</li>
-                            <li>💳 Secure Payment</li>
                         </ul>
                     </div>
 

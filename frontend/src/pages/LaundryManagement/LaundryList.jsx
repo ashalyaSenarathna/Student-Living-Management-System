@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Star, MapPin, Phone, Search, Filter, Award, Sparkles, X } from 'lucide-react';
 import './LaundryList.css';
 
 const LaundryList = () => {
@@ -7,6 +9,7 @@ const LaundryList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [activeFilter, setActiveFilter] = useState('All');
     const navigate = useNavigate();
 
     const isShopCurrentlyOpen = (openingTime, closingTime, openingDays) => {
@@ -86,16 +89,34 @@ const LaundryList = () => {
         fetchLaundries();
     }, []);
 
-    const filteredLaundries = laundries.filter(shop =>
-        shop.shopName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        shop.address.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const getFilteredLaundries = () => {
+        let list = [...laundries];
+
+        // Apply search filter (Matching beginning of name or address)
+        if (searchTerm) {
+            const term = searchTerm.toLowerCase();
+            list = list.filter(shop =>
+                shop.shopName.toLowerCase().startsWith(term) ||
+                shop.address.toLowerCase().startsWith(term)
+            );
+        }
+
+        // Apply Top Rated filter and sort
+        if (activeFilter === 'Top Rated') {
+            list = list.filter(shop => shop.rating > 3);
+            list.sort((a, b) => b.rating - a.rating);
+        }
+
+        return list;
+    };
+
+    const filteredLaundries = getFilteredLaundries();
 
     if (loading) return (
         <div className="laundry-page">
             <div className="laundry-loading">
                 <div className="loader"></div>
-                <p>Finding premium services near you...</p>
+                <p>Finding premium services...</p>
             </div>
         </div>
     );
@@ -111,63 +132,116 @@ const LaundryList = () => {
 
             <div className="filters-bar">
                 <div className="filter-group">
-                    <button className="filter-btn active">All Services</button>
-                    <button className="filter-btn">Near Me</button>
-                    <button className="filter-btn">Top Rated</button>
+                    <button
+                        className={`filter-btn ${activeFilter === 'All' ? 'active' : ''}`}
+                        onClick={() => setActiveFilter('All')}
+                    >
+                        <Filter size={14} /> All Services
+                    </button>
+                    <button
+                        className={`filter-btn ${activeFilter === 'Top Rated' ? 'active' : ''}`}
+                        onClick={() => setActiveFilter('Top Rated')}
+                    >
+                        <Star size={14} /> Top Rated
+                    </button>
                 </div>
-                <div className="search-box">
-                    <input
-                        type="text"
-                        placeholder="Search by shop name or location..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
+                <div className="search-container-premium">
+                    <div className="search-box-luxe">
+                        <Search className="search-icon" size={20} />
+                        <input
+                            type="text"
+                            placeholder="Find a laundry shop..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        {searchTerm && (
+                            <button className="clear-search-btn" onClick={() => setSearchTerm('')}>
+                                <X size={14} />
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
 
             {error && <div className="error-display">{error}</div>}
 
-            <main className="providers-grid">
-                {filteredLaundries.length > 0 ? (
-                    filteredLaundries.map(shop => (
-                        <div key={shop._id} className="provider-card">
-                            <div className="provider-image">
-                                <img src={shop.image || 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={shop.shopName} />
-                                <span className={`status-badge ${shop.isOpen ? 'open' : 'closed'}`}>
-                                    {shop.isOpen ? 'Open Now' : 'Closed'}
-                                </span>
-                            </div>
-                            <div className="provider-info">
-                                <div className="provider-name-row">
-                                    <h3>{shop.shopName}</h3>
-                                    <div className="rating">⭐ {shop.rating.toFixed(1)}</div>
-                                </div>
-                                <p className="shop-address">📍 {shop.address}</p>
-                                <div className="services-tags">
-                                    {shop.services.slice(0, 3).map((s, i) => (
-                                        <span key={i} className="service-tag">{s.name}</span>
-                                    ))}
-                                    {shop.services.length > 3 && <span className="service-tag">+{shop.services.length - 3} more</span>}
-                                </div>
-                                <div className="provider-footer">
-                                    <div className="price-info">
-                                        <span className="price">From Rs. {shop.services[0]?.price || '---'}</span>
-                                        <span className="unit">/{shop.services[0]?.unit || 'kg'}</span>
+            <main className="providers-grid-container">
+                <AnimatePresence mode="popLayout">
+                    {filteredLaundries.length > 0 ? (
+                        <motion.div
+                            className="providers-grid"
+                            layout
+                        >
+                            {filteredLaundries.map((shop, index) => (
+                                <motion.div
+                                    key={shop._id}
+                                    className={`provider-card ${activeFilter === 'Top Rated' && index === 0 ? 'top-choice' : ''}`}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                                    layout
+                                >
+                                    <div className="provider-image">
+                                        <img src={shop.image || 'https://images.unsplash.com/photo-1545173168-9f1947eebb7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} alt={shop.shopName} />
+                                        <div className="image-badges">
+                                            <span className={`status-badge ${shop.isOpen ? 'open' : 'closed'}`}>
+                                                {shop.isOpen ? 'Open Now' : 'Closed'}
+                                            </span>
+                                            {shop.rating >= 4.5 && (
+                                                <span className="elite-badge">
+                                                    <Award size={12} /> Elite
+                                                </span>
+                                            )}
+                                        </div>
+                                        {activeFilter === 'Top Rated' && index === 0 && (
+                                            <div className="top-choice-ribbon">
+                                                <Sparkles size={14} /> #1 Top Rated
+                                            </div>
+                                        )}
                                     </div>
-                                    <div className="contact-info">
-                                        <span>📞 {shop.contactNumber}</span>
+                                    <div className="provider-info">
+                                        <div className="provider-name-row">
+                                            <h3>{shop.shopName}</h3>
+                                            <div className={`rating-pill ${shop.rating >= 4.5 ? 'high' : ''}`}>
+                                                <Star size={14} fill={shop.rating >= 4.5 ? "#fbbf24" : "currentColor"} />
+                                                <span>{shop.rating.toFixed(1)}</span>
+                                            </div>
+                                        </div>
+                                        <p className="shop-address"><MapPin size={14} /> {shop.address}</p>
+                                        <div className="services-tags">
+                                            {shop.services.slice(0, 3).map((s, i) => (
+                                                <span key={i} className="service-tag">{s.name}</span>
+                                            ))}
+                                            {shop.services.length > 3 && <span className="service-tag">+{shop.services.length - 3} more</span>}
+                                        </div>
+                                        <div className="provider-footer">
+                                            <div className="price-info">
+                                                <span className="price">From Rs. {shop.services[0]?.price || '---'}</span>
+                                                <span className="unit">/{shop.services[0]?.unit || 'kg'}</span>
+                                            </div>
+                                            <div className="contact-info">
+                                                <span><Phone size={14} /> {shop.contactNumber}</span>
+                                            </div>
+                                        </div>
+                                        <button className="book-btn-premium" onClick={() => navigate(`/laundry/${shop._id}`)}>
+                                            Explore Services
+                                        </button>
                                     </div>
-                                </div>
-                                <button className="book-btn" onClick={() => navigate(`/laundry/${shop._id}`)}>View Services & Book</button>
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <div className="no-results">
-                        <h3>No laundry shops found</h3>
-                        <p>Try searching for a different name or location.</p>
-                    </div>
-                )}
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            className="no-results"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                        >
+                            <h3>No premium shops found</h3>
+                            <p>Try searching for a different name or location.</p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </main>
         </div>
     );
