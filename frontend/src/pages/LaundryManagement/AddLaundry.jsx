@@ -135,12 +135,24 @@ const AddLaundry = () => {
             return;
         }
 
+        if (name === 'shopName') {
+            // Remove numbers
+            const sanitizedValue = value.replace(/[0-9]/g, '');
+            setFormData({ ...formData, [name]: sanitizedValue });
+            return;
+        }
+
         setFormData({ ...formData, [name]: value });
     };
 
     const handleServiceChange = (index, field, value) => {
         const newServices = [...services];
-        newServices[index][field] = value;
+        if (field === 'name') {
+            // Remove numbers
+            newServices[index][field] = value.replace(/[0-9]/g, '');
+        } else {
+            newServices[index][field] = value;
+        }
         setServices(newServices);
     };
 
