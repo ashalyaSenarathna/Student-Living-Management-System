@@ -1,0 +1,767 @@
+.pharmacy-admin-page {
+    --pa-bg: linear-gradient(180deg, #081221 0%, #0c1730 56%, #0a1221 100%);
+    --pa-surface: rgba(8, 18, 37, 0.86);
+    --pa-border: rgba(148, 163, 184, 0.16);
+    --pa-text: #eff6ff;
+    --pa-muted: #9db0c8;
+    --pa-heading: #f8fbff;
+    --pa-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+    min-height: 100vh;
+    padding: 104px 24px 48px;
+    background:
+        radial-gradient(circle at top left, rgba(96, 165, 250, 0.1), transparent 24%),
+        radial-gradient(circle at top right, rgba(16, 185, 129, 0.08), transparent 22%),
+        var(--pa-bg);
+    color: var(--pa-text);
+}
+
+.pharmacy-admin-shell {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+}
+
+.pharmacy-admin-hero,
+.pharmacy-admin-tabbar,
+.pharmacy-admin-content-card,
+.pharmacy-admin-loading-state {
+    background: var(--pa-surface);
+    border: 1px solid var(--pa-border);
+    box-shadow: var(--pa-shadow);
+}
+
+.pharmacy-admin-hero,
+.pharmacy-admin-tabbar,
+.pharmacy-admin-content-card {
+    border-radius: 28px;
+    padding: 26px;
+}
+
+.pharmacy-admin-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.pharmacy-admin-hero-copy {
+    max-width: 760px;
+    display: grid;
+    gap: 12px;
+}
+
+.pharmacy-admin-eyebrow,
+.pharmacy-admin-section-kicker {
+    display: inline-flex;
+    width: fit-content;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #dbeafe;
+    border: 1px solid rgba(147, 197, 253, 0.2);
+    background: rgba(96, 165, 250, 0.12);
+}
+
+.pharmacy-admin-hero h1,
+.pharmacy-admin-section-head h2,
+.pharmacy-admin-detail-head h2,
+.pharmacy-admin-card-head h3 {
+    margin: 0;
+    color: var(--pa-heading);
+}
+
+.pharmacy-admin-hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.04;
+}
+
+.pharmacy-admin-hero p,
+.pharmacy-admin-stat-card span,
+.pharmacy-admin-empty-state p,
+.pharmacy-admin-info-card span,
+.pharmacy-admin-note-block p,
+.pharmacy-admin-item-card span,
+.pharmacy-admin-card p,
+.pharmacy-admin-card-head span,
+.pharmacy-admin-mini-item span,
+.pharmacy-admin-loading-state p {
+    margin: 0;
+    color: var(--pa-muted);
+}
+
+.pharmacy-admin-stats {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.pharmacy-admin-stat-card {
+    min-width: 150px;
+    display: grid;
+    gap: 8px;
+    padding: 18px 20px;
+    border-radius: 22px;
+    background: rgba(2, 6, 23, 0.3);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.pharmacy-admin-stat-card strong {
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+.pharmacy-admin-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 18px;
+}
+
+.pharmacy-admin-alert-error {
+    border: 1px solid rgba(251, 113, 133, 0.36);
+    background: rgba(127, 29, 29, 0.26);
+    color: #ffe4e6;
+}
+
+.pharmacy-admin-alert-warning {
+    border: 1px solid rgba(250, 204, 21, 0.3);
+    background: rgba(120, 53, 15, 0.22);
+    color: #fde68a;
+}
+
+.pharmacy-admin-alert-success {
+    border: 1px solid rgba(52, 211, 153, 0.28);
+    background: rgba(6, 95, 70, 0.24);
+    color: #d1fae5;
+}
+
+.pharmacy-admin-tabbar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pharmacy-admin-tab,
+.pharmacy-admin-filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 999px;
+    border: 1px solid var(--pa-border);
+    background: rgba(2, 6, 23, 0.24);
+    color: var(--pa-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pharmacy-admin-tab.active,
+.pharmacy-admin-tab:hover,
+.pharmacy-admin-filter-pill.active,
+.pharmacy-admin-filter-pill:hover {
+    color: #ffffff;
+    background: rgba(96, 165, 250, 0.16);
+    border-color: rgba(96, 165, 250, 0.3);
+}
+
+.pharmacy-admin-section-head,
+.pharmacy-admin-detail-head,
+.pharmacy-admin-card-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.pharmacy-admin-section-head {
+    margin-bottom: 18px;
+}
+
+.pharmacy-admin-filter-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pharmacy-admin-toolbar,
+.pharmacy-admin-catalog-tools {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.pharmacy-admin-two-column {
+    display: grid;
+    grid-template-columns: 1fr 0.95fr;
+    gap: 20px;
+}
+
+.pharmacy-admin-catalog-layout {
+    display: block;
+}
+
+.pharmacy-admin-table-card,
+.pharmacy-admin-detail-card,
+.pharmacy-admin-card,
+.pharmacy-admin-info-card,
+.pharmacy-admin-note-block,
+.pharmacy-admin-item-card,
+.pharmacy-admin-mini-item,
+.pharmacy-admin-empty-state {
+    border-radius: 22px;
+    background: rgba(2, 6, 23, 0.24);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.pharmacy-admin-detail-card,
+.pharmacy-admin-card {
+    padding: 20px;
+}
+
+.pharmacy-admin-table-wrap {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(2, 6, 23, 0.2);
+}
+
+.pharmacy-admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 720px;
+}
+
+.pharmacy-admin-table th,
+.pharmacy-admin-table td {
+    padding: 16px 14px;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.pharmacy-admin-table th {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #c7d2fe;
+    background: rgba(15, 23, 42, 0.62);
+}
+
+.pharmacy-admin-table tbody tr:hover {
+    background: rgba(96, 165, 250, 0.06);
+}
+
+.pharmacy-admin-table tbody tr.selected {
+    background: rgba(96, 165, 250, 0.12);
+}
+
+.pharmacy-admin-table-primary {
+    display: grid;
+    gap: 4px;
+}
+
+.pharmacy-admin-table-primary strong {
+    color: var(--pa-heading);
+}
+
+.pharmacy-admin-table-primary span {
+    color: var(--pa-muted);
+    font-size: 0.92rem;
+}
+
+.pharmacy-admin-row-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.pharmacy-admin-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    background: rgba(15, 23, 42, 0.36);
+    color: var(--pa-text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.88rem;
+}
+
+.pharmacy-admin-icon-btn.danger {
+    color: #ffe4e6;
+    border-color: rgba(251, 113, 133, 0.24);
+    background: rgba(127, 29, 29, 0.28);
+}
+
+.pharmacy-admin-icon-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.pharmacy-admin-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.pharmacy-admin-status-pill.pending,
+.pharmacy-admin-status-pill.low-stock {
+    color: #fde68a;
+    background: rgba(245, 158, 11, 0.16);
+}
+
+.pharmacy-admin-status-pill.approved,
+.pharmacy-admin-status-pill.ready,
+.pharmacy-admin-status-pill.partially_dispensed {
+    color: #dbeafe;
+    background: rgba(59, 130, 246, 0.18);
+}
+
+.pharmacy-admin-status-pill.delivered,
+.pharmacy-admin-status-pill.picked-up,
+.pharmacy-admin-status-pill.active,
+.pharmacy-admin-status-pill.available {
+    color: #d1fae5;
+    background: rgba(16, 185, 129, 0.16);
+}
+
+.pharmacy-admin-status-pill.cancelled,
+.pharmacy-admin-status-pill.rejected,
+.pharmacy-admin-status-pill.out-of-stock,
+.pharmacy-admin-status-pill.expired {
+    color: #fecdd3;
+    background: rgba(244, 63, 94, 0.16);
+}
+
+.pharmacy-admin-detail-head {
+    margin-bottom: 18px;
+    align-items: start;
+}
+
+.pharmacy-admin-close-btn {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(148, 163, 184, 0.14);
+    cursor: pointer;
+}
+
+.pharmacy-admin-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.pharmacy-admin-info-card {
+    padding: 16px;
+    display: grid;
+    gap: 10px;
+}
+
+.pharmacy-admin-info-card strong,
+.pharmacy-admin-note-block label,
+.pharmacy-admin-item-card strong,
+.pharmacy-admin-mini-item strong,
+.pharmacy-admin-empty-state strong {
+    color: #ffffff;
+}
+
+.pharmacy-admin-note-block {
+    padding: 18px;
+    margin-bottom: 14px;
+}
+
+.pharmacy-admin-note-block label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.pharmacy-admin-item-list,
+.pharmacy-admin-mini-list,
+.pharmacy-admin-grid,
+.pharmacy-admin-action-stack {
+    display: grid;
+    gap: 12px;
+}
+
+.pharmacy-admin-item-card,
+.pharmacy-admin-mini-item {
+    padding: 14px;
+    display: grid;
+    gap: 6px;
+}
+
+.pharmacy-admin-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.pharmacy-admin-card-head {
+    align-items: start;
+    margin-bottom: 12px;
+}
+
+.pharmacy-admin-card {
+    display: grid;
+    gap: 12px;
+}
+
+.pharmacy-admin-btn {
+    width: 100%;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 16px;
+    font: inherit;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.pharmacy-admin-btn.success {
+    background: linear-gradient(135deg, #15803d, #22c55e);
+}
+
+.pharmacy-admin-btn.info {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+.pharmacy-admin-btn.neutral {
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+}
+
+.pharmacy-admin-btn.danger {
+    background: linear-gradient(135deg, #b91c1c, #f43f5e);
+}
+
+.pharmacy-admin-link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 16px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.4);
+    color: var(--pa-text);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.pharmacy-admin-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.pharmacy-admin-form-card,
+.pharmacy-admin-stock-adjuster {
+    display: grid;
+    gap: 18px;
+}
+
+.pharmacy-admin-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(3, 7, 18, 0.68);
+    backdrop-filter: blur(8px);
+}
+
+.pharmacy-admin-modal-card {
+    width: min(760px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 24px;
+    border-radius: 28px;
+    border: 1px solid var(--pa-border);
+    background: var(--pa-surface);
+    box-shadow: var(--pa-shadow);
+}
+
+.pharmacy-admin-preview-modal {
+    width: min(960px, 100%);
+}
+
+.pharmacy-admin-preview-surface {
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(2, 6, 23, 0.24);
+}
+
+.pharmacy-admin-preview-frame,
+.pharmacy-admin-preview-image {
+    display: block;
+    width: 100%;
+    min-height: 70vh;
+    border: 0;
+}
+
+.pharmacy-admin-preview-image {
+    object-fit: contain;
+    background: #ffffff;
+}
+
+.pharmacy-admin-form,
+.pharmacy-admin-stock-adjuster {
+    margin-top: 6px;
+}
+
+.pharmacy-admin-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.pharmacy-admin-field {
+    display: grid;
+    gap: 8px;
+}
+
+.pharmacy-admin-field-wide {
+    grid-column: 1 / -1;
+}
+
+.pharmacy-admin-field span {
+    color: var(--pa-heading);
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.pharmacy-admin-search,
+.pharmacy-admin-field input,
+.pharmacy-admin-field select,
+.pharmacy-admin-field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(15, 23, 42, 0.35);
+    color: var(--pa-text);
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.pharmacy-admin-search::placeholder,
+.pharmacy-admin-field input::placeholder,
+.pharmacy-admin-field textarea::placeholder {
+    color: var(--pa-muted);
+}
+
+.pharmacy-admin-search:focus,
+.pharmacy-admin-field input:focus,
+.pharmacy-admin-field select:focus,
+.pharmacy-admin-field textarea:focus {
+    border-color: rgba(96, 165, 250, 0.5);
+    box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.14);
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.pharmacy-admin-field textarea {
+    resize: vertical;
+    min-height: 112px;
+}
+
+.pharmacy-admin-search {
+    flex: 1 1 280px;
+}
+
+.pharmacy-admin-form-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.pharmacy-admin-form-actions .pharmacy-admin-btn {
+    width: auto;
+    min-width: 180px;
+}
+
+.pharmacy-admin-empty-state {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 22px;
+}
+
+.pharmacy-admin-empty-state-inline {
+    padding: 8px 0;
+    border: none;
+    background: transparent;
+}
+
+.pharmacy-admin-loading-state {
+    min-height: 72vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 32px;
+    border-radius: 28px;
+}
+
+.pharmacy-admin-spinner {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+    border-radius: 999px;
+    border: 4px solid rgba(148, 163, 184, 0.2);
+    border-top-color: #60a5fa;
+    animation: pharmacy-admin-spin 0.9s linear infinite;
+}
+
+@keyframes pharmacy-admin-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body.light-mode .pharmacy-admin-page {
+    --pa-bg: linear-gradient(180deg, #eff6ff 0%, #f8fafc 56%, #eef2ff 100%);
+    --pa-surface: rgba(255, 255, 255, 0.92);
+    --pa-text: #132338;
+    --pa-muted: #54667f;
+    --pa-heading: #0f172a;
+    --pa-shadow: 0 20px 54px rgba(15, 23, 42, 0.1);
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-eyebrow,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-section-kicker {
+    color: #1d4ed8;
+    background: rgba(96, 165, 250, 0.08);
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-hero p,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-stat-card span,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-empty-state p,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-info-card span,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-note-block p,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-item-card span,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-card p,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-card-head span,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-mini-item span,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-loading-state p {
+    color: #52657d;
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-table-card,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-detail-card,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-card,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-info-card,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-note-block,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-item-card,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-mini-item,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-empty-state,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-table-wrap {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-hero h1,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-section-head h2,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-detail-head h2,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-card-head h3,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-info-card strong,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-note-block label,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-item-card strong,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-mini-item strong,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-empty-state strong,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-table td {
+    color: #0f172a;
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-table th {
+    background: rgba(239, 246, 255, 0.92);
+    color: #334155;
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-search,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-field input,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-field select,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-field textarea {
+    background: rgba(248, 250, 252, 0.96);
+    color: #0f172a;
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-icon-btn {
+    background: rgba(248, 250, 252, 0.96);
+    color: #0f172a;
+}
+
+body.light-mode .pharmacy-admin-modal-overlay {
+    background: rgba(15, 23, 42, 0.28);
+}
+
+body.light-mode .pharmacy-admin-page .pharmacy-admin-search::placeholder,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-field input::placeholder,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-field textarea::placeholder,
+body.light-mode .pharmacy-admin-page .pharmacy-admin-table-primary span {
+    color: #64748b;
+}
+
+@media (max-width: 1100px) {
+    .pharmacy-admin-hero,
+    .pharmacy-admin-two-column,
+    .pharmacy-admin-catalog-layout {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 760px) {
+    .pharmacy-admin-page {
+        padding: 92px 16px 32px;
+    }
+
+    .pharmacy-admin-hero,
+    .pharmacy-admin-tabbar,
+    .pharmacy-admin-content-card {
+        padding: 18px;
+    }
+
+    .pharmacy-admin-section-head,
+    .pharmacy-admin-detail-head,
+    .pharmacy-admin-card-head,
+    .pharmacy-admin-detail-grid,
+    .pharmacy-admin-toolbar,
+    .pharmacy-admin-catalog-tools,
+    .pharmacy-admin-form-actions {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pharmacy-admin-detail-grid {
+        display: grid;
+    }
+
+    .pharmacy-admin-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pharmacy-admin-form-actions .pharmacy-admin-btn {
+        width: 100%;
+    }
+
+    .pharmacy-admin-modal-overlay {
+        padding: 16px;
+    }
+
+    .pharmacy-admin-modal-card {
+        padding: 18px;
+    }
+}

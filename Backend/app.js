@@ -27,6 +27,15 @@ app.use('/api/laundry', require('./routes/laundry/LaundryRoutes'));
 app.use('/api/upload', require('./routes/laundry/UploadRoutes'));
 app.use('/api/bookings', require('./routes/laundry/BookingRoutes'));
 app.use('/api/hostel', require('./routes/hostel/HostelRoutes'));
+app.use('/api/db-check', require('./routes/debug/DbCheckRoutes'));
+
+// Health Management Routes
+app.use('/api/health/pharmaceutical', require('./routes/health/PharmaceuticalRoutes'));
+app.use('/api/health/orders', require('./routes/health/OrderRoutes'));
+app.use('/api/health/appointments', require('./routes/health/AppointmentRoutes'));
+app.use('/api/health/prescriptions', require('./routes/health/PrescriptionRoutes'));
+app.use('/api/health/doctors', require('./routes/health/DoctorRoutes'));
+app.use('/api/health/inventory', require('./routes/health/InventoryRoutes'));
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the Student Living Management System API' });
