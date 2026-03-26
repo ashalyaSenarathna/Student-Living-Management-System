@@ -20,23 +20,26 @@ const Login = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ email: username, password }),
             })
 
             const data = await response.json()
 
             if (response.ok) {
-                localStorage.setItem('userInfo', JSON.stringify(data))
+                const userPayload = data.data || data
+                localStorage.setItem('userInfo', JSON.stringify(userPayload))
 
                 // Role-based redirection
-                if (data.role === 'HOSTEL_OWNER') {
+                if (userPayload.role === 'HOSTEL_OWNER') {
                     navigate('/hostel-owner')
-                } else if (data.role === 'ADMIN') {
-                    navigate('/admin')
-                } else if (data.role === 'PROVIDER') {
+                } else if (userPayload.role === 'ADMIN') {
+                    navigate('/health/pharmacy-admin') // Default to pharmacy admin for admins
+                } else if (userPayload.role === 'DOCTOR') {
+                    navigate('/health/doctor-portal') // Doctors go to doctor portal
+                } else if (userPayload.role === 'PROVIDER') {
                     navigate('/add-laundry') // Or appropriate provider dashboard
                 } else {
-                    navigate('/')
+                    navigate('/health/medical-panel') // Students default to medical panel
                 }
 
                 window.location.reload() // Ensure navbar updates
@@ -86,11 +89,11 @@ const Login = () => {
 
                     <form onSubmit={handleSubmit}>
                         <div className="input-container">
-                            <label>Username</label>
+                            <label>Email</label>
                             <div className="input-wrapper">
                                 <input
-                                    type="text"
-                                    placeholder="Enter your username"
+                                    type="email"
+                                    placeholder="Enter your email"
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     required
