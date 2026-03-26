@@ -1549,3 +1549,133 @@ body.light-mode {
     background: rgba(251, 191, 36, 0.15) !important;
     color: #d97706 !important;
 }
+
+/* ============================================================ */
+/* SPECIFIC OVERRIDES FOR OWNER DASHBOARD (HOSTEL) */
+/* ============================================================ */
+
+.light-mode .owner-dashboard-container {
+    background-color: #f3f5fa !important;
+    color: #101426 !important;
+}
+
+.light-mode .od-sidebar {
+    background: #ffffff !important;
+    border-right: 1px solid rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .sidebar-header {
+    border-bottom: 1px solid rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .sidebar-header h3 {
+    color: #101426 !important;
+}
+
+.light-mode .od-nav .nav-item {
+    color: #394160 !important;
+}
+
+.light-mode .od-nav .nav-item:hover {
+    background: rgba(108, 99, 255, 0.05) !important;
+    color: #101426 !important;
+}
+
+.light-mode .od-nav .nav-item.active {
+    background: rgba(108, 99, 255, 0.1) !important;
+    color: #6c63ff !important;
+}
+
+.light-mode .owner-header h2 {
+    color: #101426 !important;
+}
+
+.light-mode .owner-header p {
+    color: #525b78 !important;
+}
+
+.light-mode .stat-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.05) !important;
+}
+
+.light-mode .stat-card h4 {
+    color: #525b78 !important;
+}
+
+.light-mode .stat-number {
+    color: #101426 !important;
+}
+
+.light-mode .owner-form-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .owner-form-card h3 {
+    color: #101426 !important;
+}
+
+.light-mode .form-section {
+    background: #f8fafc !important;
+    border: 1px solid rgba(108, 99, 255, 0.08) !important;
+}
+
+.light-mode .form-section h4 {
+    color: #101426 !important;
+}
+
+.light-mode .form-group label {
+    color: #394160 !important;
+}
+
+.light-mode .form-group input,
+.light-mode .form-group select,
+.light-mode .form-group textarea {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.15) !important;
+    color: #101426 !important;
+}
+
+.light-mode .form-group input:focus,
+.light-mode .form-group select:focus,
+.light-mode .form-group textarea:focus {
+    border-color: #6c63ff !important;
+    background: #ffffff !important;
+}
+
+.light-mode .facility-item {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+    color: #394160 !important;
+}
+
+.light-mode .facility-item:hover {
+    border-color: #6c63ff !important;
+}
+
+.light-mode .room-row-card {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+}
+
+.light-mode .room-number-badge {
+    background: #6c63ff !important;
+    color: #ffffff !important;
+}
+
+.light-mode .image-upload-dashed {
+    background: #f1f5f9 !important;
+    border: 2px dashed rgba(108, 99, 255, 0.2) !important;
+}
+
+.light-mode .upload-placeholder p {
+    color: #525b78 !important;
+}
+
+.light-mode .preview-item {
+    background: #ffffff !important;
+    border: 1px solid rgba(108, 99, 255, 0.1) !important;
+}
