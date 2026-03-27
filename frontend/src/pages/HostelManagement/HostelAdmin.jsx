@@ -131,12 +131,15 @@ const HostelAdmin = () => {
     };
 
     /* ---- Derived ---- */
-    const filteredUsers = users.filter(u => {
-        const matchSearch = u.username?.toLowerCase().includes(userSearch.toLowerCase()) ||
-            u.email?.toLowerCase().includes(userSearch.toLowerCase());
-        const matchRole = roleFilter === 'all' || u.role?.toLowerCase() === roleFilter;
-        return matchSearch && matchRole;
-    });
+    const filteredUsers = React.useMemo(() => {
+        const query = userSearch.toLowerCase();
+        return users.filter(u => {
+            const matchSearch = (u.username?.toLowerCase().startsWith(query) ||
+                u.email?.toLowerCase().startsWith(query));
+            const matchRole = roleFilter === 'all' || u.role?.toLowerCase() === roleFilter;
+            return matchSearch && matchRole;
+        });
+    }, [users, userSearch, roleFilter]);
 
     /* ---- Stat counts ---- */
     const stats = [
@@ -292,7 +295,12 @@ const HostelAdmin = () => {
                                         </thead>
                                         <tbody>
                                             {filteredUsers.length === 0
-                                                ? <tr><td colSpan={5} style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>No users found</td></tr>
+                                                ? <tr><td colSpan={5} style={{ textAlign: 'center', padding: '60px', color: '#ef4444' }}>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                                        <strong style={{ fontSize: '1.2rem' }}>No users found for "{userSearch}"</strong>
+                                                        <span style={{ fontSize: '0.9rem', opacity: 0.7 }}>Try another name or clear the filter</span>
+                                                    </div>
+                                                </td></tr>
                                                 : filteredUsers.map(u => (
                                                     <tr key={u._id}>
                                                         <td>

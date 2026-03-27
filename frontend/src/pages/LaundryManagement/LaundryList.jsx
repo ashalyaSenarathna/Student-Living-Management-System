@@ -89,7 +89,7 @@ const LaundryList = () => {
         fetchLaundries();
     }, []);
 
-    const getFilteredLaundries = () => {
+    const filteredLaundries = React.useMemo(() => {
         let list = [...laundries];
 
         // Apply search filter (Matching beginning of name or address)
@@ -108,9 +108,7 @@ const LaundryList = () => {
         }
 
         return list;
-    };
-
-    const filteredLaundries = getFilteredLaundries();
+    }, [laundries, searchTerm, activeFilter]);
 
     if (loading) return (
         <div className="laundry-page">
@@ -179,7 +177,7 @@ const LaundryList = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
-                                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                                    transition={{ duration: 0.2, delay: index * 0.01 }}
                                     layout
                                 >
                                     <div className="provider-image">
@@ -236,9 +234,21 @@ const LaundryList = () => {
                             className="no-results"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
+                            style={{ 
+                                color: '#ef4444', 
+                                textAlign: 'center', 
+                                padding: '80px 20px',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                gap: '10px'
+                            }}
                         >
-                            <h3>No premium shops found</h3>
-                            <p>Try searching for a different name or location.</p>
+                            <Search size={48} opacity={0.5} />
+                            <h3 style={{ fontSize: '1.5rem', fontWeight: '700' }}>
+                                {searchTerm ? `No results found for "${searchTerm}"` : "No services found"}
+                            </h3>
+                            <p style={{ opacity: 0.7, fontSize: '0.95rem' }}>Try searching for a different name or location.</p>
                         </motion.div>
                     )}
                 </AnimatePresence>
