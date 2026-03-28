@@ -40,13 +40,14 @@
 }
 
 .navbar__logo-img {
-  width: auto;
   height: 40px;
-  filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.3));
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.4));
   transition: transform 0.3s ease;
 }
 
-.navbar__logo:hover .navbar__logo-img {
+.navbar:hover .navbar__logo-img {
   transform: scale(1.05);
 }
 

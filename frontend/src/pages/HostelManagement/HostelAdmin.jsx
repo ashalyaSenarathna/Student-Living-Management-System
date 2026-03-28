@@ -3,7 +3,6 @@ import './HostelAdmin.css';
 
 const TABS = [
     { id: 'pending', label: '⏳ Pending Listings' },
-    { id: 'users', label: '👥 Users Management' },
     { id: 'reviews', label: '⭐ Reviews Moderation' },
     { id: 'reported', label: '🚩 Reported Listings' },
     { id: 'featured', label: '📌 Featured Listings' },
@@ -22,15 +21,12 @@ const HostelAdmin = () => {
     const [activeTab, setActiveTab] = useState('pending');
     const [pending, setPending] = useState([]);
     const [allHostels, setAllHostels] = useState([]);
-    const [users, setUsers] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [reported, setReported] = useState([]);
     const [featured, setFeatured] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [userSearch, setUserSearch] = useState('');
-    const [roleFilter, setRoleFilter] = useState('all');
 
     const token = (() => {
         try { const s = localStorage.getItem('userInfo'); return s ? JSON.parse(s).token : null; } catch { return null; }
@@ -55,13 +51,11 @@ const HostelAdmin = () => {
     useEffect(() => {
         const fetchAll = async () => {
             setLoading(true);
-            const [pRes, uRes, aRes] = await Promise.all([
+            const [pRes, aRes] = await Promise.all([
                 req(`${BASE}/hostel/admin/pending`),
-                req(`${BASE}/users`),
                 req(`${BASE}/hostel/admin/all`),
             ]);
             if (pRes.ok) setPending(pRes.data); else flash(pRes.data.message || 'Failed to load pending', true);
-            if (uRes.ok) setUsers(uRes.data); else flash(uRes.data.message || 'Failed to load users', true);
             if (aRes.ok) {
                 const all = aRes.data;
                 setAllHostels(all);
@@ -82,18 +76,6 @@ const HostelAdmin = () => {
     const rejectHostel = async (id) => {
         const { ok, data } = await req(`${BASE}/hostel/${id}/reject`, 'PUT');
         if (ok) { setPending(p => p.filter(x => x._id !== id)); flash('Listing rejected.'); }
-        else flash(data.message || 'Failed', true);
-    };
-
-    /* ---- Users actions ---- */
-    const banUser = async (id) => {
-        const { ok, data } = await req(`${BASE}/users/${id}/ban`, 'PUT');
-        if (ok) { setUsers(u => u.map(x => x._id === id ? { ...x, banned: true } : x)); flash('User banned.'); }
-        else flash(data.message || 'Failed', true);
-    };
-    const unbanUser = async (id) => {
-        const { ok, data } = await req(`${BASE}/users/${id}/unban`, 'PUT');
-        if (ok) { setUsers(u => u.map(x => x._id === id ? { ...x, banned: false } : x)); flash('User unbanned.'); }
         else flash(data.message || 'Failed', true);
     };
 
@@ -130,18 +112,9 @@ const HostelAdmin = () => {
         } else flash(data.message || 'Failed', true);
     };
 
-    /* ---- Derived ---- */
-    const filteredUsers = users.filter(u => {
-        const matchSearch = u.username?.toLowerCase().includes(userSearch.toLowerCase()) ||
-            u.email?.toLowerCase().includes(userSearch.toLowerCase());
-        const matchRole = roleFilter === 'all' || u.role?.toLowerCase() === roleFilter;
-        return matchSearch && matchRole;
-    });
-
     /* ---- Stat counts ---- */
     const stats = [
         { label: 'Pending', value: pending.length, color: '#f59e0b', icon: '⏳' },
-        { label: 'Users', value: users.length, color: '#3b82f6', icon: '👥' },
         { label: 'Reviews', value: reviews.length, color: '#8b5cf6', icon: '⭐' },
         { label: 'Reported', value: reported.length, color: '#ef4444', icon: '🚩' },
         { label: 'Featured', value: featured.length, color: '#10b981', icon: '📌' },
@@ -250,78 +223,6 @@ const HostelAdmin = () => {
                                             ))}
                                         </div>
                                     )}
-                            </div>
-                        )}
-
-                        {/* ===== USERS MANAGEMENT ===== */}
-                        {activeTab === 'users' && (
-                            <div className="ha-section">
-                                <div className="ha-card-head">
-                                    <h3>User Management</h3>
-                                    <div style={{ display: 'flex', gap: '12px' }}>
-                                        <input
-                                            className="ha-input"
-                                            style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
-                                            placeholder="🔍 Search users..."
-                                            value={userSearch}
-                                            onChange={e => setUserSearch(e.target.value)}
-                                        />
-                                        <select
-                                            className="ha-select"
-                                            style={{ padding: '8px', borderRadius: '8px', border: '1px solid #e2e8f0' }}
-                                            value={roleFilter}
-                                            onChange={e => setRoleFilter(e.target.value)}
-                                        >
-                                            <option value="all">All Roles</option>
-                                            <option value="student">Students</option>
-                                            <option value="owner">Owners</option>
-                                            <option value="admin">Admins</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="ha-table-wrapper">
-                                    <table className="ha-modern-table">
-                                        <thead>
-                                            <tr>
-                                                <th>User</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {filteredUsers.length === 0
-                                                ? <tr><td colSpan={5} style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>No users found</td></tr>
-                                                : filteredUsers.map(u => (
-                                                    <tr key={u._id}>
-                                                        <td>
-                                                            <div className="ha-user-cell">
-                                                                <div className="ha-avatar">{(u.username || u.email || 'U')[0].toUpperCase()}</div>
-                                                                <div className="ha-user-details">
-                                                                    <strong>{u.username || '—'}</strong>
-                                                                    <span>Joined {u.createdAt ? new Date(u.createdAt).toLocaleDateString() : '—'}</span>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>{u.email || '—'}</td>
-                                                        <td><span className={`ha-count-pill`} style={{ textTransform: 'capitalize' }}>{u.role || 'user'}</span></td>
-                                                        <td>
-                                                            <div className={`ha-status-dot ${u.banned ? 'banned' : 'active'}`}>
-                                                                {u.banned ? 'Banned' : 'Active'}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            {u.banned
-                                                                ? <button className="ha-btn-text success" onClick={() => unbanUser(u._id)}>Unban</button>
-                                                                : <button className="ha-btn-text danger" onClick={() => banUser(u._id)}>Ban User</button>
-                                                            }
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         )}
 

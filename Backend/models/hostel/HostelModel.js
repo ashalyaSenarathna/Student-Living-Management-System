@@ -34,7 +34,17 @@ const HostelSchema = new mongoose.Schema({
         ref: 'User', 
         required: true 
     },
-    isFeatured: { type: Boolean, default: false }
+    isFeatured: { type: Boolean, default: false },
+    ratings: [
+        {
+            user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+            userName: { type: String, required: true },
+            rating: { type: Number, required: true },
+            comment: { type: String, required: true },
+        }
+    ],
+    averageRating: { type: Number, default: 0 },
+    numReviews: { type: Number, default: 0 },
 }, { timestamps: true });
 
 // Index for search functionality
