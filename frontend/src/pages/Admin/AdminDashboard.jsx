@@ -112,16 +112,19 @@ const AdminDashboard = () => {
         }
     };
 
-    const filteredUsers = users.filter(user => {
-        const matchesSearch =
-            user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            user.username.toLowerCase().includes(searchQuery.toLowerCase());
-
-        const matchesFilter = activeFilter === 'ALL' || user.role.toUpperCase() === activeFilter;
-
-        return matchesSearch && matchesFilter;
-    });
+    const filteredUsers = React.useMemo(() => {
+        const query = searchQuery.toLowerCase().trim();
+        
+        return users.filter(user => {
+            // Search only by Display Name (User column)
+            const matchesSearch = user.name.toLowerCase().startsWith(query);
+            
+            // Respect the active category filter (All, Users, Providers, etc.)
+            const matchesFilter = activeFilter === 'ALL' || user.role.toUpperCase() === activeFilter;
+            
+            return matchesSearch && matchesFilter;
+        });
+    }, [users, searchQuery, activeFilter]);
 
     if (loading) return (
         <div className="admin-loading">
@@ -183,7 +186,7 @@ const AdminDashboard = () => {
                         className="stat-card"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
+                        transition={{ delay: 0.05 }}
                     >
                         <div className="stat-icon" style={{ background: 'rgba(99, 102, 241, 0.1)', color: '#6366f1' }}>
                             <Users size={24} />
@@ -198,7 +201,7 @@ const AdminDashboard = () => {
                         className="stat-card"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
+                        transition={{ delay: 0.1 }}
                     >
                         <div className="stat-icon" style={{ background: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
                             <UserCheck size={24} />
@@ -213,7 +216,7 @@ const AdminDashboard = () => {
                         className="stat-card"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
+                        transition={{ delay: 0.15 }}
                     >
                         <div className="stat-icon" style={{ background: 'rgba(168, 85, 247, 0.1)', color: '#a855f7' }}>
                             <Briefcase size={24} />
@@ -228,7 +231,7 @@ const AdminDashboard = () => {
                         className="stat-card"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.35 }}
+                        transition={{ delay: 0.2 }}
                     >
                         <div className="stat-icon" style={{ background: 'rgba(236, 72, 153, 0.1)', color: '#ec4899' }}>
                             <Home size={24} />
@@ -243,7 +246,7 @@ const AdminDashboard = () => {
                         className="stat-card"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
+                        transition={{ delay: 0.25 }}
                     >
                         <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
                             <ShieldAlert size={24} />
@@ -262,7 +265,7 @@ const AdminDashboard = () => {
                             <Search size={18} />
                             <input
                                 type="text"
-                                placeholder="Search by name, email or username..."
+                                placeholder="Search by user name..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
@@ -297,14 +300,14 @@ const AdminDashboard = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <AnimatePresence>
+                                <AnimatePresence mode="popLayout">
                                     {filteredUsers.map((user, index) => (
                                         <motion.tr
                                             key={user._id}
                                             initial={{ opacity: 0, x: -10 }}
                                             animate={{ opacity: 1, x: 0 }}
                                             exit={{ opacity: 0, scale: 0.95 }}
-                                            transition={{ delay: index * 0.05 }}
+                                            transition={{ duration: 0.2, delay: index * 0.01 }}
                                         >
                                             <td>
                                                 <div className="user-cell">
@@ -364,10 +367,19 @@ const AdminDashboard = () => {
                                 </AnimatePresence>
                                 {filteredUsers.length === 0 && (
                                     <tr>
-                                        <td colSpan="6" style={{ textAlign: 'center', padding: '100px 0', color: 'rgba(255,255,255,0.4)' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-                                                <Search size={48} opacity={0.2} />
-                                                <p>No users found matching your criteria</p>
+                                        <td colSpan="6" style={{ textAlign: 'center', padding: '100px 0' }}>
+                                            <div style={{ 
+                                                display: 'flex', 
+                                                flexDirection: 'column', 
+                                                alignItems: 'center', 
+                                                gap: '15px',
+                                                color: '#ef4444' // Red color for 'No results' as per user request to show it's 'wrong'
+                                            }}>
+                                                <Search size={48} opacity={0.5} />
+                                                <p style={{ fontSize: '1.2rem', fontWeight: '500' }}>
+                                                    {searchQuery ? `No users found for "${searchQuery}"` : "No users found in this category"}
+                                                </p>
+                                                <p style={{ fontSize: '0.9rem', opacity: 0.6 }}>Try checking the spelling or using a different keyword</p>
                                             </div>
                                         </td>
                                     </tr>
