@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Sun, Moon } from 'lucide-react';
+import logo from '../assets/logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -51,7 +52,7 @@ const Navbar = () => {
         <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
             <div className="navbar__container">
                 <Link to="/" className="navbar__logo">
-                    <div className="navbar__logo-icon">🏠</div>
+                    <img src={logo} alt="Student Living Logo" className="navbar__logo-img" />
                     <span className="navbar__logo-text">Student<span className="navbar__logo-accent">Living</span></span>
                 </Link>
 

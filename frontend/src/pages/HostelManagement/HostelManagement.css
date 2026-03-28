@@ -233,3 +233,93 @@
     color: rgba(255, 255, 255, 0.4);
 }
 
+
+/* ============================================================
+   HOSTEL CARD RATINGS
+   ============================================================ */
+
+.hostel-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.hostel-card-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 202, 40, 0.1);
+    color: #ffca28;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.hostel-card-rating .count {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+}
+
+.hostel-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.hostel-title-row h3 {
+    margin: 0;
+    flex: 1;
+}
+
+.hostel-rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 202, 40, 0.1);
+    color: #ffca28;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-left: 10px;
+    border: 1px solid rgba(255, 202, 40, 0.2);
+}
+
+.rating-count-mini {
+    color: rgba(255, 202, 40, 0.6);
+    font-weight: 500;
+}
+
+.hostel-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.hostel-title-row h3 {
+    margin: 0;
+    flex: 1;
+}
+
+.hostel-rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 202, 40, 0.1);
+    color: #ffca28;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-left: 10px;
+    border: 1px solid rgba(255, 202, 40, 0.2);
+}
+
+.rating-count-mini {
+    color: rgba(255, 202, 40, 0.6);
+    font-weight: 500;
+}

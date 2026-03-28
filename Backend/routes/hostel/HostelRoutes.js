@@ -14,6 +14,7 @@ router.put('/:id', protect, hostelController.updateHostel);
 // Admin-only routes — must be BEFORE /:id
 router.get('/admin/pending', protect, admin, hostelController.getPendingHostels);
 router.get('/admin/all', protect, admin, hostelController.getAllHostelsAdmin);
+router.get('/admin/reviews', protect, admin, hostelController.getAllReviewsAdmin);
 router.put('/:id/approve', protect, admin, hostelController.approveHostel);
 router.put('/:id/reject', protect, admin, hostelController.rejectHostel);
 router.put('/:id/feature', protect, admin, hostelController.toggleFeatured);
@@ -24,6 +25,8 @@ router.put('/:id/dismiss-report', protect, admin, hostelController.dismissReport
 // Parameterised routes — always last
 router.get('/:id', hostelController.getHostelById);
 router.delete('/:id', protect, hostelController.deleteHostel);
+router.post('/:id/reviews', protect, hostelController.createHostelReview);
+router.delete('/:hostelId/reviews/:reviewId', protect, hostelController.deleteReview);
 
 module.exports = router;
 

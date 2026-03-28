@@ -146,6 +146,24 @@ exports.rejectHostel = async (req, res) => {
     }
 };
 
+// @desc Report a hostel listing
+// @route PUT /api/hostel/:id/report
+// @access Private
+exports.reportHostel = async (req, res) => {
+    try {
+        const { reason } = req.body;
+        const hostel = await Hostel.findByIdAndUpdate(
+            req.params.id,
+            { reported: true, reportReason: reason || 'Violation of terms' },
+            { new: true }
+        );
+        if (!hostel) return res.status(404).json({ message: 'Hostel not found' });
+        res.status(200).json({ message: 'Hostel reported successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 // @desc Toggle featured status
 // @route PUT /api/hostel/:id/feature
 // @access Private (Admin)
@@ -227,6 +245,107 @@ exports.deleteHostel = async (req, res) => {
 
         await hostel.deleteOne();
         res.status(200).json({ message: 'Hostel removed' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc Create a new review for a hostel
+// @route POST /api/hostel/:id/reviews
+// @access Private
+exports.createHostelReview = async (req, res) => {
+    try {
+        const { rating, comment } = req.body;
+        const hostel = await Hostel.findById(req.params.id);
+
+        if (!hostel) {
+            return res.status(404).json({ message: 'Hostel not found' });
+        }
+
+        const alreadyReviewed = hostel.ratings.find(
+            (r) => r.user.toString() === req.user._id.toString()
+        );
+
+        if (alreadyReviewed) {
+            alreadyReviewed.rating = Number(rating);
+            alreadyReviewed.comment = comment;
+        } else {
+            const review = {
+                user: req.user._id,
+                userName: req.user.username || req.user.name,
+                rating: Number(rating),
+                comment,
+            };
+            hostel.ratings.push(review);
+        }
+
+        hostel.numReviews = hostel.ratings.length;
+        hostel.averageRating =
+            hostel.ratings.reduce((acc, item) => item.rating + acc, 0) /
+            hostel.ratings.length;
+
+        await hostel.save();
+        res.status(201).json({ message: 'Review added' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+// @desc Get all reviews for admin moderation
+// @route GET /api/hostel/admin/reviews
+// @access Private (Admin)
+exports.getAllReviewsAdmin = async (req, res) => {
+    try {
+        const hostels = await Hostel.find({ "ratings.0": { $exists: true } }).select('ratings name');
+        let allReviews = [];
+        
+        hostels.forEach(h => {
+           h.ratings.forEach(r => {
+                allReviews.push({
+                    ...r._doc,
+                    hostelId: h._id,
+                    hostelName: h.name
+                });
+           });
+        });
+
+        // Sort by newest
+        allReviews.sort((a, b) => b.createdAt - a.createdAt);
+        
+        res.status(200).json(allReviews);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc Delete a review (Admin or Review Owner)
+// @route DELETE /api/hostel/:hostelId/reviews/:reviewId
+// @access Private
+exports.deleteReview = async (req, res) => {
+    try {
+        const hostel = await Hostel.findById(req.params.hostelId);
+        if (!hostel) return res.status(404).json({ message: 'Hostel not found' });
+
+        const reviewId = req.params.reviewId;
+        const review = hostel.ratings.id(reviewId);
+        
+        if (!review) return res.status(404).json({ message: 'Review not found' });
+
+        const isReviewOwner = review.user.toString() === req.user._id.toString();
+        const isAdmin = req.user.role === 'ADMIN' || req.user.role === 'admin';
+
+        if (!isReviewOwner && !isAdmin) {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+
+        hostel.ratings.pull(reviewId);
+        hostel.numReviews = hostel.ratings.length;
+        hostel.averageRating = hostel.ratings.length > 0 
+            ? hostel.ratings.reduce((acc, item) => item.rating + acc, 0) / hostel.ratings.length
+            : 0;
+
+        await hostel.save();
+        res.status(200).json({ message: 'Review removed' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

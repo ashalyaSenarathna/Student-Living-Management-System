@@ -1760,3 +1760,60 @@ body.light-mode {
 .light-mode .gallery-item:hover {
     border-color: #6c63ff !important;
 }
+
+/* ============================================================ 
+   RATINGS & REVIEWS LIGHT MODE FIX
+   ============================================================ */
+body.light-mode .ratings-section.glass-morphism {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .ratings-header h3 {
+    background: linear-gradient(to right, #1f2937, #111827) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+body.light-mode .rating-count,
+body.light-mode .input-label,
+body.light-mode .rev-date,
+body.light-mode .login-prompt-card p {
+    color: rgba(0, 0, 0, 0.6) !important;
+}
+
+body.light-mode .rev-username,
+body.light-mode .rev-comment-text,
+body.light-mode .comment-box-modern {
+    color: #111827 !important;
+}
+
+body.light-mode .add-rating-form-modern,
+body.light-mode .review-card-modern {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+body.light-mode .review-card-modern:hover {
+    background: rgba(0, 0, 0, 0.04) !important;
+}
+
+body.light-mode .comment-box-modern {
+    background: #fff !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+body.light-mode .comment-box-modern:focus {
+    background: #fff !important;
+    border-color: #10b981 !important;
+}
+
+body.light-mode .no-reviews-placeholder {
+    color: rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-mode .rev-stars-mini {
+    background: rgba(0, 0, 0, 0.05) !important;
+}
