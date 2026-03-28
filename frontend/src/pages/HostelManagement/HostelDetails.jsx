@@ -103,6 +103,11 @@ const HostelDetails = () => {
                     <h1>{hostel.name}</h1>
                     <div className="hero-meta">
                         <span className="location-pill">📍 {hostel.location}</span>
+                        <div className="rating-pill">
+                            <Star size={16} fill="#ffca28" stroke="#ffca28" />
+                            <span>{(hostel.averageRating || 0).toFixed(1)}</span>
+                            <span className="rating-count-mini">({hostel.numReviews || 0} reviews)</span>
+                        </div>
                         <span className={`gender-pill ${hostel.gender?.toLowerCase() || 'mixed'}`}>
                             {hostel.gender ? hostel.gender.charAt(0).toUpperCase() + hostel.gender.slice(1) : 'Mixed'} Only
                         </span>
