@@ -353,6 +353,11 @@
     color: #ec4899;
 }
 
+.role-badge.doctor {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
 .admin-status-badge {
     display: flex;
     align-items: center;

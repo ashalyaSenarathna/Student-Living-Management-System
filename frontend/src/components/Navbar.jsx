@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon } from 'lucide-react';
-import logo from '../assets/logo.png';
+import { Sun, Moon, ChevronDown } from 'lucide-react';
 import './Navbar.css';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [medicalDropdownOpen, setMedicalDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
     const location = useLocation();
-
-    const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
     useEffect(() => {
         if (theme === 'light') {
@@ -22,6 +19,12 @@ const Navbar = () => {
         }
         localStorage.setItem('theme', theme);
     }, [theme]);
+
+    useEffect(() => {
+        // Close mobile menu when location changes
+        setMenuOpen(false);
+        setMedicalDropdownOpen(false);
+    }, [location.pathname]);
 
     const toggleTheme = () => {
         setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
@@ -39,7 +42,18 @@ const Navbar = () => {
             setUser(JSON.parse(storedUser));
         }
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        // Close menu when window is resized to desktop size
+        const handleResize = () => {
+            if (window.innerWidth > 1024) {
+                setMenuOpen(false);
+            }
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+        };
     }, [location.pathname]);
 
     const handleLogout = () => {
@@ -48,11 +62,24 @@ const Navbar = () => {
         window.location.reload();
     };
 
+    const medicalPanelItems = [
+        { label: '💊 Medical Panel', path: '/health/medical-panel', roles: ['USER'] },
+        { label: '📅 Book Appointment', path: '/health/appointment-booking', roles: ['USER'] },
+        { label: 'My Appointments', path: '/health/my-appointments', roles: ['USER'] },
+        { label: '📋 Prescriptions', path: '/health/prescriptions', roles: ['USER'] },
+        { label: '👨‍⚕️ Doctor Portal', path: '/health/doctor-portal', roles: ['DOCTOR'] },
+        { label: '💊 Pharmacy Admin', path: '/health/pharmacy-admin', roles: ['ADMIN'] },
+    ];
+
+    const visibleMedicalItems = medicalPanelItems.filter(item =>
+        item.roles.includes(user?.role?.toUpperCase())
+    );
+
     return (
         <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
             <div className="navbar__container">
                 <Link to="/" className="navbar__logo">
-                    <img src={logo} alt="Student Living Logo" className="navbar__logo-img" />
+                    <div className="navbar__logo-icon">🏠</div>
                     <span className="navbar__logo-text">Student<span className="navbar__logo-accent">Living</span></span>
                 </Link>
 
@@ -63,6 +90,33 @@ const Navbar = () => {
                             <li><Link to="/laundry" className={`navbar__link ${location.pathname === '/laundry' ? 'navbar__link--active' : ''}`}>Laundry</Link></li>
                         )}
                         <li><Link to="/hostel" className={`navbar__link ${location.pathname === '/hostel' ? 'navbar__link--active' : ''}`}>Hostel</Link></li>
+
+                        {/* Medical Panel Dropdown */}
+                        {visibleMedicalItems.length > 0 && (
+                            <li className="navbar__dropdown">
+                                <button
+                                    className={`navbar__link navbar__dropdown-trigger ${location.pathname.startsWith('/health') ? 'navbar__link--active' : ''
+                                        }`}
+                                    onClick={() => setMedicalDropdownOpen(!medicalDropdownOpen)}
+                                >
+                                    🏥 Medical Panel
+                                    <ChevronDown size={16} className={`dropdown-icon ${medicalDropdownOpen ? 'open' : ''}`} />
+                                </button>
+                                <div className={`navbar__dropdown-menu ${medicalDropdownOpen ? 'open' : ''}`}>
+                                    {visibleMedicalItems.map((item) => (
+                                        <Link
+                                            key={item.path}
+                                            to={item.path}
+                                            className={`navbar__dropdown-item ${location.pathname === item.path ? 'active' : ''}`}
+                                            onClick={() => setMedicalDropdownOpen(false)}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
+                        )}
+
                         {user &&
                             user.role?.toUpperCase() !== 'PROVIDER' &&
                             user.role?.toUpperCase() !== 'HOSTEL_OWNER' &&
@@ -127,13 +181,45 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu Overlay */}
-            <div className={`navbar__mobile-overlay ${menuOpen ? 'navbar__mobile-overlay--open' : ''}`}>
-                <div className="mobile-menu-content">
+            <div
+                className={`navbar__mobile-overlay ${menuOpen ? 'navbar__mobile-overlay--open' : ''}`}
+                onClick={() => setMenuOpen(false)}
+            >
+                <div className="mobile-menu-content" onClick={(e) => e.stopPropagation()}>
                     <ul className="mobile-nav-list">
                         {user?.role?.toUpperCase() !== 'HOSTEL_OWNER' && (
                             <li><Link to="/laundry" onClick={() => setMenuOpen(false)}>Laundry Services</Link></li>
                         )}
                         <li><Link to="/hostel" onClick={() => setMenuOpen(false)}>Hostel & Boarding</Link></li>
+
+                        {/* Medical Panel Mobile Dropdown */}
+                        {visibleMedicalItems.length > 0 && (
+                            <li className="mobile-dropdown">
+                                <button
+                                    className="mobile-dropdown-trigger"
+                                    onClick={() => setMedicalDropdownOpen(!medicalDropdownOpen)}
+                                >
+                                    🏥 Medical Panel
+                                    <ChevronDown size={16} className={`dropdown-icon ${medicalDropdownOpen ? 'open' : ''}`} />
+                                </button>
+                                <div className={`mobile-dropdown-menu ${medicalDropdownOpen ? 'open' : ''}`}>
+                                    {visibleMedicalItems.map((item) => (
+                                        <Link
+                                            key={item.path}
+                                            to={item.path}
+                                            className="mobile-dropdown-item"
+                                            onClick={() => {
+                                                setMenuOpen(false);
+                                                setMedicalDropdownOpen(false);
+                                            }}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
+                        )}
+
                         {user &&
                             user.role?.toUpperCase() !== 'PROVIDER' &&
                             user.role?.toUpperCase() !== 'HOSTEL_OWNER' &&

@@ -1,4 +1,5 @@
 const User = require('../../models/laundry/UserModels');
+const Doctor = require('../../models/health/DoctorModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -27,8 +28,25 @@ const registerUser = async (req, res) => {
             email,
             password: hashedPassword,
             role: role || 'USER',
-            isApproved: (role === 'PROVIDER' || role === 'HOSTEL_OWNER') ? false : true
+            isApproved: (role === 'PROVIDER' || role === 'HOSTEL_OWNER' || role === 'DOCTOR') ? false : true
         });
+
+        if (role === 'DOCTOR') {
+            const [firstName, ...lastNameParts] = name.split(' ');
+            const lastName = lastNameParts.join(' ') || 'Doctor';
+            
+            await Doctor.create({
+                user: user._id,
+                firstName: firstName,
+                lastName: lastName,
+                specialization: 'General Practitioner',
+                registrationNumber: `REG-${user.username.toUpperCase()}-${Date.now().toString().slice(-4)}`,
+                licenseNumber: `LIC-${user.username.toUpperCase()}-001`,
+                phone: '0000000000',
+                officeLocation: 'Update needed',
+                status: 'Approved' // Set to approved for simplicity during dev, or 'Pending' if approval is wanted
+            });
+        }
 
         if (user) {
             res.status(201).json({
@@ -59,8 +77,8 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ username }).select('+password');
 
         if (user && (await bcrypt.compare(password, user.password))) {
-            // Check if provider or hostel owner is approved
-            if ((user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER') && !user.isApproved) {
+            // Check if provider, hostel owner, or doctor is approved
+            if ((user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR') && !user.isApproved) {
                 return res.status(403).json({ message: 'Your account is pending admin approval. Please wait for the administrator to approve your account.' });
             }
 
@@ -101,12 +119,12 @@ const approveProvider = async (req, res) => {
         const { isApproved } = req.body;
         const user = await User.findById(req.params.id);
 
-        if (user && (user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER')) {
+        if (user && (user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR')) {
             user.isApproved = isApproved;
             await user.save();
-            res.json({ message: `Provider ${isApproved ? 'approved' : 'rejected'}` });
+            res.json({ message: `${user.role} ${isApproved ? 'approved' : 'rejected'}` });
         } else {
-            res.status(404).json({ message: 'Laundry or Hostel provider not found' });
+            res.status(404).json({ message: 'Provider or Doctor not found' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });

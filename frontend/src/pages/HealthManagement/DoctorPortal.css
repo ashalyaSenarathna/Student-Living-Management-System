@@ -1,0 +1,509 @@
+.doctor-portal-page {
+    --doc-bg: linear-gradient(180deg, #081221 0%, #0c1730 56%, #0a1221 100%);
+    --doc-surface: rgba(8, 18, 37, 0.86);
+    --doc-border: rgba(148, 163, 184, 0.16);
+    --doc-text: #eff6ff;
+    --doc-muted: #9db0c8;
+    --doc-heading: #f8fbff;
+    --doc-shadow: 0 24px 64px rgba(0, 0, 0, 0.34);
+    min-height: 100vh;
+    padding: 104px 24px 48px;
+    background:
+        radial-gradient(circle at top left, rgba(16, 185, 129, 0.1), transparent 24%),
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.1), transparent 22%),
+        var(--doc-bg);
+    color: var(--doc-text);
+}
+
+.doctor-portal-shell {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+}
+
+.doctor-portal-hero,
+.doctor-portal-layout,
+.doctor-portal-section-card,
+.doctor-portal-detail-card,
+.doctor-portal-loading-state {
+    background: var(--doc-surface);
+    border: 1px solid var(--doc-border);
+    box-shadow: var(--doc-shadow);
+}
+
+.doctor-portal-hero,
+.doctor-portal-layout {
+    border-radius: 28px;
+    padding: 26px;
+}
+
+.doctor-portal-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.doctor-portal-hero-copy {
+    max-width: 760px;
+    display: grid;
+    gap: 12px;
+}
+
+.doctor-portal-eyebrow,
+.doctor-portal-section-kicker {
+    display: inline-flex;
+    width: fit-content;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #d1fae5;
+    border: 1px solid rgba(110, 231, 183, 0.2);
+    background: rgba(16, 185, 129, 0.12);
+}
+
+.doctor-portal-hero h1,
+.doctor-portal-section-head h2,
+.doctor-portal-detail-head h2 {
+    margin: 0;
+    color: var(--doc-heading);
+}
+
+.doctor-portal-hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1.04;
+}
+
+.doctor-portal-hero p,
+.doctor-portal-empty-state p,
+.doctor-portal-stat-card span,
+.doctor-portal-appointment-card p,
+.doctor-portal-completed-card span,
+.doctor-portal-info-card span,
+.doctor-portal-note-block p,
+.doctor-medicine-item p,
+.doctor-portal-loading-state p {
+    margin: 0;
+    color: var(--doc-muted);
+}
+
+.doctor-portal-stats {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.doctor-portal-stat-card {
+    min-width: 150px;
+    display: grid;
+    gap: 8px;
+    padding: 18px 20px;
+    border-radius: 22px;
+    background: rgba(2, 6, 23, 0.3);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.doctor-portal-stat-card strong {
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+.doctor-portal-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 18px;
+}
+
+.doctor-portal-alert-error {
+    border: 1px solid rgba(251, 113, 133, 0.36);
+    background: rgba(127, 29, 29, 0.26);
+    color: #ffe4e6;
+}
+
+.doctor-portal-layout {
+    display: grid;
+    grid-template-columns: 0.92fr 1.08fr;
+    gap: 20px;
+}
+
+.doctor-portal-sidebar,
+.doctor-portal-main {
+    display: grid;
+    gap: 18px;
+    align-content: start;
+}
+
+.doctor-portal-section-card,
+.doctor-portal-detail-card,
+.doctor-portal-empty-state,
+.doctor-portal-info-card,
+.doctor-portal-note-block,
+.doctor-medicine-item,
+.doctor-portal-completed-card {
+    border-radius: 22px;
+    background: rgba(2, 6, 23, 0.24);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.doctor-portal-section-card,
+.doctor-portal-detail-card {
+    padding: 20px;
+}
+
+.doctor-portal-section-head,
+.doctor-portal-detail-head,
+.appointment-card-head,
+.doctor-portal-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.doctor-portal-section-head {
+    margin-bottom: 16px;
+}
+
+.doctor-portal-card-list {
+    display: grid;
+    gap: 12px;
+}
+
+.doctor-portal-card-list.compact {
+    gap: 10px;
+}
+
+.doctor-portal-appointment-card {
+    text-align: left;
+    padding: 16px;
+    color: inherit;
+    cursor: pointer;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.2s ease;
+}
+
+.doctor-portal-appointment-card:hover,
+.doctor-portal-appointment-card.selected {
+    transform: translateY(-1px);
+    border-color: rgba(16, 185, 129, 0.28);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.18);
+}
+
+.appointment-card-head h3,
+.doctor-portal-completed-card strong,
+.doctor-medicine-item strong,
+.doctor-portal-empty-state strong,
+.doctor-portal-info-card strong,
+.doctor-portal-note-block label {
+    color: #ffffff;
+}
+
+.appointment-status-pill {
+    display: inline-flex;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.appointment-status-pill.scheduled {
+    color: #dbeafe;
+    background: rgba(59, 130, 246, 0.18);
+}
+
+.appointment-status-pill.confirmed {
+    color: #d1fae5;
+    background: rgba(16, 185, 129, 0.16);
+}
+
+.doctor-portal-completed-card {
+    padding: 14px 16px;
+    display: grid;
+    gap: 4px;
+}
+
+.doctor-portal-detail-head {
+    margin-bottom: 18px;
+    align-items: start;
+}
+
+.doctor-portal-close-btn {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(148, 163, 184, 0.14);
+    cursor: pointer;
+}
+
+.doctor-portal-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.doctor-portal-info-card {
+    padding: 16px;
+    display: grid;
+    gap: 10px;
+}
+
+.doctor-portal-note-block {
+    padding: 18px;
+    margin-bottom: 14px;
+}
+
+.doctor-portal-note-block label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.doctor-portal-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 16px;
+    border: none;
+    border-radius: 16px;
+    font: inherit;
+    font-weight: 700;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.doctor-portal-btn.success {
+    background: linear-gradient(135deg, #15803d, #22c55e);
+}
+
+.doctor-portal-btn.danger {
+    background: linear-gradient(135deg, #be123c, #e11d48);
+}
+
+.doctor-portal-btn.primary {
+    background: linear-gradient(135deg, #0f766e, #14b8a6);
+}
+
+.doctor-portal-btn.neutral {
+    background: linear-gradient(135deg, #1d4ed8, #60a5fa);
+}
+
+.doctor-portal-btn.full-width {
+    width: 100%;
+}
+
+.doctor-prescription-form {
+    display: grid;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.doctor-portal-section-head.inside-form {
+    margin-bottom: 0;
+}
+
+.doctor-prescription-builder {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.doctor-field {
+    display: grid;
+    gap: 8px;
+}
+
+.doctor-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.doctor-field label {
+    color: #dce7f5;
+    font-weight: 600;
+}
+
+.doctor-field input,
+.doctor-field select,
+.doctor-field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.16);
+    background: rgba(15, 23, 42, 0.62);
+    color: var(--doc-text);
+    font: inherit;
+    outline: none;
+}
+
+.doctor-field textarea {
+    resize: vertical;
+}
+
+.doctor-medicine-list {
+    display: grid;
+    gap: 12px;
+}
+
+.doctor-medicine-item {
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.doctor-remove-btn {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    background: rgba(225, 29, 72, 0.22);
+    cursor: pointer;
+}
+
+.doctor-portal-empty-state {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 22px;
+}
+
+.doctor-portal-empty-state.compact {
+    padding: 16px;
+}
+
+.doctor-portal-empty-state.large {
+    min-height: 320px;
+}
+
+.doctor-portal-loading-state {
+    min-height: 72vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 32px;
+    border-radius: 28px;
+}
+
+.doctor-portal-spinner {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+    border-radius: 999px;
+    border: 4px solid rgba(148, 163, 184, 0.2);
+    border-top-color: #34d399;
+    animation: doctor-portal-spin 0.9s linear infinite;
+}
+
+@keyframes doctor-portal-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body.light-mode .doctor-portal-page {
+    --doc-bg: linear-gradient(180deg, #eff6ff 0%, #f8fafc 56%, #eef2ff 100%);
+    --doc-surface: rgba(255, 255, 255, 0.92);
+    --doc-text: #132338;
+    --doc-muted: #54667f;
+    --doc-heading: #0f172a;
+    --doc-shadow: 0 20px 54px rgba(15, 23, 42, 0.1);
+}
+
+body.light-mode .doctor-portal-page .doctor-portal-eyebrow,
+body.light-mode .doctor-portal-page .doctor-portal-section-kicker {
+    color: #047857;
+    background: rgba(16, 185, 129, 0.08);
+}
+
+body.light-mode .doctor-portal-page .doctor-portal-hero p,
+body.light-mode .doctor-portal-page .doctor-portal-empty-state p,
+body.light-mode .doctor-portal-page .doctor-portal-stat-card span,
+body.light-mode .doctor-portal-page .doctor-portal-appointment-card p,
+body.light-mode .doctor-portal-page .doctor-portal-completed-card span,
+body.light-mode .doctor-portal-page .doctor-portal-info-card span,
+body.light-mode .doctor-portal-page .doctor-portal-note-block p,
+body.light-mode .doctor-portal-page .doctor-medicine-item p,
+body.light-mode .doctor-portal-page .doctor-portal-loading-state p {
+    color: #52657d;
+}
+
+body.light-mode .doctor-portal-page .doctor-portal-section-card,
+body.light-mode .doctor-portal-page .doctor-portal-detail-card,
+body.light-mode .doctor-portal-page .doctor-portal-empty-state,
+body.light-mode .doctor-portal-page .doctor-portal-info-card,
+body.light-mode .doctor-portal-page .doctor-portal-note-block,
+body.light-mode .doctor-portal-page .doctor-medicine-item,
+body.light-mode .doctor-portal-page .doctor-portal-completed-card,
+body.light-mode .doctor-portal-page .doctor-portal-appointment-card {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+body.light-mode .doctor-portal-page .doctor-portal-hero h1,
+body.light-mode .doctor-portal-page .doctor-portal-section-head h2,
+body.light-mode .doctor-portal-page .doctor-portal-detail-head h2,
+body.light-mode .doctor-portal-page .appointment-card-head h3,
+body.light-mode .doctor-portal-page .doctor-portal-completed-card strong,
+body.light-mode .doctor-portal-page .doctor-medicine-item strong,
+body.light-mode .doctor-portal-page .doctor-portal-empty-state strong,
+body.light-mode .doctor-portal-page .doctor-portal-info-card strong,
+body.light-mode .doctor-portal-page .doctor-portal-note-block label {
+    color: #0f172a;
+}
+
+body.light-mode .doctor-portal-page .doctor-field input,
+body.light-mode .doctor-portal-page .doctor-field select,
+body.light-mode .doctor-portal-page .doctor-field textarea {
+    background: rgba(255, 255, 255, 0.92);
+    color: #0f172a;
+}
+
+@media (max-width: 1100px) {
+    .doctor-portal-hero,
+    .doctor-portal-layout {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 760px) {
+    .doctor-portal-page {
+        padding: 92px 16px 32px;
+    }
+
+    .doctor-portal-hero,
+    .doctor-portal-layout,
+    .doctor-portal-section-card,
+    .doctor-portal-detail-card {
+        padding: 18px;
+    }
+
+    .doctor-portal-detail-grid,
+    .doctor-prescription-builder {
+        grid-template-columns: 1fr;
+    }
+
+    .doctor-portal-section-head,
+    .doctor-portal-detail-head,
+    .appointment-card-head,
+    .doctor-portal-actions,
+    .doctor-medicine-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
