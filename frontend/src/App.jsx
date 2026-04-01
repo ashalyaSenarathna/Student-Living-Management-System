@@ -28,9 +28,20 @@ import './light-mode.css'; // Global light mode overrides
 
 import { Navigate } from 'react-router-dom';
 
+const getStoredUserInfo = () => {
+    try {
+        const storedUser = localStorage.getItem('userInfo');
+        return storedUser ? JSON.parse(storedUser) : null;
+    } catch (error) {
+        console.error('Failed to parse stored user info:', error);
+        localStorage.removeItem('userInfo');
+        return null;
+    }
+};
+
 const ProtectedRoute = ({ children, allowedRoles }) => {
-    const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
-    const userRole = userInfo.role?.toUpperCase();
+    const userInfo = getStoredUserInfo();
+    const userRole = userInfo?.role?.toUpperCase();
 
     if (!userInfo || !userInfo.token) {
         return <Navigate to="/login" replace />;
