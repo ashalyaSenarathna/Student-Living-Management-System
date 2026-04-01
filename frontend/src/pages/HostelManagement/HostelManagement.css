@@ -129,9 +129,17 @@
     backdrop-filter: blur(4px);
 }
 
-.gender-badge.boys { color: #60a5fa; }
-.gender-badge.girls { color: #f472b6; }
-.gender-badge.mixed { color: #a78bfa; }
+.gender-badge.boys {
+    color: #60a5fa;
+}
+
+.gender-badge.girls {
+    color: #f472b6;
+}
+
+.gender-badge.mixed {
+    color: #a78bfa;
+}
 
 .hostel-info {
     padding: 1.5rem;
@@ -212,7 +220,9 @@
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .error-display {
@@ -233,3 +243,40 @@
     color: rgba(255, 255, 255, 0.4);
 }
 
+
+/* ============================================================
+   HOSTEL CARD RATINGS
+   ============================================================ */
+
+.hostel-name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.hostel-name-row h3 {
+    margin: 0;
+    flex: 1;
+}
+
+.hostel-card-rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255, 202, 40, 0.1);
+    color: #ffca28;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 202, 40, 0.2);
+    white-space: nowrap;
+}
+
+.hostel-card-rating .review-count {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    font-size: 0.75rem;
+}

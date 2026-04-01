@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Star } from 'lucide-react';
 import './HostelManagement.css';
 
 const HostelManagement = () => {
@@ -92,7 +93,14 @@ const HostelManagement = () => {
                                 </span>
                             </div>
                             <div className="hostel-info">
-                                <h3>{h.name || 'Unnamed Accommodation'}</h3>
+                                <div className="hostel-name-row">
+                                    <h3>{h.name || 'Unnamed Accommodation'}</h3>
+                                    <div className="hostel-card-rating">
+                                        <Star size={14} fill="#ffca28" stroke="#ffca28" />
+                                        <span>{(h.averageRating || 0).toFixed(1)}</span>
+                                        <span className="review-count">({h.numReviews || 0})</span>
+                                    </div>
+                                </div>
                                 <p className="hostel-location">📍 {h.location || 'Location Not Specified'}</p>
                                 <p className="hostel-desc">{h.description || 'Premium student accommodation with modern facilities and secure environment.'}</p>
                                 <div className="hostel-footer">
