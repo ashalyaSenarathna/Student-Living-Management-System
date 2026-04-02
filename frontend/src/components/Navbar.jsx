@@ -8,6 +8,7 @@ const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [medicalDropdownOpen, setMedicalDropdownOpen] = useState(false);
     const [foodDropdownOpen, setFoodDropdownOpen] = useState(false);
+    const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
     const location = useLocation();
@@ -26,6 +27,7 @@ const Navbar = () => {
         setMenuOpen(false);
         setMedicalDropdownOpen(false);
         setFoodDropdownOpen(false);
+        setAdminDropdownOpen(false);
     }, [location.pathname]);
 
     const toggleTheme = () => {
@@ -70,7 +72,6 @@ const Navbar = () => {
         { label: 'My Appointments', path: '/health/my-appointments', roles: ['USER'] },
         { label: '📋 Prescriptions', path: '/health/prescriptions', roles: ['USER'] },
         { label: '👨‍⚕️ Doctor Portal', path: '/health/doctor-portal', roles: ['DOCTOR'] },
-        { label: '💊 Pharmacy Admin', path: '/health/pharmacy-admin', roles: ['ADMIN'] },
     ];
 
     const visibleMedicalItems = medicalPanelItems.filter(item =>
@@ -84,7 +85,6 @@ const Navbar = () => {
         { label: '➕ Add/Manage Food', path: '/food/add', roles: ['FOOD_PROVIDER'] },
         { label: '📋 Manage Orders', path: '/food/manage-orders', roles: ['FOOD_PROVIDER'] },
         { label: '📅 Manage Plans', path: '/food/manage-plans', roles: ['FOOD_PROVIDER'] },
-        { label: '🛠️ Food Admin', path: '/food/admin', roles: ['ADMIN'] },
     ];
 
     const visibleFoodItems = foodPanelItems.filter(item =>
@@ -175,10 +175,7 @@ const Navbar = () => {
                             <li><Link to="/hostel-owner" className={`navbar__link ${location.pathname === '/hostel-owner' ? 'navbar__link--active' : ''}`}>Hostel Owner</Link></li>
                         )}
                         {user && user.role?.toUpperCase() === 'ADMIN' && (
-                            <>
-                                <li><Link to="/admin" className={`navbar__link ${location.pathname === '/admin' ? 'navbar__link--active' : ''}`}>Admin</Link></li>
-                                <li><Link to="/hostel-admin" className={`navbar__link ${location.pathname === '/hostel-admin' ? 'navbar__link--active' : ''}`}>Hostel Admin</Link></li>
-                            </>
+                            <li><Link to="/admin" className={`navbar__link ${location.pathname.startsWith('/admin') || location.pathname === '/hostel-admin' || location.pathname === '/health/pharmacy-admin' || location.pathname === '/food/admin' ? 'navbar__link--active' : ''}`}>🛡️ Admin Portal</Link></li>
                         )}
                     </ul>
                 </div>
@@ -306,10 +303,7 @@ const Navbar = () => {
                             <li><Link to="/hostel-owner" onClick={() => setMenuOpen(false)}>Hostel Owner Dashboard</Link></li>
                         )}
                         {user && user.role?.toUpperCase() === 'ADMIN' && (
-                            <>
-                                <li><Link to="/admin" onClick={() => setMenuOpen(false)}>Admin Panel</Link></li>
-                                <li><Link to="/hostel-admin" onClick={() => setMenuOpen(false)}>Hostel Admin</Link></li>
-                            </>
+                            <li><Link to="/admin" onClick={() => setMenuOpen(false)}>🛡️ Admin Portal</Link></li>
                         )}
                         {user ? (
                             <>

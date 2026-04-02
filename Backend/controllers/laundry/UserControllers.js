@@ -28,7 +28,7 @@ const registerUser = async (req, res) => {
             email,
             password: hashedPassword,
             role: role || 'USER',
-            isApproved: (role === 'PROVIDER' || role === 'HOSTEL_OWNER' || role === 'DOCTOR') ? false : true
+            isApproved: (role === 'PROVIDER' || role === 'HOSTEL_OWNER' || role === 'DOCTOR' || role === 'FOOD_PROVIDER') ? false : true
         });
 
         if (role === 'DOCTOR') {
@@ -77,8 +77,8 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ username }).select('+password');
 
         if (user && (await bcrypt.compare(password, user.password))) {
-            // Check if provider, hostel owner, or doctor is approved
-            if ((user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR') && !user.isApproved) {
+            // Check if provider, hostel owner, food provider, or doctor is approved
+            if ((user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR' || user.role === 'FOOD_PROVIDER') && !user.isApproved) {
                 return res.status(403).json({ message: 'Your account is pending admin approval. Please wait for the administrator to approve your account.' });
             }
 
@@ -119,12 +119,12 @@ const approveProvider = async (req, res) => {
         const { isApproved } = req.body;
         const user = await User.findById(req.params.id);
 
-        if (user && (user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR')) {
+        if (user && (user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR' || user.role === 'FOOD_PROVIDER')) {
             user.isApproved = isApproved;
             await user.save();
             res.json({ message: `${user.role} ${isApproved ? 'approved' : 'rejected'}` });
         } else {
-            res.status(404).json({ message: 'Provider or Doctor not found' });
+            res.status(404).json({ message: 'Provider, Doctor, or Food Provider not found' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });

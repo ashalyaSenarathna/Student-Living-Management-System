@@ -358,6 +358,11 @@
     color: #ef4444;
 }
 
+.role-badge.food_provider {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316;
+}
+
 .admin-status-badge {
     display: flex;
     align-items: center;
