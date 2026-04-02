@@ -169,7 +169,7 @@ const MyMealPlans = () => {
 
             <div className="mmp-nav-tabs">
                 <button className="mmp-nav-tab" onClick={() => navigate('/food')}>Browse Food</button>
-                <button className="mmp-nav-tab" onClick={() => navigate('/my-food-orders')}>My Orders</button>
+                <button className="mmp-nav-tab" onClick={() => navigate('/food/my-orders')}>My Orders</button>
                 <button className="mmp-nav-tab active">My Meal Plans</button>
             </div>
 

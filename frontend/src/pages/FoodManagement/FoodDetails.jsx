@@ -638,7 +638,7 @@ const FoodDetails = () => {
                             <button
                                 type="button"
                                 className="fd-view-plans-btn"
-                                onClick={() => navigate('/my-meal-plans')}
+                                onClick={() => navigate('/food/my-plans')}
                             >
                                 View My Meal Plans
                             </button>
@@ -660,7 +660,7 @@ const FoodDetails = () => {
                                 <div className="fd-success-check">✅</div>
                                 <h4>Order Placed!</h4>
                                 <p>Your order is being prepared.</p>
-                                <button className="fd-view-orders-btn" onClick={() => navigate('/my-food-orders')}>
+                                <button className="fd-view-orders-btn" onClick={() => navigate('/food/my-orders')}>
                                     View My Orders <ChevronRight size={16} />
                                 </button>
                                 <button className="fd-order-again-btn" onClick={() => setOrderPlaced(false)}>

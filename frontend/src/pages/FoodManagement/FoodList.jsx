@@ -101,10 +101,10 @@ const FoodList = () => {
             <div className="food-nav-tabs">
                 <button className="food-nav-tab active">Browse Food</button>
                 {!isFoodProvider && (
-                    <button className="food-nav-tab" onClick={() => navigate('/my-food-orders')}>My Orders</button>
+                    <button className="food-nav-tab" onClick={() => navigate('/food/my-orders')}>My Orders</button>
                 )}
                 {!isFoodProvider && (
-                    <button className="food-nav-tab" onClick={() => navigate('/my-meal-plans')}>My Meal Plans</button>
+                    <button className="food-nav-tab" onClick={() => navigate('/food/my-plans')}>My Meal Plans</button>
                 )}
             </div>
 

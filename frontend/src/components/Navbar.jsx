@@ -9,6 +9,7 @@ const Navbar = () => {
     const [medicalDropdownOpen, setMedicalDropdownOpen] = useState(false);
     const [foodDropdownOpen, setFoodDropdownOpen] = useState(false);
     const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
+    const [laundryDropdownOpen, setLaundryDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
     const location = useLocation();
@@ -28,6 +29,7 @@ const Navbar = () => {
         setMedicalDropdownOpen(false);
         setFoodDropdownOpen(false);
         setAdminDropdownOpen(false);
+        setLaundryDropdownOpen(false);
     }, [location.pathname]);
 
     const toggleTheme = () => {
@@ -66,6 +68,17 @@ const Navbar = () => {
         window.location.reload();
     };
 
+    const laundryPanelItems = [
+        { label: '🧺 Laundry Services', path: '/laundry', roles: ['USER', 'PROVIDER', 'ADMIN'] },
+        { label: '🎫 My Laundry Bookings', path: '/my-bookings', roles: ['USER'] },
+        { label: '🏪 Manage Shop', path: '/add-laundry', roles: ['PROVIDER'] },
+        { label: '📋 Manage Bookings', path: '/manage-bookings', roles: ['PROVIDER'] },
+    ];
+
+    const visibleLaundryItems = laundryPanelItems.filter(item =>
+        item.roles.includes(user?.role?.toUpperCase())
+    );
+
     const medicalPanelItems = [
         { label: '💊 Medical Panel', path: '/health/medical-panel', roles: ['USER'] },
         { label: '📅 Book Appointment', path: '/health/appointment-booking', roles: ['USER'] },
@@ -102,8 +115,31 @@ const Navbar = () => {
                 <div className={`navbar__menu ${menuOpen ? 'navbar__menu--active' : ''}`}>
                     <ul className="navbar__list">
                         <li><Link to="/" className={`navbar__link ${location.pathname === '/' ? 'navbar__link--active' : ''}`}>Home</Link></li>
-                        {user?.role?.toUpperCase() !== 'HOSTEL_OWNER' && (
-                            <li><Link to="/laundry" className={`navbar__link ${location.pathname === '/laundry' ? 'navbar__link--active' : ''}`}>Laundry</Link></li>
+
+                        {/* Laundry Panel Dropdown */}
+                        {visibleLaundryItems.length > 0 && (
+                            <li className="navbar__dropdown">
+                                <button
+                                    className={`navbar__link navbar__dropdown-trigger ${['/laundry', '/my-bookings', '/add-laundry', '/manage-bookings'].includes(location.pathname) ? 'navbar__link--active' : ''
+                                        }`}
+                                    onClick={() => setLaundryDropdownOpen(!laundryDropdownOpen)}
+                                >
+                                    🧺 Laundry
+                                    <ChevronDown size={16} className={`dropdown-icon ${laundryDropdownOpen ? 'open' : ''}`} />
+                                </button>
+                                <div className={`navbar__dropdown-menu ${laundryDropdownOpen ? 'open' : ''}`}>
+                                    {visibleLaundryItems.map((item) => (
+                                        <Link
+                                            key={item.path}
+                                            to={item.path}
+                                            className={`navbar__dropdown-item ${location.pathname === item.path ? 'active' : ''}`}
+                                            onClick={() => setLaundryDropdownOpen(false)}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
                         )}
                         <li><Link to="/hostel" className={`navbar__link ${location.pathname === '/hostel' ? 'navbar__link--active' : ''}`}>Hostel</Link></li>
 
@@ -159,18 +195,6 @@ const Navbar = () => {
                             </li>
                         )}
 
-                        {user &&
-                            user.role?.toUpperCase() !== 'PROVIDER' &&
-                            user.role?.toUpperCase() !== 'HOSTEL_OWNER' &&
-                            user.role?.toUpperCase() !== 'ADMIN' && (
-                                <li><Link to="/my-bookings" className={`navbar__link ${location.pathname === '/my-bookings' ? 'navbar__link--active' : ''}`}>My Laundry Bookings</Link></li>
-                            )}
-                        {user && user.role?.toUpperCase() === 'PROVIDER' && (
-                            <>
-                                <li><Link to="/add-laundry" className={`navbar__link ${location.pathname === '/add-laundry' ? 'navbar__link--active' : ''}`}>Manage Shop</Link></li>
-                                <li><Link to="/manage-bookings" className={`navbar__link ${location.pathname === '/manage-bookings' ? 'navbar__link--active' : ''}`}>Bookings Manage</Link></li>
-                            </>
-                        )}
                         {user && user.role?.toUpperCase() === 'HOSTEL_OWNER' && (
                             <li><Link to="/hostel-owner" className={`navbar__link ${location.pathname === '/hostel-owner' ? 'navbar__link--active' : ''}`}>Hostel Owner</Link></li>
                         )}
@@ -226,9 +250,35 @@ const Navbar = () => {
             >
                 <div className="mobile-menu-content" onClick={(e) => e.stopPropagation()}>
                     <ul className="mobile-nav-list">
-                        {user?.role?.toUpperCase() !== 'HOSTEL_OWNER' && (
-                            <li><Link to="/laundry" onClick={() => setMenuOpen(false)}>Laundry Services</Link></li>
+                        
+                        {/* Laundry Panel Mobile Dropdown */}
+                        {visibleLaundryItems.length > 0 && (
+                            <li className="mobile-dropdown">
+                                <button
+                                    className="mobile-dropdown-trigger"
+                                    onClick={() => setLaundryDropdownOpen(!laundryDropdownOpen)}
+                                >
+                                    🧺 Laundry
+                                    <ChevronDown size={16} className={`dropdown-icon ${laundryDropdownOpen ? 'open' : ''}`} />
+                                </button>
+                                <div className={`mobile-dropdown-menu ${laundryDropdownOpen ? 'open' : ''}`}>
+                                    {visibleLaundryItems.map((item) => (
+                                        <Link
+                                            key={item.path}
+                                            to={item.path}
+                                            className="mobile-dropdown-item"
+                                            onClick={() => {
+                                                setMenuOpen(false);
+                                                setLaundryDropdownOpen(false);
+                                            }}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
                         )}
+
                         <li><Link to="/hostel" onClick={() => setMenuOpen(false)}>Hostel & Boarding</Link></li>
 
                         {/* Medical Panel Mobile Dropdown */}
@@ -287,18 +337,6 @@ const Navbar = () => {
                             </li>
                         )}
 
-                        {user &&
-                            user.role?.toUpperCase() !== 'PROVIDER' &&
-                            user.role?.toUpperCase() !== 'HOSTEL_OWNER' &&
-                            user.role?.toUpperCase() !== 'ADMIN' && (
-                                <li><Link to="/my-bookings" onClick={() => setMenuOpen(false)}>My Bookings</Link></li>
-                            )}
-                        {user && user.role?.toUpperCase() === 'PROVIDER' && (
-                            <>
-                                <li><Link to="/add-laundry" onClick={() => setMenuOpen(false)}>Manage Laundry Shop</Link></li>
-                                <li><Link to="/manage-bookings" onClick={() => setMenuOpen(false)}>Manage Bookings</Link></li>
-                            </>
-                        )}
                         {user && user.role?.toUpperCase() === 'HOSTEL_OWNER' && (
                             <li><Link to="/hostel-owner" onClick={() => setMenuOpen(false)}>Hostel Owner Dashboard</Link></li>
                         )}
