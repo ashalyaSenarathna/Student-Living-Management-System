@@ -17,6 +17,63 @@ body {
     overflow-x: hidden;
 }
 
+:root {
+    --theme-text-primary: #f3f5fa;
+    --theme-text-secondary: #cbd5e1;
+}
+
+body.light-mode {
+    --theme-text-primary: #101426;
+    --theme-text-secondary: #475569;
+}
+
+/* Global text fallback: dark text in light mode, light text in dark mode */
+body,
+body .App {
+    color: var(--theme-text-primary);
+}
+
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body p,
+body span,
+body li,
+body label,
+body td,
+body th,
+body small,
+body strong {
+    color: inherit;
+}
+
+body input,
+body textarea,
+body select {
+    color: var(--theme-text-primary);
+}
+
+/* Keep dropdown menu items readable across OS/browser native select rendering */
+body:not(.light-mode) select,
+body:not(.light-mode) option {
+    background-color: #0f172a;
+    color: #f3f5fa;
+}
+
+body.light-mode select,
+body.light-mode option {
+    background-color: #ffffff;
+    color: #101426;
+}
+
+body input::placeholder,
+body textarea::placeholder {
+    color: var(--theme-text-secondary);
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;

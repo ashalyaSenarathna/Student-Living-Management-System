@@ -15,7 +15,19 @@
     --text-main: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.5);
     --sidebar-width: 280px;
+        --row-border: rgba(255, 255, 255, 0.03);
+        --row-hover: rgba(255, 255, 255, 0.02);
 }
+
+    .light-mode .admin-dashboard {
+        --background: #f3f6ff;
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --card-border: rgba(15, 23, 42, 0.12);
+        --text-main: #111827;
+        --text-muted: rgba(17, 24, 39, 0.62);
+        --row-border: rgba(15, 23, 42, 0.08);
+        --row-hover: rgba(99, 102, 241, 0.06);
+    }
 
 .admin-dashboard {
     display: flex;
@@ -41,6 +53,10 @@
     z-index: 100;
 }
 
+    .light-mode .admin-sidebar {
+        background: rgba(255, 255, 255, 0.92);
+    }
+
 .sidebar-logo {
     display: flex;
     align-items: center;
@@ -65,6 +81,10 @@
     font-size: 1.5rem;
     font-weight: 700;
 }
+
+    .light-mode .sidebar-logo h2 {
+        color: #111827;
+    }
 
 .sidebar-nav {
     display: flex;
@@ -134,6 +154,13 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+    .light-mode .header-title h1 {
+        background: linear-gradient(135deg, #111827 0%, #374151 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
 .header-title p {
     color: var(--text-muted);
@@ -225,10 +252,14 @@
     border: 1px solid var(--card-border);
     padding: 12px 12px 12px 45px;
     border-radius: 12px;
-    color: #fff;
+        color: var(--text-main);
     font-family: inherit;
     transition: all 0.3s;
 }
+
+    .search-bar input::placeholder {
+        color: var(--text-muted);
+    }
 
 .search-bar input:focus {
     outline: none;
@@ -285,7 +316,7 @@
     text-align: left;
     font-size: 0.75rem;
     font-weight: 700;
-    text-transform: uppercase;
+        color: var(--text-main);
     letter-spacing: 1.5px;
     color: var(--text-muted);
     border-bottom: 1px solid var(--card-border);
@@ -293,11 +324,11 @@
 
 .users-table tbody tr {
     transition: all 0.2s;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid var(--row-border);
 }
 
 .users-table tbody tr:hover {
-    background: rgba(255, 255, 255, 0.02);
+        background: var(--row-hover);
 }
 
 .users-table td {
@@ -448,9 +479,22 @@
     align-items: center;
     height: 100vh;
     background: var(--background);
-    color: #fff;
+        color: var(--text-main);
     gap: 20px;
 }
+
+    .users-empty-cell {
+        text-align: center;
+        padding: 100px 0;
+        color: var(--text-muted);
+    }
+
+    .users-empty-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
 
 .loader {
     width: 48px;

@@ -164,6 +164,10 @@ const Register = () => {
                                     <input type="radio" name="role" value="HOSTEL_OWNER" checked={formData.role === 'HOSTEL_OWNER'} onChange={handleChange} />
                                     <span>Hostel Owner</span>
                                 </label>
+                                <label className={`role-option ${formData.role === 'FOOD_PROVIDER' ? 'active' : ''}`}>
+                                    <input type="radio" name="role" value="FOOD_PROVIDER" checked={formData.role === 'FOOD_PROVIDER'} onChange={handleChange} />
+                                    <span>Food Vendor</span>
+                                </label>
                             </div>
                         </div>
 

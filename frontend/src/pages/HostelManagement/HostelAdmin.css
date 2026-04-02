@@ -470,3 +470,54 @@
         padding: 20px;
     }
 }
+
+.light-mode .ha-container {
+    background-color: #eef2ff;
+    color: #0f172a;
+}
+
+.light-mode .ha-sidebar,
+.light-mode .ha-header-new,
+.light-mode .ha-content-card,
+.light-mode .ha-stat-card,
+.light-mode .ha-pending-card,
+.light-mode .ha-modern-table tr,
+.light-mode .ha-card-footer {
+    background: rgba(255, 255, 255, 0.94);
+    color: #0f172a;
+    border-color: rgba(15, 23, 42, 0.1);
+}
+
+.light-mode .sidebar-brand h3,
+.light-mode .header-info h2,
+.light-mode .ha-stat-val,
+.light-mode .ha-card-head h3,
+.light-mode .ha-card-body h4,
+.light-mode .ha-modern-table td,
+.light-mode .ha-type-tag,
+.light-mode .ha-btn-action.ghost,
+.light-mode .ha-avatar {
+    color: #0f172a;
+}
+
+.light-mode .ha-nav-item {
+    color: #475569;
+}
+
+.light-mode .ha-nav-item:hover {
+    color: #0f172a;
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.light-mode .ha-nav-item.active {
+    color: #ffffff;
+}
+
+.light-mode .ha-meta,
+.light-mode .ha-count-pill,
+.light-mode .ha-user-details span,
+.light-mode .ha-modern-table th,
+.light-mode .header-info p,
+.light-mode .ha-stat-label {
+    color: rgba(15, 23, 42, 0.62);
+}

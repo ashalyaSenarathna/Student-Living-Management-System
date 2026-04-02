@@ -153,6 +153,13 @@ const AdminDashboard = () => {
                         <Home size={20} />
                         <span>Hostel Admin</span>
                     </button>
+                    <button
+                        className="nav-item"
+                        onClick={() => navigate('/food-admin')}
+                    >
+                        <Star size={20} />
+                        <span>Food Admin</span>
+                    </button>
                 </nav>
 
                 <div className="sidebar-footer">
@@ -364,8 +371,8 @@ const AdminDashboard = () => {
                                 </AnimatePresence>
                                 {filteredUsers.length === 0 && (
                                     <tr>
-                                        <td colSpan="6" style={{ textAlign: 'center', padding: '100px 0', color: 'rgba(255,255,255,0.4)' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
+                                        <td colSpan="6" className="users-empty-cell">
+                                            <div className="users-empty-wrap">
                                                 <Search size={48} opacity={0.2} />
                                                 <p>No users found matching your criteria</p>
                                             </div>

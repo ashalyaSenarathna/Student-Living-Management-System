@@ -1,0 +1,290 @@
+.fad-page {
+    min-height: 100vh;
+    padding: 7.5rem 1.25rem 3rem;
+    color: #f4f7fb;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(255, 196, 120, 0.18), transparent 36%),
+        radial-gradient(circle at 92% 8%, rgba(120, 199, 255, 0.16), transparent 33%),
+        linear-gradient(165deg, #101e2f 0%, #12283e 45%, #0f2535 100%);
+}
+
+.light-mode .fad-page {
+    color: #111827;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(254, 215, 170, 0.5), transparent 36%),
+        radial-gradient(circle at 92% 8%, rgba(186, 230, 253, 0.45), transparent 33%),
+        linear-gradient(165deg, #eff6ff 0%, #f8fafc 45%, #eef2ff 100%);
+}
+
+.fad-header {
+    max-width: 1200px;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.fad-header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.fad-header p {
+    margin: 0.35rem 0 0;
+    opacity: 0.85;
+}
+
+.fad-back-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: #f4f7fb;
+    border-radius: 12px;
+    padding: 0.65rem 1rem;
+    cursor: pointer;
+}
+
+.light-mode .fad-back-btn {
+    color: #111827;
+    border-color: rgba(15, 23, 42, 0.16);
+    background: rgba(255, 255, 255, 0.88);
+}
+
+.fad-error {
+    max-width: 1200px;
+    margin: 0 auto 1rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.45);
+}
+
+.fad-stats {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.fad-stat-card {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    padding: 0.95rem;
+}
+
+.light-mode .fad-stat-card,
+.light-mode .fad-restaurant-card,
+.light-mode .fad-empty,
+.light-mode .fad-search-box {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(15, 23, 42, 0.12);
+}
+
+.fad-stat-card p {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.fad-stat-card h3 {
+    margin: 0.2rem 0 0;
+    font-size: 1.35rem;
+}
+
+.fad-quick-actions {
+    max-width: 1200px;
+    margin: 1.1rem auto 1.4rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.fad-quick-actions button {
+    border: none;
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    background: #ffd38f;
+    color: #2b1d05;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.fad-restaurants-section {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.fad-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.9rem;
+}
+
+.fad-section-head h2 {
+    margin: 0;
+}
+
+.fad-search-box {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.55rem 0.7rem;
+    border-radius: 10px;
+    min-width: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.fad-search-box input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: #f4f7fb;
+    outline: none;
+}
+
+.light-mode .fad-search-box input {
+    color: #111827;
+}
+
+.fad-restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+}
+
+.fad-restaurant-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 14px;
+    padding: 0.9rem;
+}
+
+.fad-restaurant-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fad-restaurant-top h3 {
+    margin: 0;
+    font-size: 1.03rem;
+}
+
+.fad-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-weight: 600;
+}
+
+.fad-row {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0.45rem 0;
+    opacity: 0.92;
+}
+
+.fad-card-actions {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.6rem;
+}
+
+.fad-card-actions button {
+    flex: 1;
+    border: none;
+    border-radius: 10px;
+    padding: 0.52rem 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.fad-card-actions button.danger {
+    background: #fca5a5;
+    color: #430b0b;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.fad-empty {
+    padding: 1.1rem;
+    border-radius: 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.fad-loading {
+    min-height: 65vh;
+    display: grid;
+    place-items: center;
+}
+
+.fad-spinner {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #ffd38f;
+    animation: fadSpin 0.9s linear infinite;
+    margin: 0 auto 0.7rem;
+}
+
+@keyframes fadSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 1024px) {
+    .fad-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fad-restaurants-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .fad-page {
+        padding: 6.6rem 0.9rem 2rem;
+    }
+
+    .fad-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fad-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .fad-section-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fad-search-box {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .fad-restaurants-grid {
+        grid-template-columns: 1fr;
+    }
+}

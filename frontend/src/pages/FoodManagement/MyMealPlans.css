@@ -1,0 +1,585 @@
+/* ===========================
+   MY MEAL PLANS STYLES
+   =========================== */
+
+.mmp-page {
+    padding-top: 100px;
+    min-height: 100vh;
+    background: #060a1f;
+    color: #fff;
+    padding-bottom: 6rem;
+}
+
+.mmp-header {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.mmp-header-icon {
+    color: #fb923c;
+    flex-shrink: 0;
+}
+
+.mmp-header h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 0.25rem;
+}
+
+.mmp-header p {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.95rem;
+}
+
+.mmp-nav-tabs {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 1rem;
+    padding: 0 2rem 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    flex-wrap: wrap;
+}
+
+.mmp-nav-tab {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.mmp-nav-tab.active {
+    color: #fb923c;
+    border-bottom-color: #fb923c;
+}
+
+.mmp-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.mmp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.mmp-card {
+    background: rgba(13, 18, 43, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 1rem;
+    backdrop-filter: blur(20px);
+}
+
+.mmp-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+}
+
+.mmp-top h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.mmp-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.mmp-status.active {
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.mmp-status.paused {
+    color: #f59e0b;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.mmp-status.cancelled {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.mmp-price {
+    margin-top: 0.8rem;
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #fb923c;
+    font-family: 'Outfit', sans-serif;
+}
+
+.mmp-plan-type {
+    margin: 0.15rem 0 0.8rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.85rem;
+}
+
+.mmp-info-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.48rem;
+}
+
+.mmp-info-list li {
+    display: flex;
+    gap: 0.48rem;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.85rem;
+}
+
+.mmp-meta {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.52);
+}
+
+.mmp-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.2rem;
+}
+
+.mmp-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 0.8rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+}
+
+.mmp-btn-edit {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.mmp-btn-edit:hover {
+    background: rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.5);
+    transform: translateY(-2px);
+}
+
+.mmp-btn-delete {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.mmp-btn-delete:hover {
+    background: rgba(239, 68, 68, 0.25);
+    border-color: rgba(239, 68, 68, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Modal Styles */
+.mmp-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.mmp-modal {
+    background: rgba(13, 18, 43, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.mmp-modal-small {
+    max-width: 400px;
+}
+
+.mmp-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mmp-modal-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+}
+
+.mmp-modal-close {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mmp-modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.mmp-modal-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.mmp-modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mmp-modal-field label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mmp-modal-field label span {
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 400;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.mmp-modal-input {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.mmp-modal-input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fb923c;
+    box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.1);
+}
+
+.mmp-modal-input option {
+    background: #0f172a;
+    color: #fff;
+}
+
+.mmp-modal-textarea {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.3s ease;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.mmp-modal-textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fb923c;
+    box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.1);
+}
+
+.mmp-modal-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.mmp-modal-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(251, 146, 60, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(251, 146, 60, 0.2);
+}
+
+.mmp-delete-warning {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+    padding: 1rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 10px;
+}
+
+.mmp-modal-footer {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mmp-modal-btn {
+    flex: 1;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+}
+
+.mmp-modal-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.mmp-modal-btn-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.mmp-modal-btn-cancel:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+}
+
+.mmp-modal-btn-save {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+    border: none;
+}
+
+.mmp-modal-btn-save:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.mmp-modal-btn-delete {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff;
+    border: none;
+}
+
+.mmp-modal-btn-delete:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+.mmp-empty {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+}
+
+.mmp-empty-icon {
+    color: rgba(255, 255, 255, 0.15);
+    margin-bottom: 1.2rem;
+}
+
+.mmp-browse-btn {
+    margin-top: 1.1rem;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.mmp-loading,
+.mmp-error {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.mmp-spinner {
+    width: 34px;
+    height: 34px;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #fb923c;
+    border-radius: 50%;
+    margin: 0 auto 0.8rem;
+    animation: mmpSpin 0.8s linear infinite;
+}
+
+@keyframes mmpSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.light-mode .mmp-page {
+    background: #f3f5fa;
+    color: #0f172a;
+}
+
+.light-mode .mmp-card,
+.light-mode .mmp-empty {
+    background: #fff;
+    border-color: rgba(148, 163, 184, 0.3);
+}
+
+.light-mode .mmp-plan-type,
+.light-mode .mmp-header p,
+.light-mode .mmp-meta,
+.light-mode .mmp-info-list li {
+    color: #334155;
+}
+
+.light-mode .mmp-nav-tab {
+    color: #475569;
+}
+
+.light-mode .mmp-modal {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .mmp-modal-header,
+.light-mode .mmp-modal-footer {
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.light-mode .mmp-modal-header h2 {
+    color: #0f172a;
+}
+
+.light-mode .mmp-modal-field label {
+    color: #1e293b;
+}
+
+.light-mode .mmp-modal-field label span {
+    color: #64748b;
+}
+
+.light-mode .mmp-modal-close {
+    color: #64748b;
+}
+
+.light-mode .mmp-modal-close:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: #0f172a;
+}
+
+.light-mode .mmp-modal-input {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+
+.light-mode .mmp-modal-input:focus {
+    background: #f8fafc;
+    border-color: #fb923c;
+    box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.1);
+}
+
+.light-mode .mmp-modal-input option {
+    background: #fff;
+    color: #0f172a;
+}
+
+.light-mode .mmp-modal-textarea {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+
+.light-mode .mmp-modal-textarea:focus {
+    background: #f8fafc;
+    border-color: #fb923c;
+    box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.1);
+}
+
+.light-mode .mmp-modal-textarea::placeholder {
+    color: #a0aec0;
+}
+
+.light-mode .mmp-modal-detail {
+    background: rgba(251, 146, 60, 0.08);
+    border-color: rgba(251, 146, 60, 0.2);
+    color: #1e293b;
+}
+
+.light-mode .mmp-delete-warning {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.2);
+    color: #1e293b;
+}
+
+.light-mode .mmp-modal-btn-cancel {
+    background: #f1f5f9;
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.light-mode .mmp-modal-btn-cancel:hover:not(:disabled) {
+    background: #e2e8f0;
+    border-color: rgba(0, 0, 0, 0.15);
+}

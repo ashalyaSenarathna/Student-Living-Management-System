@@ -27,7 +27,7 @@ const registerUser = async (req, res) => {
             email,
             password: hashedPassword,
             role: role || 'USER',
-            isApproved: (role === 'PROVIDER' || role === 'HOSTEL_OWNER') ? false : true
+            isApproved: true
         });
 
         if (user) {
@@ -59,11 +59,6 @@ const loginUser = async (req, res) => {
         const user = await User.findOne({ username }).select('+password');
 
         if (user && (await bcrypt.compare(password, user.password))) {
-            // Check if provider or hostel owner is approved
-            if ((user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER') && !user.isApproved) {
-                return res.status(403).json({ message: 'Your account is pending admin approval. Please wait for the administrator to approve your account.' });
-            }
-
             res.json({
                 _id: user.id,
                 name: user.name,
@@ -101,12 +96,12 @@ const approveProvider = async (req, res) => {
         const { isApproved } = req.body;
         const user = await User.findById(req.params.id);
 
-        if (user && (user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER')) {
+        if (user && (user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'FOOD_PROVIDER')) {
             user.isApproved = isApproved;
             await user.save();
             res.json({ message: `Provider ${isApproved ? 'approved' : 'rejected'}` });
         } else {
-            res.status(404).json({ message: 'Laundry or Hostel provider not found' });
+            res.status(404).json({ message: 'Provider not found' });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });

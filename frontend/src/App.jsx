@@ -14,6 +14,14 @@ import HostelManagement from './pages/HostelManagement/HostelManagement';
 import HostelDetails from './pages/HostelManagement/HostelDetails';
 import OwnerDashboard from './pages/HostelManagement/OwnerDashboard';
 import HostelAdmin from './pages/HostelManagement/HostelAdmin';
+import FoodList from './pages/FoodManagement/FoodList';
+import FoodDetails from './pages/FoodManagement/FoodDetails';
+import AddFood from './pages/FoodManagement/AddFood';
+import ManageFoodOrders from './pages/FoodManagement/ManageFoodOrders';
+import ManageMealPlans from './pages/FoodManagement/ManageMealPlans';
+import MyFoodOrders from './pages/FoodManagement/MyFoodOrders';
+import MyMealPlans from './pages/FoodManagement/MyMealPlans';
+import FoodAdminDashboard from './pages/FoodManagement/FoodAdminDashboard';
 import './App.css';
 import './light-mode.css'; // Global light mode overrides
 
@@ -74,6 +82,43 @@ function App() {
                     </ProtectedRoute>
                 } />
 
+                {/* Food Management Routes */}
+                <Route path="/food" element={
+                    <ProtectedRoute allowedRoles={['USER', 'FOOD_PROVIDER', 'ADMIN']}>
+                        <FoodList />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/:id" element={
+                    <ProtectedRoute allowedRoles={['USER', 'FOOD_PROVIDER', 'ADMIN']}>
+                        <FoodDetails />
+                    </ProtectedRoute>
+                } />
+                <Route path="/add-food" element={
+                    <ProtectedRoute allowedRoles={['FOOD_PROVIDER', 'ADMIN']}>
+                        <AddFood />
+                    </ProtectedRoute>
+                } />
+                <Route path="/manage-food-orders" element={
+                    <ProtectedRoute allowedRoles={['FOOD_PROVIDER', 'ADMIN']}>
+                        <ManageFoodOrders />
+                    </ProtectedRoute>
+                } />
+                <Route path="/manage-meal-plans" element={
+                    <ProtectedRoute allowedRoles={['FOOD_PROVIDER', 'ADMIN']}>
+                        <ManageMealPlans />
+                    </ProtectedRoute>
+                } />
+                <Route path="/my-food-orders" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                        <MyFoodOrders />
+                    </ProtectedRoute>
+                } />
+                <Route path="/my-meal-plans" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                        <MyMealPlans />
+                    </ProtectedRoute>
+                } />
+
                 {/* Hostel Owner Dashboard */}
                 <Route path="/hostel-owner" element={
                     <ProtectedRoute allowedRoles={['HOSTEL_OWNER', 'ADMIN']}>
@@ -85,6 +130,11 @@ function App() {
                 <Route path="/admin" element={
                     <ProtectedRoute allowedRoles={['ADMIN']}>
                         <AdminDashboard />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food-admin" element={
+                    <ProtectedRoute allowedRoles={['ADMIN']}>
+                        <FoodAdminDashboard />
                     </ProtectedRoute>
                 } />
                 <Route path="/hostel-admin" element={

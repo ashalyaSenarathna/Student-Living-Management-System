@@ -1,0 +1,1067 @@
+/* ===========================
+   FOOD DETAILS STYLES
+   =========================== */
+
+.fd-page {
+    padding-top: 80px;
+    min-height: 100vh;
+    background: #060a1f;
+    color: #fff;
+}
+
+/* Light-mode overrides for details page */
+.light-mode .fd-page {
+    background: #f3f5fa;
+    color: #0f172a;
+}
+
+.light-mode .fd-hero,
+.light-mode .fd-menu-item,
+.light-mode .fd-cart-card,
+.light-mode .fd-add-review,
+.light-mode .fd-review-card,
+.light-mode .fd-cart-empty,
+.light-mode .fd-category-bar,
+.light-mode .fd-card {
+    background: #ffffff;
+    border-color: rgba(148, 163, 184, 0.25);
+    color: #0f172a;
+}
+
+.light-mode .fd-back-btn,
+.light-mode .fd-meta-pill,
+.light-mode .fd-cat-btn,
+.light-mode .fd-item-cat,
+.light-mode .fd-qty-control,
+.light-mode .fd-review-textarea,
+.light-mode .fd-review-submit {
+    background: rgba(15, 23, 42, 0.05);
+    border-color: rgba(15, 23, 42, 0.12);
+    color: #0f172a;
+}
+
+.light-mode .fd-back-btn:hover,
+.light-mode .fd-cat-btn.active {
+    background: rgba(249, 115, 22, 0.12);
+    color: #0f172a;
+}
+
+.light-mode .fd-review-textarea,
+.light-mode .fd-item-desc,
+.light-mode .fd-item-price,
+.light-mode .fd-veg-badge,
+.light-mode .fd-qty-control span,
+.light-mode .fd-review-meta h4,
+.light-mode .fd-review-comment {
+    color: #0f172a;
+}
+
+.light-mode .fd-add-btn,
+.light-mode .fd-review-submit {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #ffffff;
+}
+
+/* Hero */
+.fd-hero {
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 2rem 4rem;
+}
+
+.fd-hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.fd-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    margin-bottom: 2rem;
+}
+
+.fd-back-btn:hover {
+    background: rgba(249, 115, 22, 0.15);
+    border-color: rgba(249, 115, 22, 0.3);
+    color: #fb923c;
+}
+
+.fd-hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 1.25rem;
+}
+
+.fd-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.fd-meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.fd-cuisine-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.fd-cuisine-chip {
+    background: rgba(249, 115, 22, 0.12);
+    color: #fb923c;
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    padding: 0.35rem 0.9rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Layout */
+.fd-layout {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Main */
+
+/* Category Bar */
+.fd-category-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.fd-cat-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0.55rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.fd-cat-btn:hover {
+    border-color: rgba(249, 115, 22, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.fd-cat-btn.active {
+    background: rgba(249, 115, 22, 0.1);
+    border-color: rgba(249, 115, 22, 0.4);
+    color: #fb923c;
+}
+
+.fd-section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.fd-item-count {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 500;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Menu List */
+.fd-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 4rem;
+}
+
+.fd-menu-item {
+    background: rgba(13, 18, 43, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: all 0.3s;
+    backdrop-filter: blur(10px);
+}
+
+.fd-menu-item:hover {
+    border-color: rgba(249, 115, 22, 0.2);
+    background: rgba(13, 18, 43, 0.8);
+    transform: translateX(4px);
+}
+
+.fd-item-image {
+    position: relative;
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.fd-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.fd-veg-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 0.6rem;
+    background: rgba(16, 185, 129, 0.9);
+    padding: 0.2rem 0.4rem;
+    border-radius: 6px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.fd-item-details {
+    flex: 1;
+}
+
+.fd-item-details h3 {
+
+.fd-view-only-pill {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(148, 163, 184, 0.45);
+    background: rgba(148, 163, 184, 0.14);
+    color: #cbd5e1;
+    border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.fd-item-desc {
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.45);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.fd-item-cat {
+    display: inline-block;
+    font-size: 0.73rem;
+    background: rgba(108, 99, 255, 0.08);
+    color: rgba(139, 92, 246, 0.8);
+    padding: 0.25rem 0.65rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.fd-item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.fd-item-price {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+.fd-add-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border: none;
+    padding: 0.55rem 1.2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.fd-add-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3);
+}
+
+.fd-qty-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    border-radius: 12px;
+    padding: 0.3rem 0.5rem;
+}
+
+.fd-qty-control button {
+    background: transparent;
+    border: none;
+    color: #fb923c;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.fd-qty-control button:hover {
+    background: rgba(249, 115, 22, 0.15);
+}
+
+.fd-qty-control span {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+/* Reviews */
+.fd-reviews-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 3rem;
+}
+
+/* Meal Plan */
+.fd-meal-plan-section {
+    margin-top: 3rem;
+    background: rgba(13, 18, 43, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 1.4rem;
+}
+
+.fd-meal-plan-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.fd-meal-plan-header p {
+    margin: 0.45rem 0 1.2rem;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 0.92rem;
+}
+
+.fd-meal-plan-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fd-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.fd-form-grid label,
+.fd-notes-label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+}
+
+.fd-form-grid input,
+.fd-form-grid select,
+.fd-notes-label textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 0.62rem 0.72rem;
+    color: #fff;
+    font-size: 0.9rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.fd-form-grid input:focus,
+.fd-form-grid select:focus,
+.fd-notes-label textarea:focus {
+    outline: none;
+    border-color: rgba(249, 115, 22, 0.55);
+    box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+}
+
+.fd-notes-label textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.fd-plan-grid {
+    margin-top: 0.2rem;
+}
+
+.fd-meals-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.fd-meals-row > span {
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.fd-meals-toggles {
+    display: flex;
+    gap: 0.55rem;
+}
+
+.fd-meal-toggle {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.75);
+    border-radius: 999px;
+    padding: 0.42rem 0.95rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.fd-meal-toggle.active {
+    background: rgba(249, 115, 22, 0.2);
+    border-color: rgba(249, 115, 22, 0.65);
+    color: #fb923c;
+}
+
+.fd-plan-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    background: rgba(249, 115, 22, 0.07);
+    border-radius: 14px;
+    padding: 0.8rem 0.95rem;
+}
+
+.fd-plan-summary p {
+    margin: 0.3rem 0 0;
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.fd-plan-price {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #fb923c;
+}
+
+.fd-meal-submit-btn {
+    border: none;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border-radius: 12px;
+    font-size: 0.92rem;
+    font-weight: 800;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+}
+
+.fd-meal-submit-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.fd-meal-plan-msg {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #fb923c;
+    font-weight: 600;
+}
+
+.fd-view-plans-btn {
+    border: 1px solid rgba(249, 115, 22, 0.35);
+    background: rgba(249, 115, 22, 0.1);
+    color: #fb923c;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 0.68rem 1rem;
+    cursor: pointer;
+}
+
+.fd-view-plans-btn:hover {
+    background: rgba(249, 115, 22, 0.18);
+}
+
+.light-mode .fd-meal-plan-section {
+    background: #ffffff;
+    border-color: rgba(148, 163, 184, 0.3);
+}
+
+.light-mode .fd-meal-plan-header p,
+.light-mode .fd-plan-summary p,
+.light-mode .fd-form-grid label,
+.light-mode .fd-notes-label,
+.light-mode .fd-meals-row > span {
+    color: #334155;
+}
+
+.light-mode .fd-form-grid input,
+.light-mode .fd-form-grid select,
+.light-mode .fd-notes-label textarea,
+.light-mode .fd-meal-toggle {
+    background: rgba(15, 23, 42, 0.04);
+    border-color: rgba(15, 23, 42, 0.15);
+    color: #0f172a;
+}
+
+.light-mode .fd-plan-summary {
+    background: rgba(249, 115, 22, 0.08);
+}
+
+.light-mode .fd-view-plans-btn {
+    color: #c2410c;
+    background: rgba(249, 115, 22, 0.1);
+}
+
+@media (max-width: 780px) {
+    .fd-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fd-plan-summary {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.fd-reviews-section h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 2rem;
+}
+
+.fd-add-review {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+}
+
+.fd-add-review h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+}
+
+.fd-star-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.fd-star-input label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+.fd-stars {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.fd-star {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: color 0.15s, transform 0.15s;
+}
+
+.fd-star.active { color: #fbbf24; }
+.fd-star:hover { transform: scale(1.2); }
+
+.fd-review-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 1rem 1.25rem;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+.fd-review-textarea:focus {
+    outline: none;
+    border-color: #f97316;
+}
+
+.fd-review-submit {
+    margin-top: 1rem;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border: none;
+    padding: 0.85rem 2rem;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: all 0.2s;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.fd-review-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
+}
+
+.fd-review-msg {
+    margin-top: 0.75rem;
+    color: #10b981;
+    font-size: 0.9rem;
+}
+
+.fd-reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fd-no-reviews {
+    color: rgba(255, 255, 255, 0.35);
+    text-align: center;
+    padding: 2rem;
+}
+
+.fd-review-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.25rem;
+}
+
+.fd-review-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.fd-user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.fd-review-meta h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+.fd-review-stars {
+    color: #fbbf24;
+    font-size: 0.9rem;
+}
+
+.fd-review-date {
+    margin-left: auto;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.82rem;
+}
+
+.fd-review-comment {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* Sidebar */
+.fd-sidebar {
+    position: sticky;
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.fd-cart-card {
+    background: rgba(13, 18, 43, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 24px;
+    padding: 1.75rem;
+    backdrop-filter: blur(20px);
+}
+
+.fd-cart-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.fd-cart-header h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    flex: 1;
+}
+
+.fd-cart-badge {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.fd-cart-empty {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.fd-cart-empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.fd-cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.fd-cart-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.fd-cart-item:last-child {
+    border-bottom: none;
+}
+
+.fd-cart-item-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fd-cart-item-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.fd-cart-item-price {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #fb923c;
+}
+
+.fd-cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fd-cart-item-qty button {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.fd-cart-item-qty button:hover {
+    background: rgba(249, 115, 22, 0.15);
+    color: #fb923c;
+}
+
+.fd-cart-item-qty span {
+    font-size: 0.88rem;
+    font-weight: 700;
+    min-width: 20px;
+    text-align: center;
+}
+
+.fd-cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+}
+
+.fd-place-order-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border: none;
+    padding: 1.1rem;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Outfit', sans-serif;
+}
+
+.fd-place-order-btn:hover:not(:disabled) {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(249, 115, 22, 0.35);
+}
+
+.fd-place-order-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.fd-order-success {
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.fd-success-check {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.fd-order-success h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.fd-order-success p {
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.fd-view-orders-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: #fff;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.fd-view-orders-btn:hover {
+    transform: scale(1.02);
+}
+
+.fd-order-again-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.75rem;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.fd-order-again-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+/* Info Card */
+.fd-info-card {
+    background: rgba(13, 18, 43, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 24px;
+    padding: 1.75rem;
+    backdrop-filter: blur(20px);
+}
+
+.fd-info-card h3 {
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 1.25rem;
+}
+
+.fd-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.fd-info-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.88rem;
+}
+
+.fd-info-list li span:first-child {
+    color: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+}
+
+.fd-info-list li span:last-child {
+    color: rgba(255, 255, 255, 0.8);
+    text-align: right;
+}
+
+/* Loading & Error */
+.fd-loading {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    background: #060a1f;
+    color: #fff;
+    padding-top: 80px;
+}
+
+.fd-spinner {
+    width: 52px;
+    height: 52px;
+    border: 3px solid rgba(249, 115, 22, 0.15);
+    border-top-color: #f97316;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.fd-loading p {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.fd-error {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #060a1f;
+    color: #fca5a5;
+    font-size: 1.1rem;
+    padding-top: 80px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .fd-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .fd-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 600px) {
+    .fd-menu-item {
+        flex-wrap: wrap;
+    }
+
+    .fd-item-actions {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

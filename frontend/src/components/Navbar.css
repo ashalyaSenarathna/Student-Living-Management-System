@@ -11,6 +11,15 @@
   padding: 2rem 0;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   background: transparent;
+  --nav-link-color: rgba(255, 255, 255, 0.8);
+  --nav-link-active-color: #fff;
+  --mobile-nav-link-color: #fff;
+}
+
+.light-mode .navbar {
+  --nav-link-color: #394160;
+  --nav-link-active-color: #101426;
+  --mobile-nav-link-color: #101426;
 }
 
 .navbar--scrolled {
@@ -62,15 +71,21 @@
 
 .navbar__list {
   display: flex;
-  gap: 3.5rem;
+  gap: 1.8rem;
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.navbar__list li {
+  white-space: nowrap;
 }
 
 .navbar__link {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--nav-link-color);
   font-size: 1.05rem;
   font-weight: 600;
   transition: all 0.3s ease;
@@ -80,7 +95,7 @@
 
 .navbar__link:hover,
 .navbar__link--active {
-  color: #fff;
+  color: var(--nav-link-active-color);
 }
 
 .navbar__link--active::after {
@@ -109,10 +124,15 @@
   width: 100%;
 }
 
+.navbar__menu {
+  max-width: 65%;
+  overflow: hidden;
+}
+
 .navbar__actions {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   z-index: 1001;
 }
 
@@ -327,7 +347,7 @@
 
 .mobile-nav-list a {
   text-decoration: none;
-  color: #fff;
+  color: var(--mobile-nav-link-color);
   font-size: 2.5rem;
   font-weight: 800;
   font-family: 'Outfit', sans-serif;
