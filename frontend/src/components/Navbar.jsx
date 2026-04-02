@@ -7,6 +7,7 @@ const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const [medicalDropdownOpen, setMedicalDropdownOpen] = useState(false);
+    const [foodDropdownOpen, setFoodDropdownOpen] = useState(false);
     const [user, setUser] = useState(null);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
     const location = useLocation();
@@ -24,6 +25,7 @@ const Navbar = () => {
         // Close mobile menu when location changes
         setMenuOpen(false);
         setMedicalDropdownOpen(false);
+        setFoodDropdownOpen(false);
     }, [location.pathname]);
 
     const toggleTheme = () => {
@@ -75,6 +77,20 @@ const Navbar = () => {
         item.roles.includes(user?.role?.toUpperCase())
     );
 
+    const foodPanelItems = [
+        { label: '🍔 Food Hub', path: '/food', roles: ['USER', 'FOOD_PROVIDER', 'ADMIN'] },
+        { label: '📦 My Orders', path: '/food/my-orders', roles: ['USER'] },
+        { label: '🍽️ My Meal Plans', path: '/food/my-plans', roles: ['USER'] },
+        { label: '➕ Add/Manage Food', path: '/food/add', roles: ['FOOD_PROVIDER'] },
+        { label: '📋 Manage Orders', path: '/food/manage-orders', roles: ['FOOD_PROVIDER'] },
+        { label: '📅 Manage Plans', path: '/food/manage-plans', roles: ['FOOD_PROVIDER'] },
+        { label: '🛠️ Food Admin', path: '/food/admin', roles: ['ADMIN'] },
+    ];
+
+    const visibleFoodItems = foodPanelItems.filter(item =>
+        item.roles.includes(user?.role?.toUpperCase())
+    );
+
     return (
         <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
             <div className="navbar__container">
@@ -109,6 +125,32 @@ const Navbar = () => {
                                             to={item.path}
                                             className={`navbar__dropdown-item ${location.pathname === item.path ? 'active' : ''}`}
                                             onClick={() => setMedicalDropdownOpen(false)}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
+                        )}
+
+                        {/* Food Panel Dropdown */}
+                        {visibleFoodItems.length > 0 && (
+                            <li className="navbar__dropdown">
+                                <button
+                                    className={`navbar__link navbar__dropdown-trigger ${location.pathname.startsWith('/food') ? 'navbar__link--active' : ''
+                                        }`}
+                                    onClick={() => setFoodDropdownOpen(!foodDropdownOpen)}
+                                >
+                                    🍔 Food
+                                    <ChevronDown size={16} className={`dropdown-icon ${foodDropdownOpen ? 'open' : ''}`} />
+                                </button>
+                                <div className={`navbar__dropdown-menu ${foodDropdownOpen ? 'open' : ''}`}>
+                                    {visibleFoodItems.map((item) => (
+                                        <Link
+                                            key={item.path}
+                                            to={item.path}
+                                            className={`navbar__dropdown-item ${location.pathname === item.path ? 'active' : ''}`}
+                                            onClick={() => setFoodDropdownOpen(false)}
                                         >
                                             {item.label}
                                         </Link>
@@ -211,6 +253,34 @@ const Navbar = () => {
                                             onClick={() => {
                                                 setMenuOpen(false);
                                                 setMedicalDropdownOpen(false);
+                                            }}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    ))}
+                                </div>
+                            </li>
+                        )}
+
+                        {/* Food Panel Mobile Dropdown */}
+                        {visibleFoodItems.length > 0 && (
+                            <li className="mobile-dropdown">
+                                <button
+                                    className="mobile-dropdown-trigger"
+                                    onClick={() => setFoodDropdownOpen(!foodDropdownOpen)}
+                                >
+                                    🍔 Food Hub
+                                    <ChevronDown size={16} className={`dropdown-icon ${foodDropdownOpen ? 'open' : ''}`} />
+                                </button>
+                                <div className={`mobile-dropdown-menu ${foodDropdownOpen ? 'open' : ''}`}>
+                                    {visibleFoodItems.map((item) => (
+                                        <Link
+                                            key={item.path}
+                                            to={item.path}
+                                            className="mobile-dropdown-item"
+                                            onClick={() => {
+                                                setMenuOpen(false);
+                                                setFoodDropdownOpen(false);
                                             }}
                                         >
                                             {item.label}

@@ -28,6 +28,7 @@ app.use('/api/upload', require('./routes/laundry/UploadRoutes'));
 app.use('/api/bookings', require('./routes/laundry/BookingRoutes'));
 app.use('/api/hostel', require('./routes/hostel/HostelRoutes'));
 app.use('/api/health', require('./routes/health'));
+app.use('/api/food', require('./routes/food/FoodRoutes'));
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the Student Living Management System API' });

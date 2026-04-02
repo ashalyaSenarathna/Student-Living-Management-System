@@ -20,6 +20,17 @@ import MyAppointments from './pages/HealthManagement/MyAppointments';
 import PrescriptionPanel from './pages/HealthManagement/PrescriptionPanel';
 import DoctorPortal from './pages/HealthManagement/DoctorPortal';
 import PharmacyAdmin from './pages/HealthManagement/PharmacyAdmin';
+
+// Food Management Imports
+import FoodList from './pages/FoodManagement/FoodList';
+import FoodDetails from './pages/FoodManagement/FoodDetails';
+import AddFood from './pages/FoodManagement/AddFood';
+import ManageFoodOrders from './pages/FoodManagement/ManageFoodOrders';
+import ManageMealPlans from './pages/FoodManagement/ManageMealPlans';
+import MyFoodOrders from './pages/FoodManagement/MyFoodOrders';
+import MyMealPlans from './pages/FoodManagement/MyMealPlans';
+import FoodAdminDashboard from './pages/FoodManagement/FoodAdminDashboard';
+
 import './App.css';
 import './light-mode.css'; // Global light mode overrides
 
@@ -128,6 +139,48 @@ function App() {
                 <Route path="/health/pharmacy-admin" element={
                     <ProtectedRoute allowedRoles={['ADMIN']}>
                         <PharmacyAdmin />
+                    </ProtectedRoute>
+                } />
+
+                {/* Food Management Routes */}
+                <Route path="/food" element={
+                    <ProtectedRoute allowedRoles={['USER', 'FOOD_PROVIDER', 'ADMIN']}>
+                        <FoodList />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/add" element={
+                    <ProtectedRoute allowedRoles={['FOOD_PROVIDER', 'ADMIN']}>
+                        <AddFood />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/manage-orders" element={
+                    <ProtectedRoute allowedRoles={['FOOD_PROVIDER', 'ADMIN']}>
+                        <ManageFoodOrders />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/manage-plans" element={
+                    <ProtectedRoute allowedRoles={['FOOD_PROVIDER', 'ADMIN']}>
+                        <ManageMealPlans />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/my-orders" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                        <MyFoodOrders />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/my-plans" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                        <MyMealPlans />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/admin" element={
+                    <ProtectedRoute allowedRoles={['ADMIN']}>
+                        <FoodAdminDashboard />
+                    </ProtectedRoute>
+                } />
+                <Route path="/food/:id" element={
+                    <ProtectedRoute allowedRoles={['USER', 'FOOD_PROVIDER', 'ADMIN']}>
+                        <FoodDetails />
                     </ProtectedRoute>
                 } />
             </Routes>
