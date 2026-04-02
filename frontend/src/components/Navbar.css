@@ -48,9 +48,11 @@
   min-width: fit-content;
 }
 
-.navbar__logo-icon {
-  font-size: 2.2rem;
-  filter: drop-shadow(0 0 10px rgba(108, 99, 255, 0.5));
+.navbar__logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(108, 99, 255, 0.3));
 }
 
 .navbar__logo-text {
@@ -70,8 +72,8 @@
 }
 
 @media (max-width: 768px) {
-  .navbar__logo-icon {
-    font-size: 1.8rem;
+  .navbar__logo-img {
+    height: 35px;
   }
 
   .navbar__logo-text {

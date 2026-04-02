@@ -27,8 +27,10 @@
     margin-bottom: 1rem;
 }
 
-.footer__logo-icon {
-    font-size: 1.5rem;
+.footer__logo-img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
 }
 
 .footer__accent {
