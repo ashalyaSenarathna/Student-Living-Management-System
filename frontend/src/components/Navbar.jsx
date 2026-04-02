@@ -36,6 +36,27 @@ const Navbar = () => {
         setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
     };
 
+    const toggleLaundryDropdown = () => {
+        setLaundryDropdownOpen(!laundryDropdownOpen);
+        setMedicalDropdownOpen(false);
+        setFoodDropdownOpen(false);
+        setAdminDropdownOpen(false);
+    };
+
+    const toggleMedicalDropdown = () => {
+        setMedicalDropdownOpen(!medicalDropdownOpen);
+        setLaundryDropdownOpen(false);
+        setFoodDropdownOpen(false);
+        setAdminDropdownOpen(false);
+    };
+
+    const toggleFoodDropdown = () => {
+        setFoodDropdownOpen(!foodDropdownOpen);
+        setLaundryDropdownOpen(false);
+        setMedicalDropdownOpen(false);
+        setAdminDropdownOpen(false);
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
@@ -122,7 +143,7 @@ const Navbar = () => {
                                 <button
                                     className={`navbar__link navbar__dropdown-trigger ${['/laundry', '/my-bookings', '/add-laundry', '/manage-bookings'].includes(location.pathname) ? 'navbar__link--active' : ''
                                         }`}
-                                    onClick={() => setLaundryDropdownOpen(!laundryDropdownOpen)}
+                                    onClick={toggleLaundryDropdown}
                                 >
                                     🧺 Laundry
                                     <ChevronDown size={16} className={`dropdown-icon ${laundryDropdownOpen ? 'open' : ''}`} />
@@ -149,7 +170,7 @@ const Navbar = () => {
                                 <button
                                     className={`navbar__link navbar__dropdown-trigger ${location.pathname.startsWith('/health') ? 'navbar__link--active' : ''
                                         }`}
-                                    onClick={() => setMedicalDropdownOpen(!medicalDropdownOpen)}
+                                    onClick={toggleMedicalDropdown}
                                 >
                                     🏥 Medical Panel
                                     <ChevronDown size={16} className={`dropdown-icon ${medicalDropdownOpen ? 'open' : ''}`} />
@@ -175,7 +196,7 @@ const Navbar = () => {
                                 <button
                                     className={`navbar__link navbar__dropdown-trigger ${location.pathname.startsWith('/food') ? 'navbar__link--active' : ''
                                         }`}
-                                    onClick={() => setFoodDropdownOpen(!foodDropdownOpen)}
+                                    onClick={toggleFoodDropdown}
                                 >
                                     🍔 Food
                                     <ChevronDown size={16} className={`dropdown-icon ${foodDropdownOpen ? 'open' : ''}`} />
@@ -250,13 +271,13 @@ const Navbar = () => {
             >
                 <div className="mobile-menu-content" onClick={(e) => e.stopPropagation()}>
                     <ul className="mobile-nav-list">
-                        
+
                         {/* Laundry Panel Mobile Dropdown */}
                         {visibleLaundryItems.length > 0 && (
                             <li className="mobile-dropdown">
                                 <button
                                     className="mobile-dropdown-trigger"
-                                    onClick={() => setLaundryDropdownOpen(!laundryDropdownOpen)}
+                                    onClick={toggleLaundryDropdown}
                                 >
                                     🧺 Laundry
                                     <ChevronDown size={16} className={`dropdown-icon ${laundryDropdownOpen ? 'open' : ''}`} />
@@ -286,7 +307,7 @@ const Navbar = () => {
                             <li className="mobile-dropdown">
                                 <button
                                     className="mobile-dropdown-trigger"
-                                    onClick={() => setMedicalDropdownOpen(!medicalDropdownOpen)}
+                                    onClick={toggleMedicalDropdown}
                                 >
                                     🏥 Medical Panel
                                     <ChevronDown size={16} className={`dropdown-icon ${medicalDropdownOpen ? 'open' : ''}`} />
@@ -314,7 +335,7 @@ const Navbar = () => {
                             <li className="mobile-dropdown">
                                 <button
                                     className="mobile-dropdown-trigger"
-                                    onClick={() => setFoodDropdownOpen(!foodDropdownOpen)}
+                                    onClick={toggleFoodDropdown}
                                 >
                                     🍔 Food Hub
                                     <ChevronDown size={16} className={`dropdown-icon ${foodDropdownOpen ? 'open' : ''}`} />

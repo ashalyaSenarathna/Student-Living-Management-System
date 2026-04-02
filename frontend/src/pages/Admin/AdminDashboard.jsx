@@ -116,14 +116,14 @@ const AdminDashboard = () => {
 
     const filteredUsers = React.useMemo(() => {
         const query = searchQuery.toLowerCase().trim();
-        
+
         return users.filter(user => {
             // Search only by Display Name (User column)
             const matchesSearch = user.name.toLowerCase().startsWith(query);
-            
+
             // Respect the active category filter (All, Users, Providers, etc.)
             const matchesFilter = activeFilter === 'ALL' || user.role.toUpperCase() === activeFilter;
-            
+
             return matchesSearch && matchesFilter;
         });
     }, [users, searchQuery, activeFilter]);
@@ -328,7 +328,7 @@ const AdminDashboard = () => {
                                         filter === 'PROVIDER' ? 'Laundry Providers' :
                                             filter === 'HOSTEL_OWNER' ? 'Hostel Providers' :
                                                 filter === 'FOOD_PROVIDER' ? 'Food Providers' :
-                                                filter.charAt(0) + filter.slice(1).toLowerCase() + 's'}
+                                                    filter.charAt(0) + filter.slice(1).toLowerCase() + 's'}
                                 </button>
                             ))}
                         </div>
@@ -374,7 +374,7 @@ const AdminDashboard = () => {
                                                     {user.role === 'PROVIDER' ? 'Laundry Provider' :
                                                         user.role === 'HOSTEL_OWNER' ? 'Hostel Provider' :
                                                             user.role === 'FOOD_PROVIDER' ? 'Food Provider' :
-                                                            user.role}
+                                                                user.role}
                                                 </span>
                                             </td>
                                             <td>
@@ -416,10 +416,10 @@ const AdminDashboard = () => {
                                 {filteredUsers.length === 0 && (
                                     <tr>
                                         <td colSpan="6" style={{ textAlign: 'center', padding: '100px 0' }}>
-                                            <div style={{ 
-                                                display: 'flex', 
-                                                flexDirection: 'column', 
-                                                alignItems: 'center', 
+                                            <div style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
                                                 gap: '15px',
                                                 color: '#ef4444' // Red color for 'No results' as per user request to show it's 'wrong'
                                             }}>
