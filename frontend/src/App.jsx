@@ -14,6 +14,12 @@ import HostelManagement from './pages/HostelManagement/HostelManagement';
 import HostelDetails from './pages/HostelManagement/HostelDetails';
 import OwnerDashboard from './pages/HostelManagement/OwnerDashboard';
 import HostelAdmin from './pages/HostelManagement/HostelAdmin';
+import StudentMedicalPanel from './pages/HealthManagement/StudentMedicalPanel';
+import AppointmentBooking from './pages/HealthManagement/AppointmentBooking';
+import MyAppointments from './pages/HealthManagement/MyAppointments';
+import PrescriptionPanel from './pages/HealthManagement/PrescriptionPanel';
+import DoctorPortal from './pages/HealthManagement/DoctorPortal';
+import PharmacyAdmin from './pages/HealthManagement/PharmacyAdmin';
 import './App.css';
 import './light-mode.css'; // Global light mode overrides
 
@@ -90,6 +96,38 @@ function App() {
                 <Route path="/hostel-admin" element={
                     <ProtectedRoute allowedRoles={['ADMIN']}>
                         <HostelAdmin />
+                    </ProtectedRoute>
+                } />
+
+                {/* Health Management Routes */}
+                <Route path="/health/medical-panel" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN', 'DOCTOR']}>
+                        <StudentMedicalPanel />
+                    </ProtectedRoute>
+                } />
+                <Route path="/health/appointment-booking" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                        <AppointmentBooking />
+                    </ProtectedRoute>
+                } />
+                <Route path="/health/my-appointments" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                        <MyAppointments />
+                    </ProtectedRoute>
+                } />
+                <Route path="/health/prescriptions" element={
+                    <ProtectedRoute allowedRoles={['USER', 'ADMIN']}>
+                        <PrescriptionPanel />
+                    </ProtectedRoute>
+                } />
+                <Route path="/health/doctor-portal" element={
+                    <ProtectedRoute allowedRoles={['DOCTOR', 'ADMIN']}>
+                        <DoctorPortal />
+                    </ProtectedRoute>
+                } />
+                <Route path="/health/pharmacy-admin" element={
+                    <ProtectedRoute allowedRoles={['ADMIN']}>
+                        <PharmacyAdmin />
                     </ProtectedRoute>
                 } />
             </Routes>

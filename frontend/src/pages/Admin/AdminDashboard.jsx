@@ -15,7 +15,8 @@ import {
     Flag,
     CheckCircle2,
     Clock,
-    Trash2
+    Trash2,
+    Stethoscope
 } from 'lucide-react';
 import './AdminDashboard.css';
 
@@ -248,6 +249,21 @@ const AdminDashboard = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.25 }}
                     >
+                        <div className="stat-icon" style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444' }}>
+                            <Stethoscope size={24} />
+                        </div>
+                        <div className="stat-info">
+                            <span className="stat-label">Doctors</span>
+                            <span className="stat-value">{users.filter(u => u.role === 'DOCTOR').length}</span>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        className="stat-card"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                    >
                         <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
                             <ShieldAlert size={24} />
                         </div>
@@ -272,7 +288,7 @@ const AdminDashboard = () => {
                         </div>
 
                         <div className="table-filters">
-                            {['ALL', 'USER', 'PROVIDER', 'HOSTEL_OWNER', 'ADMIN'].map(filter => (
+                            {['ALL', 'USER', 'PROVIDER', 'DOCTOR', 'HOSTEL_OWNER', 'ADMIN'].map(filter => (
                                 <button
                                     key={filter}
                                     className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
@@ -330,7 +346,7 @@ const AdminDashboard = () => {
                                                 </span>
                                             </td>
                                             <td>
-                                                {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER') ? (
+                                                {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR') ? (
                                                     <div className="admin-status-badge">
                                                         <span className={`admin-status-dot ${user.isApproved ? 'approved' : 'pending'}`}></span>
                                                         {user.isApproved ? 'Approved' : 'Pending'}
@@ -344,7 +360,7 @@ const AdminDashboard = () => {
                                             </td>
                                             <td className="actions-cell">
                                                 <div className="actions-stack">
-                                                    {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER') && (
+                                                    {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR') && (
                                                         <button
                                                             className={`action-btn ${user.isApproved ? 'btn-reject' : 'btn-approve'}`}
                                                             onClick={() => handleApprove(user._id, !user.isApproved)}

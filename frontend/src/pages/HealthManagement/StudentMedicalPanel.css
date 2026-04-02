@@ -1,0 +1,731 @@
+.medical-panel-page {
+    --medical-bg: linear-gradient(180deg, #071225 0%, #0c1833 52%, #091121 100%);
+    --medical-surface: rgba(10, 21, 43, 0.86);
+    --medical-surface-strong: rgba(8, 17, 35, 0.95);
+    --medical-border: rgba(158, 177, 255, 0.16);
+    --medical-border-strong: rgba(125, 211, 252, 0.32);
+    --medical-text: #eff6ff;
+    --medical-muted: #9fb3cc;
+    --medical-heading: #f8fbff;
+    --medical-accent: #60a5fa;
+    --medical-accent-strong: #2563eb;
+    --medical-accent-soft: rgba(96, 165, 250, 0.16);
+    --medical-success: #34d399;
+    --medical-warning: #fbbf24;
+    --medical-danger: #fb7185;
+    --medical-shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+    min-height: 100vh;
+    padding: 104px 24px 48px;
+    background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.16), transparent 24%),
+        var(--medical-bg);
+    color: var(--medical-text);
+}
+
+.medical-panel-shell {
+    max-width: 1380px;
+    margin: 0 auto;
+    display: grid;
+    gap: 24px;
+}
+
+.medical-hero {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 32px;
+    border-radius: 28px;
+    background:
+        linear-gradient(135deg, rgba(30, 64, 175, 0.22), rgba(8, 47, 73, 0.1)),
+        var(--medical-surface);
+    border: 1px solid var(--medical-border);
+    box-shadow: var(--medical-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.medical-hero::after {
+    content: '';
+    position: absolute;
+    inset: auto -140px -140px auto;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(96, 165, 250, 0.22), transparent 68%);
+    pointer-events: none;
+}
+
+.medical-hero-copy {
+    max-width: 720px;
+    display: grid;
+    gap: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.medical-eyebrow,
+.medical-section-kicker {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 7px 12px;
+    border-radius: 999px;
+    color: #dbeafe;
+    background: rgba(96, 165, 250, 0.12);
+    border: 1px solid rgba(147, 197, 253, 0.2);
+}
+
+.medical-hero h1,
+.medical-section-heading h2 {
+    margin: 0;
+    color: var(--medical-heading);
+    line-height: 1.05;
+}
+
+.medical-hero h1 {
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+}
+
+.medical-hero p,
+.medical-section-heading p,
+.medical-empty-state p,
+.medicine-main span,
+.stock-cell small,
+.action-note,
+.medical-cart-item-main span,
+.medical-upload-copy p {
+    margin: 0;
+    color: var(--medical-muted);
+}
+
+.medical-hero-actions {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.medical-stat-card,
+.medical-cart-trigger {
+    min-width: 142px;
+    padding: 18px 20px;
+    border-radius: 22px;
+    background: rgba(6, 15, 31, 0.52);
+    border: 1px solid var(--medical-border);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.medical-stat-card {
+    display: grid;
+    gap: 8px;
+}
+
+.medical-stat-card strong,
+.medical-cart-trigger strong {
+    font-size: 1.45rem;
+    color: #ffffff;
+}
+
+.medical-stat-label {
+    font-size: 0.82rem;
+    color: var(--medical-muted);
+}
+
+.medical-cart-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(96, 165, 250, 0.22);
+    color: #ffffff;
+    background: linear-gradient(135deg, #2563eb, #0ea5e9);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.medical-cart-trigger:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.28);
+}
+
+.medical-alert {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    border: 1px solid;
+}
+
+.medical-alert-error {
+    background: rgba(127, 29, 29, 0.25);
+    border-color: rgba(251, 113, 133, 0.4);
+    color: #ffe4e6;
+}
+
+.medical-toolbar,
+.medical-content-card,
+.medical-checkout-card,
+.medical-upload-card,
+.medical-cart-modal {
+    background: var(--medical-surface);
+    border: 1px solid var(--medical-border);
+    box-shadow: var(--medical-shadow);
+}
+
+.medical-toolbar,
+.medical-content-card {
+    border-radius: 24px;
+    padding: 24px;
+}
+
+.medical-toolbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.medical-search {
+    min-width: min(100%, 460px);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border-radius: 16px;
+    background: rgba(2, 6, 23, 0.34);
+    border: 1px solid var(--medical-border);
+}
+
+.medical-search input,
+.medical-qty-input,
+.medical-address-input,
+.medical-cart-item-controls input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--medical-text);
+    font: inherit;
+}
+
+.medical-search input::placeholder,
+.medical-address-input::placeholder {
+    color: #7890ad;
+}
+
+.medical-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.medical-filter-pill {
+    padding: 11px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--medical-border);
+    background: rgba(2, 6, 23, 0.28);
+    color: var(--medical-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.medical-filter-pill.active,
+.medical-filter-pill:hover {
+    color: #ffffff;
+    background: var(--medical-accent-soft);
+    border-color: var(--medical-border-strong);
+}
+
+.medical-section-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.medical-table-wrapper {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(2, 6, 23, 0.22);
+}
+
+.medical-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 980px;
+}
+
+.medical-table th,
+.medical-table td {
+    padding: 18px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    vertical-align: middle;
+}
+
+.medical-table th {
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #c7d2fe;
+    background: rgba(15, 23, 42, 0.62);
+}
+
+.medical-table tbody tr:hover {
+    background: rgba(96, 165, 250, 0.06);
+}
+
+.medicine-main {
+    display: grid;
+    gap: 6px;
+}
+
+.medicine-main strong,
+.medical-cart-item-main strong,
+.medical-empty-state strong,
+.medical-upload-copy strong {
+    color: #f8fbff;
+}
+
+.medical-price {
+    color: #dbeafe;
+    font-weight: 700;
+}
+
+.stock-cell {
+    display: grid;
+    gap: 6px;
+}
+
+.stock-pill,
+.type-pill,
+.order-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    width: fit-content;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.stock-pill.available,
+.type-pill.normal,
+.order-status-pill.delivered,
+.order-status-pill.picked-up {
+    color: #d1fae5;
+    background: rgba(16, 185, 129, 0.16);
+}
+
+.stock-pill.low-stock,
+.order-status-pill.pending,
+.order-status-pill.ready {
+    color: #fde68a;
+    background: rgba(245, 158, 11, 0.16);
+}
+
+.stock-pill.out-of-stock,
+.type-pill.critical,
+.order-status-pill.rejected,
+.order-status-pill.cancelled {
+    color: #fecdd3;
+    background: rgba(244, 63, 94, 0.16);
+}
+
+.order-status-pill.approved {
+    color: #bfdbfe;
+    background: rgba(59, 130, 246, 0.18);
+}
+
+.medical-qty-input,
+.medical-address-input,
+.medical-cart-item-controls input {
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.62);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+.medical-qty-input {
+    width: 86px;
+}
+
+.action-cell {
+    display: grid;
+    gap: 8px;
+}
+
+.medical-add-btn,
+.medical-place-order-btn,
+.medical-remove-btn,
+.medical-close-btn {
+    border: none;
+    cursor: pointer;
+    font: inherit;
+}
+
+.medical-add-btn,
+.medical-place-order-btn {
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #2563eb, #0ea5e9);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.medical-add-btn:hover:not(:disabled),
+.medical-place-order-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.medical-add-btn:disabled,
+.medical-place-order-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.medical-empty-row {
+    text-align: center;
+    color: var(--medical-muted);
+    padding: 36px;
+}
+
+.medical-empty-state {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(2, 6, 23, 0.26);
+    border: 1px dashed rgba(148, 163, 184, 0.22);
+}
+
+.medical-empty-state.in-modal {
+    margin-top: 12px;
+}
+
+.medical-cart-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: rgba(2, 6, 23, 0.72);
+    backdrop-filter: blur(8px);
+}
+
+.medical-cart-modal {
+    width: min(960px, 100%);
+    max-height: min(88vh, 980px);
+    overflow-y: auto;
+    border-radius: 28px;
+    padding: 24px;
+    background: var(--medical-surface-strong);
+}
+
+.medical-cart-header,
+.medical-cart-item-main,
+.medical-cart-item-controls,
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+}
+
+.medical-close-btn {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    color: #ffffff;
+    background: rgba(148, 163, 184, 0.14);
+}
+
+.medical-cart-items {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.medical-cart-item,
+.medical-checkout-card,
+.medical-upload-card {
+    padding: 18px;
+    border-radius: 20px;
+    background: rgba(2, 6, 23, 0.26);
+}
+
+.medical-cart-item {
+    border: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.medical-cart-item-controls {
+    margin-top: 14px;
+    align-items: end;
+}
+
+.medical-cart-item-controls label {
+    display: grid;
+    gap: 8px;
+    color: var(--medical-muted);
+}
+
+.medical-cart-item-controls input {
+    width: 94px;
+}
+
+.medical-cart-item-price {
+    font-weight: 700;
+    color: #dbeafe;
+}
+
+.medical-remove-btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: #fecdd3;
+    background: rgba(244, 63, 94, 0.14);
+}
+
+.medical-upload-card {
+    margin-top: 18px;
+    border: 1px dashed rgba(250, 204, 21, 0.28);
+}
+
+.medical-upload-copy {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.medical-file-picker {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(15, 23, 42, 0.62);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    color: #e2e8f0;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.medical-file-picker input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.medical-checkout-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.medical-checkout-card h3 {
+    margin-top: 0;
+    color: #ffffff;
+}
+
+.medical-radio-group {
+    display: grid;
+    gap: 12px;
+}
+
+.medical-radio-group label {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 13px 14px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.62);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    color: var(--medical-text);
+}
+
+.medical-address-input {
+    min-height: 104px;
+    margin-top: 14px;
+    resize: vertical;
+}
+
+.summary-card {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+}
+
+.summary-line {
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    color: var(--medical-muted);
+}
+
+.summary-line strong {
+    color: #ffffff;
+}
+
+.summary-line.total {
+    font-size: 1.05rem;
+}
+
+.medical-place-order-btn {
+    margin-top: 6px;
+}
+
+.medical-loading-state {
+    min-height: 72vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    border-radius: 28px;
+    background: var(--medical-surface);
+    border: 1px solid var(--medical-border);
+}
+
+.medical-spinner {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    border: 4px solid rgba(148, 163, 184, 0.22);
+    border-top-color: #60a5fa;
+    animation: medical-spin 0.9s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes medical-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body.light-mode .medical-panel-page {
+    --medical-bg: linear-gradient(180deg, #eff6ff 0%, #f8fafc 58%, #eef2ff 100%);
+    --medical-surface: rgba(255, 255, 255, 0.9);
+    --medical-surface-strong: rgba(255, 255, 255, 0.98);
+    --medical-border: rgba(59, 130, 246, 0.12);
+    --medical-border-strong: rgba(37, 99, 235, 0.24);
+    --medical-text: #142338;
+    --medical-muted: #51637c;
+    --medical-heading: #0f172a;
+    --medical-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+}
+
+body.light-mode .medical-panel-page .medical-eyebrow,
+body.light-mode .medical-panel-page .medical-section-kicker {
+    color: #1d4ed8;
+    background: rgba(37, 99, 235, 0.08);
+}
+
+body.light-mode .medical-panel-page .medical-hero p,
+body.light-mode .medical-panel-page .medical-section-heading p,
+body.light-mode .medical-panel-page .medical-empty-state p,
+body.light-mode .medical-panel-page .medicine-main span,
+body.light-mode .medical-panel-page .stock-cell small,
+body.light-mode .medical-panel-page .action-note,
+body.light-mode .medical-panel-page .medical-cart-item-main span,
+body.light-mode .medical-panel-page .medical-upload-copy p,
+body.light-mode .medical-panel-page .medical-stat-label,
+body.light-mode .medical-panel-page .summary-line,
+body.light-mode .medical-panel-page .medical-radio-group label,
+body.light-mode .medical-panel-page .medical-cart-item-controls label {
+    color: #4b5f7b;
+}
+
+body.light-mode .medical-panel-page .medical-table th {
+    background: rgba(239, 246, 255, 0.92);
+    color: #334155;
+}
+
+body.light-mode .medical-panel-page .medical-search,
+body.light-mode .medical-panel-page .medical-filter-pill,
+body.light-mode .medical-panel-page .medical-table-wrapper,
+body.light-mode .medical-panel-page .medical-qty-input,
+body.light-mode .medical-panel-page .medical-address-input,
+body.light-mode .medical-panel-page .medical-cart-item-controls input,
+body.light-mode .medical-panel-page .medical-file-picker,
+body.light-mode .medical-panel-page .medical-radio-group label,
+body.light-mode .medical-panel-page .medical-cart-item,
+body.light-mode .medical-panel-page .medical-checkout-card,
+body.light-mode .medical-panel-page .medical-upload-card,
+body.light-mode .medical-panel-page .medical-empty-state {
+    background: rgba(255, 255, 255, 0.86);
+}
+
+body.light-mode .medical-panel-page .medical-search input,
+body.light-mode .medical-panel-page .medical-qty-input,
+body.light-mode .medical-panel-page .medical-address-input,
+body.light-mode .medical-panel-page .medical-cart-item-controls input,
+body.light-mode .medical-panel-page .medical-table td,
+body.light-mode .medical-panel-page .medicine-main strong,
+body.light-mode .medical-panel-page .medical-cart-item-main strong,
+body.light-mode .medical-panel-page .medical-empty-state strong,
+body.light-mode .medical-panel-page .medical-upload-copy strong,
+body.light-mode .medical-panel-page .medical-checkout-card h3,
+body.light-mode .medical-panel-page .summary-line strong,
+body.light-mode .medical-panel-page .medical-section-heading h2,
+body.light-mode .medical-panel-page .medical-hero h1 {
+    color: #0f172a;
+}
+
+body.light-mode .medical-panel-page .medical-cart-overlay {
+    background: rgba(15, 23, 42, 0.45);
+}
+
+@media (max-width: 1100px) {
+    .medical-hero,
+    .medical-checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .medical-hero {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 820px) {
+    .medical-panel-page {
+        padding: 92px 16px 32px;
+    }
+
+    .medical-toolbar,
+    .medical-content-card,
+    .medical-cart-modal {
+        padding: 18px;
+    }
+
+    .medical-hero {
+        padding: 22px;
+        border-radius: 22px;
+    }
+
+    .medical-cart-overlay {
+        padding: 12px;
+    }
+
+    .medical-cart-item-main,
+    .medical-cart-item-controls,
+    .medical-section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
