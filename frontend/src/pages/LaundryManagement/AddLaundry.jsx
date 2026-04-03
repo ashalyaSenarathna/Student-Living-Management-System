@@ -59,23 +59,25 @@ const AddLaundry = () => {
         }
     };
 
-    const fileToBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = (error) => reject(error);
-        });
-    };
-
     const uploadImage = async () => {
         if (!imageFile) return formData.image;
 
+        const uploadData = new FormData();
+        uploadData.append('image', imageFile);
+
         try {
-            const base64Image = await fileToBase64(imageFile);
-            return base64Image;
+            const res = await fetch('http://localhost:5000/api/upload', {
+                method: 'POST',
+                body: uploadData
+            });
+            const data = await res.json();
+            if (res.ok) {
+                return data.imageUrl;
+            } else {
+                throw new Error(data.message || 'Image upload failed');
+            }
         } catch (err) {
-            throw new Error('Failed to convert image to base64');
+            throw err;
         }
     };
 
