@@ -64,17 +64,9 @@ function App() {
                 <Route path="/hostel/:id" element={<HostelDetails />} />
                 <Route path="/profile" element={<Profile />} />
 
-                {/* Restricted Laundry Routes */}
-                <Route path="/laundry" element={
-                    <ProtectedRoute allowedRoles={['USER', 'PROVIDER', 'ADMIN']}>
-                        <LaundryList />
-                    </ProtectedRoute>
-                } />
-                <Route path="/laundry/:id" element={
-                    <ProtectedRoute allowedRoles={['USER', 'PROVIDER', 'ADMIN']}>
-                        <LaundryDetails />
-                    </ProtectedRoute>
-                } />
+                {/* Public Laundry Routes */}
+                <Route path="/laundry" element={<LaundryList />} />
+                <Route path="/laundry/:id" element={<LaundryDetails />} />
                 <Route path="/add-laundry" element={
                     <ProtectedRoute allowedRoles={['PROVIDER', 'ADMIN']}>
                         <AddLaundry />
@@ -142,12 +134,9 @@ function App() {
                     </ProtectedRoute>
                 } />
 
-                {/* Food Management Routes */}
-                <Route path="/food" element={
-                    <ProtectedRoute allowedRoles={['USER', 'FOOD_PROVIDER', 'ADMIN']}>
-                        <FoodList />
-                    </ProtectedRoute>
-                } />
+                {/* Public Food Routes */}
+                <Route path="/food" element={<FoodList />} />
+                <Route path="/food/:id" element={<FoodDetails />} />
                 <Route path="/food/add" element={
                     <ProtectedRoute allowedRoles={['FOOD_PROVIDER', 'ADMIN']}>
                         <AddFood />
@@ -178,11 +167,7 @@ function App() {
                         <FoodAdminDashboard />
                     </ProtectedRoute>
                 } />
-                <Route path="/food/:id" element={
-                    <ProtectedRoute allowedRoles={['USER', 'FOOD_PROVIDER', 'ADMIN']}>
-                        <FoodDetails />
-                    </ProtectedRoute>
-                } />
+
             </Routes>
         </div>
     );

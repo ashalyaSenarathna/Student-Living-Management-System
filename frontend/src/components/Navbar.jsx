@@ -97,7 +97,7 @@ const Navbar = () => {
     ];
 
     const visibleLaundryItems = laundryPanelItems.filter(item =>
-        item.roles.includes(user?.role?.toUpperCase())
+        (!user && item.roles.includes('USER')) || (user && item.roles.includes(user?.role?.toUpperCase()))
     );
 
     const medicalPanelItems = [
@@ -109,7 +109,7 @@ const Navbar = () => {
     ];
 
     const visibleMedicalItems = medicalPanelItems.filter(item =>
-        item.roles.includes(user?.role?.toUpperCase())
+        (!user && item.roles.includes('USER')) || (user && item.roles.includes(user?.role?.toUpperCase()))
     );
 
     const foodPanelItems = [
@@ -122,7 +122,7 @@ const Navbar = () => {
     ];
 
     const visibleFoodItems = foodPanelItems.filter(item =>
-        item.roles.includes(user?.role?.toUpperCase())
+        (!user && item.roles.includes('USER')) || (user && item.roles.includes(user?.role?.toUpperCase()))
     );
 
     return (

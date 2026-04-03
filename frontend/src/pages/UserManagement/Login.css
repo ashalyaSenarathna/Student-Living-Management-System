@@ -320,12 +320,25 @@
     margin-left: 0.25rem;
 }
 
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1.25rem;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
 .input-wrapper input {
     width: 100%;
     background: rgba(0, 0, 0, 0.2);
     border: 1.5px solid rgba(255, 255, 255, 0.05);
     border-radius: 16px;
-    padding: 1rem 1.25rem;
+    padding: 1rem 1.25rem 1rem 3.5rem;
     color: #fff;
     font-size: 1rem;
     font-family: var(--font-main);
@@ -337,6 +350,31 @@
     background: rgba(108, 99, 255, 0.05);
     border-color: var(--primary);
     box-shadow: 0 0 0 5px rgba(108, 99, 255, 0.1);
+}
+
+.input-wrapper input:focus + .input-icon,
+.input-wrapper:focus-within .input-icon {
+    color: var(--primary);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.password-toggle:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .form-options {
@@ -361,6 +399,34 @@
     box-shadow: 0 12px 24px rgba(108, 99, 255, 0.3);
     text-transform: uppercase;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-text-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.loader-span {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.spinner-mini {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 .submit-btn:hover {
@@ -393,14 +459,58 @@
 }
 
 .error-message {
-    background: rgba(239, 68, 68, 0.15);
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
     color: #fca5a5;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     border-radius: 14px;
     margin-bottom: 2rem;
     font-size: 0.9rem;
     font-weight: 600;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
     backdrop-filter: blur(5px);
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% { transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+    40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* Password Requirements Checklist */
+.password-requirements {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 0.75rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.password-requirements p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    margin: 0 !important;
+}
+
+.password-requirements p.valid {
+    color: var(--accent);
+}
+
+.password-requirements p svg {
+    opacity: 0.3;
+}
+
+.password-requirements p.valid svg {
+    opacity: 1;
 }

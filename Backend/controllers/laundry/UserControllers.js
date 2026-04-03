@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
         if (role === 'DOCTOR') {
             const [firstName, ...lastNameParts] = name.split(' ');
             const lastName = lastNameParts.join(' ') || 'Doctor';
-            
+
             await Doctor.create({
                 user: user._id,
                 firstName: firstName,
