@@ -69,9 +69,9 @@
 }
 
 .ha-nav-item.active {
-    background: #6c63ff;
+    background: #10b981;
     color: #fff;
-    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .ha-badge {

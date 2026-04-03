@@ -60,8 +60,8 @@
 }
 
 .nav-item.active {
-    background: rgba(108, 99, 255, 0.1);
-    color: #6c63ff;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
     font-weight: 600;
 }
 
@@ -222,7 +222,7 @@
     margin: 0 0 20px 0;
     font-size: 1.1rem;
     color: #fff;
-    border-bottom: 2px solid #6c63ff;
+    border-bottom: 2px solid #10b981;
     padding-bottom: 4px;
 }
 
@@ -254,9 +254,9 @@
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #6c63ff;
-    background: rgba(108, 99, 255, 0.05);
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.1);
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .form-group textarea {
@@ -329,9 +329,9 @@
 }
 
 .btn-add-room {
-    background: rgba(108, 99, 255, 0.05);
-    color: #6c63ff;
-    border: 2px dashed rgba(108, 99, 255, 0.3);
+    background: rgba(16, 185, 129, 0.05);
+    color: #10b981;
+    border: 2px dashed rgba(16, 185, 129, 0.3);
     padding: 10px;
     border-radius: 8px;
     width: 100%;
@@ -363,8 +363,8 @@
 }
 
 .upload-dropzone:hover {
-    border-color: #6c63ff;
-    background: rgba(108, 99, 255, 0.05);
+    border-color: #10b981;
+    background: rgba(16, 185, 129, 0.05);
 }
 
 .upload-dropzone[disabled] {
@@ -445,7 +445,7 @@
 }
 
 .btn-submit-hostel {
-    background: linear-gradient(135deg, #6c63ff, #a855f7);
+    background: linear-gradient(135deg, #10b981, #34d399);
     color: #fff;
     padding: 14px 40px;
     border: none;
@@ -453,12 +453,12 @@
     font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 4px 6px -1px rgba(108, 99, 255, 0.2);
+    box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-submit-hostel:hover {
-    box-shadow: 0 0 25px rgba(108, 99, 255, 0.5);
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.5);
     transform: translateY(-2px);
 }
 
