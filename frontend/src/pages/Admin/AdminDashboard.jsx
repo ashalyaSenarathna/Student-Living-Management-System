@@ -16,7 +16,8 @@ import {
     CheckCircle2,
     Clock,
     Trash2,
-    Stethoscope
+    Stethoscope,
+    UtensilsCrossed
 } from 'lucide-react';
 import './AdminDashboard.css';
 
@@ -115,14 +116,14 @@ const AdminDashboard = () => {
 
     const filteredUsers = React.useMemo(() => {
         const query = searchQuery.toLowerCase().trim();
-        
+
         return users.filter(user => {
             // Search only by Display Name (User column)
             const matchesSearch = user.name.toLowerCase().startsWith(query);
-            
+
             // Respect the active category filter (All, Users, Providers, etc.)
             const matchesFilter = activeFilter === 'ALL' || user.role.toUpperCase() === activeFilter;
-            
+
             return matchesSearch && matchesFilter;
         });
     }, [users, searchQuery, activeFilter]);
@@ -156,6 +157,20 @@ const AdminDashboard = () => {
                     >
                         <Home size={20} />
                         <span>Hostel Admin</span>
+                    </button>
+                    <button
+                        className="nav-item"
+                        onClick={() => navigate('/food/admin')}
+                    >
+                        <UtensilsCrossed size={20} />
+                        <span>Food Admin</span>
+                    </button>
+                    <button
+                        className="nav-item"
+                        onClick={() => navigate('/health/pharmacy-admin')}
+                    >
+                        <Stethoscope size={20} />
+                        <span>Pharmacy Admin</span>
                     </button>
                 </nav>
 
@@ -262,6 +277,21 @@ const AdminDashboard = () => {
                         className="stat-card"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.28 }}
+                    >
+                        <div className="stat-icon" style={{ background: 'rgba(249, 115, 22, 0.1)', color: '#f97316' }}>
+                            <UtensilsCrossed size={24} />
+                        </div>
+                        <div className="stat-info">
+                            <span className="stat-label">Food Providers</span>
+                            <span className="stat-value">{users.filter(u => u.role === 'FOOD_PROVIDER').length}</span>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        className="stat-card"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
                     >
                         <div className="stat-icon" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
@@ -288,7 +318,7 @@ const AdminDashboard = () => {
                         </div>
 
                         <div className="table-filters">
-                            {['ALL', 'USER', 'PROVIDER', 'DOCTOR', 'HOSTEL_OWNER', 'ADMIN'].map(filter => (
+                            {['ALL', 'USER', 'PROVIDER', 'DOCTOR', 'HOSTEL_OWNER', 'FOOD_PROVIDER', 'ADMIN'].map(filter => (
                                 <button
                                     key={filter}
                                     className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
@@ -297,7 +327,8 @@ const AdminDashboard = () => {
                                     {filter === 'ALL' ? 'All Roles' :
                                         filter === 'PROVIDER' ? 'Laundry Providers' :
                                             filter === 'HOSTEL_OWNER' ? 'Hostel Providers' :
-                                                filter.charAt(0) + filter.slice(1).toLowerCase() + 's'}
+                                                filter === 'FOOD_PROVIDER' ? 'Food Providers' :
+                                                    filter.charAt(0) + filter.slice(1).toLowerCase() + 's'}
                                 </button>
                             ))}
                         </div>
@@ -342,11 +373,12 @@ const AdminDashboard = () => {
                                                 <span className={`role-badge ${user.role.toLowerCase()}`}>
                                                     {user.role === 'PROVIDER' ? 'Laundry Provider' :
                                                         user.role === 'HOSTEL_OWNER' ? 'Hostel Provider' :
-                                                            user.role}
+                                                            user.role === 'FOOD_PROVIDER' ? 'Food Provider' :
+                                                                user.role}
                                                 </span>
                                             </td>
                                             <td>
-                                                {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR') ? (
+                                                {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR' || user.role === 'FOOD_PROVIDER') ? (
                                                     <div className="admin-status-badge">
                                                         <span className={`admin-status-dot ${user.isApproved ? 'approved' : 'pending'}`}></span>
                                                         {user.isApproved ? 'Approved' : 'Pending'}
@@ -360,7 +392,7 @@ const AdminDashboard = () => {
                                             </td>
                                             <td className="actions-cell">
                                                 <div className="actions-stack">
-                                                    {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR') && (
+                                                    {(user.role === 'PROVIDER' || user.role === 'HOSTEL_OWNER' || user.role === 'DOCTOR' || user.role === 'FOOD_PROVIDER') && (
                                                         <button
                                                             className={`action-btn ${user.isApproved ? 'btn-reject' : 'btn-approve'}`}
                                                             onClick={() => handleApprove(user._id, !user.isApproved)}
@@ -384,10 +416,10 @@ const AdminDashboard = () => {
                                 {filteredUsers.length === 0 && (
                                     <tr>
                                         <td colSpan="6" style={{ textAlign: 'center', padding: '100px 0' }}>
-                                            <div style={{ 
-                                                display: 'flex', 
-                                                flexDirection: 'column', 
-                                                alignItems: 'center', 
+                                            <div style={{
+                                                display: 'flex',
+                                                flexDirection: 'column',
+                                                alignItems: 'center',
                                                 gap: '15px',
                                                 color: '#ef4444' // Red color for 'No results' as per user request to show it's 'wrong'
                                             }}>
