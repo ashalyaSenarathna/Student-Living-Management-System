@@ -1,4 +1,20 @@
 const Booking = require('../../models/laundry/BookingModels');
+const Laundry = require('../../models/laundry/LaundryModels');
+
+const timeToMinutes = (timeStr) => {
+    if (!timeStr) return 0;
+    const [time, modifier] = timeStr.split(' ');
+    let [hours, minutes] = time.split(':');
+    hours = parseInt(hours, 10);
+    minutes = parseInt(minutes, 10);
+
+    if (modifier === 'PM' && hours !== 12) {
+        hours += 12;
+    } else if (modifier === 'AM' && hours === 12) {
+        hours = 0;
+    }
+    return hours * 60 + minutes;
+};
 
 // @desc    Create new booking
 // @route   POST /api/bookings
@@ -16,6 +32,23 @@ const createBooking = async (req, res) => {
 
         if (services && services.length === 0) {
             return res.status(400).json({ message: 'No services selected' });
+        }
+
+        // Fetch shop details for time verification
+        const shop = await Laundry.findById(laundry);
+        if (!shop) {
+            return res.status(404).json({ message: 'Laundry shop not found' });
+        }
+
+        // Verify if shop is open at the requested pickupTime
+        const requestedTimeMins = timeToMinutes(pickupTime);
+        const openTimeMins = timeToMinutes(shop.openingTime);
+        const closeTimeMins = timeToMinutes(shop.closingTime);
+
+        if (requestedTimeMins < openTimeMins || requestedTimeMins > closeTimeMins) {
+            return res.status(400).json({ 
+                message: `Booking failed. This shop is only open from ${shop.openingTime} to ${shop.closingTime}.` 
+            });
         }
 
         const booking = new Booking({

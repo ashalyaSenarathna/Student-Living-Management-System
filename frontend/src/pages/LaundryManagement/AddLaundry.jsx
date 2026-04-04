@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Store,
@@ -43,8 +43,9 @@ const AddLaundry = () => {
     ]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [isEdit, setIsEdit] = useState(false);
     const [shopId, setShopId] = useState(null);
+    const { id } = useParams();
+    const isEdit = !!id;
 
     const navigate = useNavigate();
 
@@ -82,24 +83,24 @@ const AddLaundry = () => {
     };
 
     useEffect(() => {
-        const fetchMyShop = async () => {
+        const fetchShop = async () => {
             const userInfo = JSON.parse(localStorage.getItem('userInfo'));
             if (!userInfo || userInfo.role !== 'PROVIDER') {
                 navigate('/login');
                 return;
             }
 
+            if (!id) return; // Not editing
+
             try {
-                const response = await fetch('http://localhost:5000/api/laundry', {
+                const response = await fetch(`http://localhost:5000/api/laundry/${id}`, {
                     headers: {
                         'Authorization': `Bearer ${userInfo.token}`
                     }
                 });
-                const data = await response.json();
+                const myShop = await response.json();
 
-                // Find if this provider already has a shop
-                const myShop = data.find(shop => shop.provider._id === userInfo._id);
-                if (myShop) {
+                if (response.ok) {
                     const days = (myShop.openingDays || 'Monday - Saturday').split(' - ');
                     setFormData({
                         shopName: myShop.shopName,
@@ -120,8 +121,8 @@ const AddLaundry = () => {
             }
         };
 
-        fetchMyShop();
-    }, [navigate]);
+        fetchShop();
+    }, [id, navigate]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -195,7 +196,7 @@ const AddLaundry = () => {
 
             if (response.ok) {
                 alert(`Laundry shop ${isEdit ? 'updated' : 'added'} successfully!`);
-                navigate('/laundry');
+                navigate('/profile');
             } else {
                 setError(data.message || 'Action failed');
             }

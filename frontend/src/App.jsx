@@ -72,6 +72,11 @@ function App() {
                         <AddLaundry />
                     </ProtectedRoute>
                 } />
+                <Route path="/edit-laundry/:id" element={
+                    <ProtectedRoute allowedRoles={['PROVIDER', 'ADMIN']}>
+                        <AddLaundry />
+                    </ProtectedRoute>
+                } />
                 <Route path="/manage-bookings" element={
                     <ProtectedRoute allowedRoles={['PROVIDER', 'ADMIN']}>
                         <ManageBookings />

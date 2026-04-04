@@ -1,4 +1,5 @@
 const Laundry = require('../../models/laundry/LaundryModels');
+const Booking = require('../../models/laundry/BookingModels');
 
 // @desc    Get all laundry shops
 // @route   GET /api/laundry
@@ -35,11 +36,11 @@ const createLaundry = async (req, res) => {
     try {
         const { shopName, address, contactNumber, services, image, openingTime, closingTime, openingDays } = req.body;
 
-        // Check if provider already has a shop
-        const shopExists = await Laundry.findOne({ provider: req.user._id });
+        // Check how many shops the provider already has
+        const shopCount = await Laundry.countDocuments({ provider: req.user._id });
 
-        if (shopExists) {
-            return res.status(400).json({ message: 'Provider already has a registered laundry shop' });
+        if (shopCount >= 3) {
+            return res.status(400).json({ message: 'Each provider can manage a maximum of 3 laundry shops' });
         }
 
         const laundry = new Laundry({
@@ -133,10 +134,51 @@ const createLaundryReview = async (req, res) => {
     }
 };
 
+// @desc    Get laundry shops by provider
+// @route   GET /api/laundry/my-shop
+// @access  Private/Provider
+const getLaundryByProvider = async (req, res) => {
+    try {
+        const laundries = await Laundry.find({ provider: req.user._id });
+        res.json(laundries); // Returns an array (even if empty)
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Delete laundry shop
+// @route   DELETE /api/laundry/:id
+// @access  Private/Provider
+const deleteLaundry = async (req, res) => {
+    try {
+        const laundry = await Laundry.findById(req.params.id);
+
+        if (!laundry) {
+            return res.status(404).json({ message: 'Laundry shop not found' });
+        }
+
+        // Check ownership
+        if (laundry.provider.toString() !== req.user._id.toString() && req.user.role !== 'ADMIN') {
+            return res.status(401).json({ message: 'Not authorized to delete this shop' });
+        }
+
+        await Laundry.findByIdAndDelete(req.params.id);
+        
+        // Cleanup related bookings
+        await Booking.deleteMany({ laundry: req.params.id });
+
+        res.json({ message: 'Laundry shop and related bookings removed successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getAllLaundries,
     getLaundryById,
     createLaundry,
     updateLaundry,
-    createLaundryReview
+    createLaundryReview,
+    getLaundryByProvider,
+    deleteLaundry
 };
