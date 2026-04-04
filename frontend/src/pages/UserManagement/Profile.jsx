@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Camera, User, Mail, Shield, BadgeCheck, PencilLine } from 'lucide-react';
+import { Camera, User, Mail, Shield, BadgeCheck, PencilLine, Store, Trash2, MapPin, Phone } from 'lucide-react';
 import './Profile.css';
 
 const Profile = () => {
@@ -17,6 +17,8 @@ const Profile = () => {
     });
     const [message, setMessage] = useState('');
     const [msgType, setMsgType] = useState('success');
+    const [laundryShops, setLaundryShops] = useState([]);
+    const [shopLoading, setShopLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -39,7 +41,30 @@ const Profile = () => {
             confirmPassword: ''
         });
         setLoading(false);
+
+        if (userInfo.role === 'PROVIDER') {
+            fetchLaundryShops(userInfo.token);
+        }
     }, [navigate]);
+
+    const fetchLaundryShops = async (token) => {
+        try {
+            setShopLoading(true);
+            const response = await fetch('http://localhost:5000/api/laundry/my-shop', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setLaundryShops(data);
+            }
+        } catch (err) {
+            console.error('Error fetching laundry shops:', err);
+        } finally {
+            setShopLoading(false);
+        }
+    };
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -98,6 +123,36 @@ const Profile = () => {
                 setFormData(prev => ({ ...prev, password: '', confirmPassword: '' }));
             } else {
                 setMessage(data.message || 'Update failed');
+                setMsgType('error');
+            }
+        } catch (err) {
+            setMessage('Connection error');
+            setMsgType('error');
+        }
+    };
+
+    const handleDeleteShop = async (id) => {
+        if (!window.confirm('Are you sure you want to delete your laundry shop? This action cannot be undone.')) {
+            return;
+        }
+
+        try {
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+            const response = await fetch(`http://localhost:5000/api/laundry/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${userInfo.token}`
+                }
+            });
+
+            if (response.ok) {
+                setLaundryShops(prev => prev.filter(shop => shop._id !== id));
+                setMessage('Laundry shop deleted successfully');
+                setMsgType('success');
+                setTimeout(() => setMessage(''), 3000);
+            } else {
+                const data = await response.json();
+                setMessage(data.message || 'Failed to delete shop');
                 setMsgType('error');
             }
         } catch (err) {
@@ -208,6 +263,71 @@ const Profile = () => {
                             </div>
                         )}
                     </div>
+
+                    {user.role === 'PROVIDER' && (
+                        <div className="provider-section">
+                            <div className="section-header">
+                                <Store className="section-icon" />
+                                <h3>Managed Services ({laundryShops.length}/3)</h3>
+                            </div>
+                            
+                            <div className="shops-container-luxe">
+                                {shopLoading ? (
+                                    <div className="shop-loading-mini">Loading shop details...</div>
+                                ) : laundryShops.length > 0 ? (
+                                    laundryShops.map((shop) => (
+                                        <div key={shop._id} className="shop-management-card">
+                                            <div className="shop-info-luxe">
+                                                <div className="shop-image-mini">
+                                                    <img src={shop.image} alt={shop.shopName} />
+                                                </div>
+                                                <div className="shop-details-mini">
+                                                    <h4>{shop.shopName}</h4>
+                                                    <div className="shop-meta-mini">
+                                                        <span><MapPin size={14} /> {shop.address}</span>
+                                                        <span><Phone size={14} /> {shop.contactNumber}</span>
+                                                    </div>
+                                                    <div className="shop-actions-mini">
+                                                        <button 
+                                                            className="edit-shop-btn"
+                                                            onClick={() => navigate(`/edit-laundry/${shop._id}`)}
+                                                        >
+                                                            <PencilLine size={16} /> Edit
+                                                        </button>
+                                                        <button 
+                                                            className="delete-shop-btn"
+                                                            onClick={() => handleDeleteShop(shop._id)}
+                                                        >
+                                                            <Trash2 size={16} /> Delete
+                                                        </button>
+                                                        <button 
+                                                            className="manage-shop-btn"
+                                                            onClick={() => navigate('/manage-bookings')}
+                                                        >
+                                                            Manage
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="shop-management-card">
+                                        <div className="no-shop-message">
+                                            <p>You haven't registered any laundry shops yet.</p>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {laundryShops.length < 3 && (
+                                    <div className="add-shop-card-dashed" onClick={() => navigate('/add-laundry')}>
+                                        <Store size={24} />
+                                        <span>Register New Shop</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

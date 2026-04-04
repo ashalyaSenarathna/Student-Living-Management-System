@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Eye, EyeOff, User as UserIcon, Mail, Lock, ShieldCheck, ArrowRight, UserPlus, AlertCircle, CheckCircle2 } from 'lucide-react'
 import './Login.css'
 
 const Register = () => {
@@ -12,9 +13,30 @@ const Register = () => {
         confirmPassword: '',
         role: 'USER'
     })
+    const [stats, setStats] = useState({ users: 0, partners: 0 })
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const userRes = await fetch('http://localhost:5000/api/users/count')
+                const laundryRes = await fetch('http://localhost:5000/api/laundry')
+                const foodRes = await fetch('http://localhost:5000/api/food')
+                
+                let userCount = 0, partnerCount = 0
+                if (userRes.ok) userCount = (await userRes.json()).count
+                if (laundryRes.ok) partnerCount += (await (await fetch('http://localhost:5000/api/laundry')).json()).length
+                if (foodRes.ok) partnerCount += (await (await fetch('http://localhost:5000/api/food')).json()).length
+                
+                setStats({ users: userCount, partners: partnerCount })
+            } catch (err) { console.error(err) }
+        }
+        fetchStats()
+    }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,8 +67,22 @@ const Register = () => {
         }
 
         // Password validation
-        if (formData.password.length < 6) {
-            return setError('Password must be at least 6 characters long')
+        const passwordRegex = /^[A-Z].*\d.*[@#].*$/; // Starts with Capital, contains number, contains @ or #
+        
+        if (formData.password.length < 8) {
+            return setError('Password must be at least 8 characters long')
+        }
+
+        if (!/^[A-Z]/.test(formData.password)) {
+            return setError('The first letter of the password must be a Capital letter')
+        }
+
+        if (!/\d/.test(formData.password)) {
+            return setError('Password must contain at least one number')
+        }
+
+        if (!/[@#]/.test(formData.password)) {
+            return setError('Password must contain at least one special character (@ or #)')
         }
 
         if (formData.password !== formData.confirmPassword) {
@@ -99,12 +135,12 @@ const Register = () => {
 
                     <div className="stats-container">
                         <div className="stat-item">
-                            <span className="stat-value">Free</span>
-                            <span className="stat-label">Registration</span>
+                            <span className="stat-value">{stats.users > 0 ? `${stats.users}+` : '---'}</span>
+                            <span className="stat-label">Active Users</span>
                         </div>
                         <div className="stat-item">
-                            <span className="stat-value">24/7</span>
-                            <span className="stat-label">System Access</span>
+                            <span className="stat-value">{stats.partners > 0 ? `${stats.partners}+` : '---'}</span>
+                            <span className="stat-label">Premium Partners</span>
                         </div>
                     </div>
                 </div>
@@ -117,19 +153,26 @@ const Register = () => {
                         <p>Already have an account? <Link to="/login">Sign in</Link></p>
                     </div>
 
-                    {error && <div className="error-message">{error}</div>}
+                    {error && (
+                        <div className="error-message">
+                            <AlertCircle size={18} />
+                            <span>{error}</span>
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit}>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                             <div className="input-container">
                                 <label>First Name</label>
                                 <div className="input-wrapper">
+                                    <UserIcon className="input-icon" size={18} />
                                     <input type="text" name="firstName" placeholder="John" value={formData.firstName} onChange={handleChange} required />
                                 </div>
                             </div>
                             <div className="input-container">
                                 <label>Last Name</label>
                                 <div className="input-wrapper">
+                                    <UserIcon className="input-icon" size={18} />
                                     <input type="text" name="lastName" placeholder="Doe" value={formData.lastName} onChange={handleChange} required />
                                 </div>
                             </div>
@@ -138,6 +181,7 @@ const Register = () => {
                         <div className="input-container">
                             <label>Username</label>
                             <div className="input-wrapper">
+                                <UserIcon className="input-icon" size={18} />
                                 <input type="text" name="username" placeholder="johndoe123" value={formData.username} onChange={handleChange} required />
                             </div>
                         </div>
@@ -145,6 +189,7 @@ const Register = () => {
                         <div className="input-container">
                             <label>Email Address</label>
                             <div className="input-wrapper">
+                                <Mail className="input-icon" size={18} />
                                 <input type="email" name="email" placeholder="john@university.edu" value={formData.email} onChange={handleChange} required />
                             </div>
                         </div>
@@ -176,22 +221,77 @@ const Register = () => {
                         </div>
 
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                            <div className="input-container">
+                            <div className="input-container" style={{ marginBottom: '0.5rem' }}>
                                 <label>Password</label>
                                 <div className="input-wrapper">
-                                    <input type="password" name="password" placeholder="••••••••" value={formData.password} onChange={handleChange} required />
+                                    <Lock className="input-icon" size={18} />
+                                    <input 
+                                        type={showPassword ? "text" : "password"} 
+                                        name="password" 
+                                        placeholder="••••••••" 
+                                        value={formData.password} 
+                                        onChange={handleChange} 
+                                        required 
+                                    />
+                                    <button 
+                                        type="button" 
+                                        className="password-toggle"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                    >
+                                        {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
                                 </div>
                             </div>
-                            <div className="input-container">
+                            <div className="input-container" style={{ marginBottom: '0.5rem' }}>
                                 <label>Confirm</label>
                                 <div className="input-wrapper">
-                                    <input type="password" name="confirmPassword" placeholder="••••••••" value={formData.confirmPassword} onChange={handleChange} required />
+                                    <Lock className="input-icon" size={18} />
+                                    <input 
+                                        type={showConfirmPassword ? "text" : "password"} 
+                                        name="confirmPassword" 
+                                        placeholder="••••••••" 
+                                        value={formData.confirmPassword} 
+                                        onChange={handleChange} 
+                                        required 
+                                    />
+                                    <button 
+                                        type="button" 
+                                        className="password-toggle"
+                                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                                    >
+                                        {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                                    </button>
                                 </div>
                             </div>
                         </div>
 
-                        <button type="submit" className="submit-btn" disabled={isLoading} style={{ marginTop: '1rem' }}>
-                            {isLoading ? 'Creating Account...' : 'Create Account'}
+                        {/* Password Requirements Guide */}
+                        <div className="password-requirements">
+                            <p className={/^[A-Z]/.test(formData.password) ? 'valid' : ''}>
+                                <CheckCircle2 size={12} /> First letter Capital
+                            </p>
+                            <p className={/\d/.test(formData.password) ? 'valid' : ''}>
+                                <CheckCircle2 size={12} /> At least one Number
+                            </p>
+                            <p className={/[@#]/.test(formData.password) ? 'valid' : ''}>
+                                <CheckCircle2 size={12} /> Contains @ or #
+                            </p>
+                            <p className={formData.password.length >= 8 ? 'valid' : ''}>
+                                <CheckCircle2 size={12} /> Min. 8 characters
+                            </p>
+                        </div>
+
+                        <button type="submit" className="submit-btn" disabled={isLoading} style={{ marginTop: '1.5rem' }}>
+                            {isLoading ? (
+                                <span className="loader-span">
+                                    <div className="spinner-mini"></div>
+                                    Creating Account...
+                                </span>
+                            ) : (
+                                <span className="btn-text-content">
+                                    Create Account <UserPlus size={18} />
+                                </span>
+                            )}
                         </button>
                     </form>
                 </div>

@@ -291,3 +291,187 @@
     color: #6c63ff;
     letter-spacing: 1.5px;
 }
+
+/* Provider Section Styles */
+.provider-section {
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.section-header h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.section-icon {
+    color: #6c63ff;
+}
+
+.shops-container-luxe {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.shop-management-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.shop-management-card:hover {
+    border-color: rgba(108, 99, 255, 0.3);
+}
+
+.shop-info-luxe {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.shop-image-mini {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.shop-image-mini img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.shop-details-mini {
+    flex: 1;
+}
+
+.shop-details-mini h4 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+}
+
+.shop-meta-mini {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.shop-meta-mini span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.shop-actions-mini {
+    display: flex;
+    gap: 1rem;
+}
+
+.delete-shop-btn,
+.manage-shop-btn,
+.edit-shop-btn {
+    padding: 0.6rem 1.1rem;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.edit-shop-btn {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.edit-shop-btn:hover {
+    background: #f59e0b;
+    color: #fff;
+}
+
+.delete-shop-btn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.delete-shop-btn:hover {
+    background: #ef4444;
+    color: #fff;
+}
+
+.manage-shop-btn {
+    background: rgba(108, 99, 255, 0.1);
+    color: #6c63ff;
+    border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+.manage-shop-btn:hover {
+    background: #6c63ff;
+    color: #fff;
+}
+
+.add-shop-card-dashed {
+    background: rgba(255, 255, 255, 0.01);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.add-shop-card-dashed:hover {
+    background: rgba(108, 99, 255, 0.05);
+    border-color: #6c63ff;
+    color: #6c63ff;
+}
+
+.add-shop-card-dashed span {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.no-shop-message {
+    text-align: center;
+    padding: 1rem;
+}
+
+.no-shop-message p {
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.shop-loading-mini {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 2rem;
+}

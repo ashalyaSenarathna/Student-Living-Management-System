@@ -9,6 +9,39 @@ const BookingModal = ({ isOpen, onClose, laundry, onBookingSuccess }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    const timeToMinutes = (timeStr) => {
+        if (!timeStr) return 0;
+        
+        // Handle HH:MM (24-hour format from input)
+        if (timeStr.includes(':') && !timeStr.includes(' ')) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+
+        // Handle HH:MM AM/PM (from shop data)
+        const [time, modifier] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':');
+        hours = parseInt(hours, 10);
+        minutes = parseInt(minutes, 10);
+
+        if (modifier === 'PM' && hours !== 12) {
+            hours += 12;
+        } else if (modifier === 'AM' && hours === 12) {
+            hours = 0;
+        }
+        return hours * 60 + minutes;
+    };
+
+    const convertTo24Hour = (timeStr) => {
+        if (!timeStr || !timeStr.includes(' ')) return "";
+        const [time, modifier] = timeStr.split(' ');
+        let [hours, minutes] = time.split(':');
+        let h = parseInt(hours, 10);
+        if (modifier === 'PM' && h !== 12) h += 12;
+        if (modifier === 'AM' && h === 12) h = 0;
+        return `${h.toString().padStart(2, '0')}:${minutes}`;
+    };
+
     if (!isOpen) return null;
 
     const handleServiceToggle = (service) => {
@@ -52,6 +85,17 @@ const BookingModal = ({ isOpen, onClose, laundry, onBookingSuccess }) => {
                 return;
             }
         }
+
+        // --- ADDED BUSINESS HOURS VALIDATION ---
+        const requestedMins = timeToMinutes(pickupTime);
+        const openMins = timeToMinutes(laundry.openingTime);
+        const closeMins = timeToMinutes(laundry.closingTime);
+
+        if (requestedMins < openMins || requestedMins > closeMins) {
+            setError(`Shop is closed at this time. Business hours: ${laundry.openingTime} - ${laundry.closingTime}`);
+            return;
+        }
+        // ----------------------------------------
 
         const userInfo = JSON.parse(localStorage.getItem('userInfo'));
         if (!userInfo) {
@@ -184,7 +228,15 @@ const BookingModal = ({ isOpen, onClose, laundry, onBookingSuccess }) => {
                                             setError('');
                                             setPickupTime(selectedTime);
                                         }}
-                                        min={pickupDate === new Date().toLocaleDateString('sv-SE') ? new Date().toTimeString().slice(0, 5) : ''}
+                                        min={
+                                            pickupDate === new Date().toLocaleDateString('sv-SE') 
+                                            ? ([
+                                                new Date().toTimeString().slice(0, 5), 
+                                                convertTo24Hour(laundry.openingTime)
+                                              ].sort().reverse()[0]) // Get the latest of current time and opening time
+                                            : convertTo24Hour(laundry.openingTime)
+                                        }
+                                        max={convertTo24Hour(laundry.closingTime)}
                                         required
                                     />
                                 </div>
