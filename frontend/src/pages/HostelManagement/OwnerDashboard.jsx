@@ -3,6 +3,7 @@ import './OwnerDashboard.css';
 
 const OwnerDashboard = () => {
     const [hostels, setHostels] = useState([]);
+    const [hostels, setHostels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [activeTab, setActiveTab] = useState('overview');
@@ -49,10 +50,16 @@ const OwnerDashboard = () => {
                 const data = await res.json();
                 if (res.ok) setHostels(data);
                 else setError(data.message || 'Unable to fetch hostels');
-            } catch (err) { setError('Server unreachable'); } finally { setLoading(false); }
+            } catch (err) { setError('Server unreachable'); }
         };
 
-        fetchMy();
+        const loadAll = async () => {
+            setLoading(true);
+            await fetchMy();
+            setLoading(false);
+        };
+
+        loadAll();
     }, [token]);
 
     const handleChange = (e) => {
@@ -336,16 +343,6 @@ const OwnerDashboard = () => {
                     >
                         <span className="icon">➕</span> {isEditing ? 'Editing...' : 'Add New'}
                     </button>
-                </nav>
-            </aside>
-
-            <main className="od-main-content">
-                <header className="owner-header">
-                    <h2>Hostel Owner Dashboard</h2>
-                    <p>Manage your boarding entries and hostels from here.</p>
-                </header>
-
-                <div className="od-tab-content">
                     {activeTab === 'overview' && (
                         <div className="overview-section">
                             <div className="stats-grid">
@@ -354,12 +351,10 @@ const OwnerDashboard = () => {
                                     <p className="stat-number">{hostels.length}</p>
                                 </div>
                                 <div className="stat-card">
-                                    <h4>Active Bookings</h4>
-                                    <p className="stat-number">0</p>
-                                </div>
-                                <div className="stat-card">
-                                    <h4>Views (30d)</h4>
-                                    <p className="stat-number">24</p>
+                                    <h4>Verification Status</h4>
+                                    <p className="stat-number" style={{ fontSize: '1.2rem' }}>
+                                        {hostels.filter(h => h.status === 'approved').length} Approved
+                                    </p>
                                 </div>
                             </div>
                         </div>

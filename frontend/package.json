@@ -4,6 +4,7 @@
     "private": true,
     "type": "module",
     "dependencies": {
+        "@stripe/stripe-js": "^9.2.0",
         "axios": "^1.13.5",
         "framer-motion": "^12.34.3",
         "jwt-decode": "^4.0.0",

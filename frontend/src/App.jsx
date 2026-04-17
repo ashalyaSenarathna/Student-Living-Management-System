@@ -20,7 +20,6 @@ import MyAppointments from './pages/HealthManagement/MyAppointments';
 import PrescriptionPanel from './pages/HealthManagement/PrescriptionPanel';
 import DoctorPortal from './pages/HealthManagement/DoctorPortal';
 import PharmacyAdmin from './pages/HealthManagement/PharmacyAdmin';
-
 // Food Management Imports
 import FoodList from './pages/FoodManagement/FoodList';
 import FoodDetails from './pages/FoodManagement/FoodDetails';
