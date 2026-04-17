@@ -11,7 +11,10 @@
 
 .homepage-premium {
     min-height: 100vh;
-    background: var(--bg-dark);
+    background: linear-gradient(rgba(6, 10, 31, 0.4), rgba(6, 10, 31, 0.4)), url('../assets/background1.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: #fff;
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;

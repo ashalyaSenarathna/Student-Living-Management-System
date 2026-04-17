@@ -198,7 +198,7 @@ const HomePage = () => {
                         <p>Find your next perfect living space with verified listings and secure virtual tours.</p>
                         <ul className="s-perks">
                             <li><CheckCircle2 size={16} /> Verified Owners only</li>
-                            <li><CheckCircle2 size={16} /> Safe Deposit System</li>
+                            <li><CheckCircle2 size={16} /> Direct Owner Contact</li>
                         </ul>
                     </motion.div>
 
