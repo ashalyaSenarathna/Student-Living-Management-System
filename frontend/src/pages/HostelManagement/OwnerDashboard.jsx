@@ -3,7 +3,6 @@ import './OwnerDashboard.css';
 
 const OwnerDashboard = () => {
     const [hostels, setHostels] = useState([]);
-    const [hostels, setHostels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [activeTab, setActiveTab] = useState('overview');
@@ -343,6 +342,10 @@ const OwnerDashboard = () => {
                     >
                         <span className="icon">➕</span> {isEditing ? 'Editing...' : 'Add New'}
                     </button>
+                </nav>
+            </aside>
+
+            <main className="od-main">
                     {activeTab === 'overview' && (
                         <div className="overview-section">
                             <div className="stats-grid">
@@ -514,7 +517,6 @@ const OwnerDashboard = () => {
                             )}
                         </div>
                     )}
-                </div>
             </main>
         </div>
     );
