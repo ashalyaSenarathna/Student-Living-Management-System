@@ -118,7 +118,6 @@ const OwnerDashboard = () => {
         const newPreviews = [...previews];
 
         files.forEach(file => {
-            // Find the first slot that doesn't have a file AND doesn't have an existing preview
             const firstEmpty = newPreviews.findIndex(p => p === null);
             if (firstEmpty !== -1) {
                 newImages[firstEmpty] = file;
@@ -169,10 +168,9 @@ const OwnerDashboard = () => {
                 parking: false
             },
             rooms: hostel.rooms && hostel.rooms.length > 0 ? hostel.rooms : [{ roomNo: '', totalBeds: '', availableBeds: '' }],
-            images: [null, null, null] // Reuse existing images logic or handle differently if needed
+            images: [null, null, null]
         });
         
-        // Show existing images in previews if available
         if (hostel.images && Array.isArray(hostel.images)) {
             const newPreviews = [null, null, null];
             hostel.images.forEach((img, idx) => {
@@ -210,7 +208,6 @@ const OwnerDashboard = () => {
             return false;
         }
         
-        // Check if there's at least one image (either a new File in form.images OR an existing URL/base64 in previews)
         const hasNewImage = form.images.some(img => img !== null);
         const hasExistingImage = previews.some(p => p !== null && (typeof p === 'string'));
         
@@ -243,16 +240,13 @@ const OwnerDashboard = () => {
         if (!validateForm()) return;
 
         try {
-            let imagesToUpload = [];
-            
-            // Handle images: if they are files (new), convert to base64. If strings (existing), keep as is.
             const imagePromises = form.images.map(async (img, idx) => {
                 if (img instanceof File) {
                     return await fileToBase64(img);
                 } else if (previews[idx] && typeof previews[idx] === 'string' && previews[idx].startsWith('http')) {
-                    return previews[idx]; // Keep existing URL
+                    return previews[idx];
                 } else if (previews[idx] && typeof previews[idx] === 'string' && previews[idx].startsWith('data:image')) {
-                    return previews[idx]; // Keep already converted base64 if any
+                    return previews[idx];
                 }
                 return null;
             });
@@ -293,7 +287,6 @@ const OwnerDashboard = () => {
                     setSuccessMsg('Hostel submitted successfully! It will appear after admin approval.');
                 }
                 
-                // Reset form
                 setForm({
                     name: '', location: '', description: '', price: '', contact: '',
                     gender: 'mixed',
@@ -311,6 +304,31 @@ const OwnerDashboard = () => {
             }
         } catch (err) {
             setError('Could not connect to server. Make sure the backend is running.');
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this listing? This action cannot be undone.')) return;
+        
+        setError('');
+        setSuccessMsg('');
+        
+        try {
+            const res = await fetch(`http://localhost:5000/api/hostel/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            
+            if (res.ok) {
+                setHostels(prev => prev.filter(h => (h._id !== id && h.id !== id)));
+                setSuccessMsg('Hostel removed successfully.');
+                setTimeout(() => setSuccessMsg(''), 3000);
+            } else {
+                setError(data.message || 'Failed to delete hostel.');
+            }
+        } catch (err) {
+            setError('Could not connect to server.');
         }
     };
 
@@ -345,178 +363,178 @@ const OwnerDashboard = () => {
                 </nav>
             </aside>
 
-            <main className="od-main">
-                    {activeTab === 'overview' && (
-                        <div className="overview-section">
-                            <div className="stats-grid">
-                                <div className="stat-card">
-                                    <h4>Total Listings</h4>
-                                    <p className="stat-number">{hostels.length}</p>
-                                </div>
-                                <div className="stat-card">
-                                    <h4>Verification Status</h4>
-                                    <p className="stat-number" style={{ fontSize: '1.2rem' }}>
-                                        {hostels.filter(h => h.status === 'approved').length} Approved
-                                    </p>
-                                </div>
+            <main className="od-main-content">
+                {activeTab === 'overview' && (
+                    <div className="overview-section">
+                        <div className="stats-grid">
+                            <div className="stat-card">
+                                <h4>Total Listings</h4>
+                                <p className="stat-number">{hostels.length}</p>
+                            </div>
+                            <div className="stat-card">
+                                <h4>Verification Status</h4>
+                                <p className="stat-number" style={{ fontSize: '1.2rem' }}>
+                                    {hostels.filter(h => h.status === 'approved').length} Approved
+                                </p>
                             </div>
                         </div>
-                    )}
+                    </div>
+                )}
 
-                    {activeTab === 'add' && (
-                        <div className="owner-form-card">
-                            <div className="form-header-flex">
-                                <h3>{isEditing ? 'Edit Hostel / Boarding' : 'Add New Hostel / Boarding'}</h3>
-                                {isEditing && <button className="btn-cancel-edit" onClick={cancelEdit}>Cancel Edit</button>}
-                            </div>
-                            {error && <div className="form-error-banner">⚠️ {error}</div>}
-                            {successMsg && <div className="form-success-banner">✅ {successMsg}</div>}
-                            <form onSubmit={handleSubmit} className="hostel-form-complex">
-                                <section className="form-section">
-                                    <h4>Basic Information</h4>
+                {activeTab === 'add' && (
+                    <div className="owner-form-card">
+                        <div className="form-header-flex">
+                            <h3>{isEditing ? 'Edit Hostel / Boarding' : 'Add New Hostel / Boarding'}</h3>
+                            {isEditing && <button className="btn-cancel-edit" onClick={cancelEdit}>Cancel Edit</button>}
+                        </div>
+                        {error && <div className="form-error-banner">⚠️ {error}</div>}
+                        {successMsg && <div className="form-success-banner">✅ {successMsg}</div>}
+                        <form onSubmit={handleSubmit} className="hostel-form-complex">
+                            <section className="form-section">
+                                <h4>Basic Information</h4>
+                                <div className="form-group">
+                                    <label>Hostel Name / Title *</label>
+                                    <input name="name" value={form.name} onChange={handleChange} required placeholder="e.g. Sunshine Boys Hostel" />
+                                </div>
+                                <div className="form-row-3">
                                     <div className="form-group">
-                                        <label>Hostel Name / Title *</label>
-                                        <input name="name" value={form.name} onChange={handleChange} required placeholder="e.g. Sunshine Boys Hostel" />
+                                        <label>Monthly Price (Rs.) *</label>
+                                        <input name="price" type="number" value={form.price} onChange={handleChange} required placeholder="5000" />
                                     </div>
-                                    <div className="form-row-3">
-                                        <div className="form-group">
-                                            <label>Monthly Price (Rs.) *</label>
-                                            <input name="price" type="number" value={form.price} onChange={handleChange} required placeholder="5000" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>Location / Area *</label>
-                                            <input name="location" value={form.location} onChange={handleChange} required placeholder="e.g. Malabe" />
-                                        </div>
-                                        <div className="form-group">
-                                            <label>Contact Number *</label>
-                                            <input name="contact" value={form.contact} onChange={handleChange} onBlur={handleContactBlur} required placeholder="0712345678" />
-                                        </div>
+                                    <div className="form-group">
+                                        <label>Location / Area *</label>
+                                        <input name="location" value={form.location} onChange={handleChange} required placeholder="e.g. Malabe" />
                                     </div>
-                                </section>
+                                    <div className="form-group">
+                                        <label>Contact Number *</label>
+                                        <input name="contact" value={form.contact} onChange={handleChange} onBlur={handleContactBlur} required placeholder="0712345678" />
+                                    </div>
+                                </div>
+                            </section>
 
-                                <section className="form-section">
-                                    <h4>Preferences & Facilities</h4>
-                                    <div className="form-group">
-                                        <label>Gender Allowed</label>
-                                        <div className="radio-group">
-                                            <label><input type="radio" name="gender" value="boys" checked={form.gender === 'boys'} onChange={handleChange} /> Boys</label>
-                                            <label><input type="radio" name="gender" value="girls" checked={form.gender === 'girls'} onChange={handleChange} /> Girls</label>
-                                            <label><input type="radio" name="gender" value="mixed" checked={form.gender === 'mixed'} onChange={handleChange} /> Mixed</label>
-                                        </div>
+                            <section className="form-section">
+                                <h4>Preferences & Facilities</h4>
+                                <div className="form-group">
+                                    <label>Gender Allowed</label>
+                                    <div className="radio-group">
+                                        <label><input type="radio" name="gender" value="boys" checked={form.gender === 'boys'} onChange={handleChange} /> Boys</label>
+                                        <label><input type="radio" name="gender" value="girls" checked={form.gender === 'girls'} onChange={handleChange} /> Girls</label>
+                                        <label><input type="radio" name="gender" value="mixed" checked={form.gender === 'mixed'} onChange={handleChange} /> Mixed</label>
                                     </div>
-                                    <div className="form-group">
-                                        <label>Facilities Offered</label>
-                                        <div className="checkbox-grid">
-                                            {Object.keys(form.facilities).map(f => (
-                                                <label key={f} className="checkbox-item">
-                                                    <input type="checkbox" name={f} checked={form.facilities[f]} onChange={handleFacilityChange} />
-                                                    {f.charAt(0).toUpperCase() + f.slice(1)}
-                                                </label>
+                                </div>
+                                <div className="form-group">
+                                    <label>Facilities Offered</label>
+                                    <div className="checkbox-grid">
+                                        {Object.keys(form.facilities).map(f => (
+                                            <label key={f} className="checkbox-item">
+                                                <input type="checkbox" name={f} checked={form.facilities[f]} onChange={handleFacilityChange} />
+                                                {f.charAt(0).toUpperCase() + f.slice(1)}
+                                            </label>
+                                        ))}
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section className="form-section">
+                                <h4>Rooms Management</h4>
+                                <div className="rooms-list">
+                                    {form.rooms.map((room, index) => (
+                                        <div key={index} className="room-entry-row">
+                                            <div className="form-group">
+                                                <label>Room No</label>
+                                                <input value={room.roomNo} onChange={(e) => handleRoomChange(index, 'roomNo', e.target.value)} placeholder="A-01" />
+                                            </div>
+                                            <div className="form-group">
+                                                <label>Total Beds</label>
+                                                <input type="number" value={room.totalBeds} onChange={(e) => handleRoomChange(index, 'totalBeds', e.target.value)} placeholder="4" />
+                                            </div>
+                                            <div className="form-group">
+                                                <label>Available Beds</label>
+                                                <input type="number" value={room.availableBeds} onChange={(e) => handleRoomChange(index, 'availableBeds', e.target.value)} placeholder="2" />
+                                            </div>
+                                            {form.rooms.length > 1 && (
+                                                <button type="button" className="btn-remove-room" onClick={() => removeRoom(index)}>×</button>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                                <button type="button" className="btn-add-room" onClick={addRoom}>+ Add Another Room</button>
+                            </section>
+
+                            <section className="form-section">
+                                <h4>Photos & Description</h4>
+                                <div className="form-group">
+                                    <label>Hostel Photos (Up to 3) *</label>
+                                    <div className="image-upload-wrapper">
+                                        <label className="upload-dropzone">
+                                            <input
+                                                type="file"
+                                                multiple
+                                                accept="image/*"
+                                                onChange={handleFileChange}
+                                                disabled={form.images.filter(img => img !== null).length >= 3}
+                                                hidden
+                                            />
+                                            <div className="upload-hint">
+                                                <span className="upload-icon">📸</span>
+                                                <span>Click to upload photos</span>
+                                            </div>
+                                        </label>
+                                        <div className="image-previews-grid">
+                                            {previews.map((src, idx) => src && (
+                                                <div key={idx} className="preview-item">
+                                                    <img src={src} alt={`preview-${idx}`} />
+                                                    <button type="button" className="btn-remove-img" onClick={() => removeImage(idx)}>×</button>
+                                                </div>
                                             ))}
                                         </div>
                                     </div>
-                                </section>
+                                </div>
+                                <div className="form-group">
+                                    <label>Description & Rules</label>
+                                    <textarea name="description" value={form.description} onChange={handleChange} placeholder="Describe your hostel, rules, entry times, etc." />
+                                </div>
+                            </section>
 
-                                <section className="form-section">
-                                    <h4>Rooms Management</h4>
-                                    <div className="rooms-list">
-                                        {form.rooms.map((room, index) => (
-                                            <div key={index} className="room-entry-row">
-                                                <div className="form-group">
-                                                    <label>Room No</label>
-                                                    <input value={room.roomNo} onChange={(e) => handleRoomChange(index, 'roomNo', e.target.value)} placeholder="A-01" />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label>Total Beds</label>
-                                                    <input type="number" value={room.totalBeds} onChange={(e) => handleRoomChange(index, 'totalBeds', e.target.value)} placeholder="4" />
-                                                </div>
-                                                <div className="form-group">
-                                                    <label>Available Beds</label>
-                                                    <input type="number" value={room.availableBeds} onChange={(e) => handleRoomChange(index, 'availableBeds', e.target.value)} placeholder="2" />
-                                                </div>
-                                                {form.rooms.length > 1 && (
-                                                    <button type="button" className="btn-remove-room" onClick={() => removeRoom(index)}>×</button>
-                                                )}
+                            <div className="form-footer-actions">
+                                <p className="approval-notice">Listing will be visible after <strong>Admin Approval</strong>.</p>
+                                <button type="submit" className="btn-submit-hostel">
+                                    {isEditing ? 'Update Hostel' : 'Submit for Approval'}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                )}
+
+                {activeTab === 'list' && (
+                    <div className="owner-list">
+                        <h3>Your Hostels</h3>
+                        {!token && <div className="form-error-banner">⚠️ Please <a href="/login">login</a> to view your listings.</div>}
+                        {loading ? <div className="loader"></div> : (
+                            hostels.length > 0 ? (
+                                <div className="hostel-grid-owner">
+                                    {hostels.map(h => (
+                                        <div className="hostel-item-card" key={h._id || h.id}>
+                                            <div className="card-badge-status" data-status={h.status || 'pending'}>
+                                                {h.status || 'Pending'}
                                             </div>
-                                        ))}
-                                    </div>
-                                    <button type="button" className="btn-add-room" onClick={addRoom}>+ Add Another Room</button>
-                                </section>
-
-                                <section className="form-section">
-                                    <h4>Photos & Description</h4>
-                                    <div className="form-group">
-                                        <label>Hostel Photos (Up to 3) *</label>
-                                        <div className="image-upload-wrapper">
-                                            <label className="upload-dropzone">
-                                                <input
-                                                    type="file"
-                                                    multiple
-                                                    accept="image/*"
-                                                    onChange={handleFileChange}
-                                                    disabled={form.images.filter(img => img !== null).length >= 3}
-                                                    hidden
-                                                />
-                                                <div className="upload-hint">
-                                                    <span className="upload-icon">📸</span>
-                                                    <span>Click to upload photos</span>
+                                            <img src={h.images?.[0] || h.image || 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=400&q=60'} alt={h.name} />
+                                            <div className="hostel-meta">
+                                                <h4>{h.name}</h4>
+                                                <p className="loc">📍 {h.location}</p>
+                                                <p className="price">Rs. {h.price || '—'}</p>
+                                                <div className="card-actions">
+                                                    <button className="btn-edit-sm" onClick={() => handleEdit(h)}>Edit</button>
+                                                    <button className="btn-delete-sm" onClick={() => handleDelete(h._id || h.id)}>Delete</button>
                                                 </div>
-                                            </label>
-                                            <div className="image-previews-grid">
-                                                {previews.map((src, idx) => src && (
-                                                    <div key={idx} className="preview-item">
-                                                        <img src={src} alt={`preview-${idx}`} />
-                                                        <button type="button" className="btn-remove-img" onClick={() => removeImage(idx)}>×</button>
-                                                    </div>
-                                                ))}
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label>Description & Rules</label>
-                                        <textarea name="description" value={form.description} onChange={handleChange} placeholder="Describe your hostel, rules, entry times, etc." />
-                                    </div>
-                                </section>
-
-                                <div className="form-footer-actions">
-                                    <p className="approval-notice">Listing will be visible after <strong>Admin Approval</strong>.</p>
-                                    <button type="submit" className="btn-submit-hostel">
-                                        {isEditing ? 'Update Hostel' : 'Submit for Approval'}
-                                    </button>
+                                    ))}
                                 </div>
-                            </form>
-                        </div>
-                    )}
-
-                    {activeTab === 'list' && (
-                        <div className="owner-list">
-                            <h3>Your Hostels</h3>
-                            {!token && <div className="form-error-banner">⚠️ Please <a href="/login">login</a> to view your listings.</div>}
-                            {loading ? <div className="loader"></div> : (
-                                hostels.length > 0 ? (
-                                    <div className="hostel-grid-owner">
-                                        {hostels.map(h => (
-                                            <div className="hostel-item-card" key={h._id || h.id}>
-                                                <div className="card-badge-status" data-status={h.status || 'pending'}>
-                                                    {h.status || 'Pending'}
-                                                </div>
-                                                <img src={h.images?.[0] || h.image || 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=400&q=60'} alt={h.name} />
-                                                <div className="hostel-meta">
-                                                    <h4>{h.name}</h4>
-                                                    <p className="loc">📍 {h.location}</p>
-                                                    <p className="price">Rs. {h.price || '—'}</p>
-                                                    <div className="card-actions">
-                                                        <button className="btn-edit-sm" onClick={() => handleEdit(h)}>Edit</button>
-                                                        <button className="btn-delete-sm">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : <div className="no-hostels">No hostels yet. Click 'Add New' to begin.</div>
-                            )}
-                        </div>
-                    )}
+                            ) : <div className="no-hostels">No hostels yet. Click 'Add New' to begin.</div>
+                        )}
+                    </div>
+                )}
             </main>
         </div>
     );

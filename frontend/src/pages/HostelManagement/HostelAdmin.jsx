@@ -3,6 +3,7 @@ import './HostelAdmin.css';
 
 const TABS = [
     { id: 'pending', label: '⏳ Pending Listings' },
+    { id: 'all', label: '📂 Manage All' },
     { id: 'reviews', label: '⭐ Reviews Moderation' },
     { id: 'reported', label: '🚩 Reported Listings' },
     { id: 'featured', label: '📌 Featured Listings' },
@@ -86,10 +87,18 @@ const HostelAdmin = () => {
         else flash(data.message || 'Failed', true);
     };
 
-    /* ---- Reported actions ---- */
+    /* ---- Reported / General actions ---- */
     const removeListing = async (id) => {
+        if (!window.confirm('Are you sure you want to permanently delete this listing?')) return;
+        
         const { ok, data } = await req(`${BASE}/hostel/${id}`, 'DELETE');
-        if (ok) { setReported(r => r.filter(x => x._id !== id)); setAllHostels(a => a.filter(x => x._id !== id)); flash('Listing removed.'); }
+        if (ok) { 
+            setReported(r => r.filter(x => x._id !== id)); 
+            setAllHostels(a => a.filter(x => x._id !== id)); 
+            setPending(p => p.filter(x => x._id !== id));
+            setFeatured(f => f.filter(x => x._id !== id));
+            flash('Listing removed.'); 
+        }
         else flash(data.message || 'Failed', true);
     };
     const dismissReport = async (id) => {
@@ -115,7 +124,7 @@ const HostelAdmin = () => {
     /* ---- Stat counts ---- */
     const stats = [
         { label: 'Pending', value: pending.length, color: '#f59e0b', icon: '⏳' },
-        { label: 'Reviews', value: reviews.length, color: '#8b5cf6', icon: '⭐' },
+        { label: 'Total', value: allHostels.length, color: '#3b82f6', icon: '📂' },
         { label: 'Reported', value: reported.length, color: '#ef4444', icon: '🚩' },
         { label: 'Featured', value: featured.length, color: '#10b981', icon: '📌' },
     ];
@@ -223,6 +232,50 @@ const HostelAdmin = () => {
                                             ))}
                                         </div>
                                     )}
+                            </div>
+                        {/* ===== MANAGE ALL LISTINGS ===== */}
+                        {activeTab === 'all' && (
+                            <div className="ha-section">
+                                <div className="ha-card-head">
+                                    <h3>System Listings</h3>
+                                    <span className="ha-count-pill">{allHostels.length} total hostels</span>
+                                </div>
+                                <div className="ha-table-wrapper">
+                                    <table className="ha-modern-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Hostel</th>
+                                                <th>Owner</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {allHostels.map(h => (
+                                                <tr key={h._id}>
+                                                    <td>
+                                                        <div className="ha-user-cell">
+                                                            <img src={h.images?.[0] || h.image || ''} style={{ width: '40px', height: '40px', borderRadius: '4px', objectFit: 'cover' }} alt="" />
+                                                            <div>
+                                                                <strong>{h.name}</strong>
+                                                                <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{h.location}</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{h.owner?.name || h.owner?.username || '—'}</td>
+                                                    <td>
+                                                        <span className={`ha-count-pill ${h.status === 'approved' ? 'success' : h.status === 'pending' ? 'warning' : 'danger'}`}>
+                                                            {h.status || 'Pending'}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <button className="ha-btn-text danger" onClick={() => removeListing(h._id)}>Delete</button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         )}
 
