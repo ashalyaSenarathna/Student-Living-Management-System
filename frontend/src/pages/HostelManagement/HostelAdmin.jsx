@@ -233,6 +233,7 @@ const HostelAdmin = () => {
                                         </div>
                                     )}
                             </div>
+                        )}
                         {/* ===== MANAGE ALL LISTINGS ===== */}
                         {activeTab === 'all' && (
                             <div className="ha-section">

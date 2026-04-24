@@ -163,7 +163,9 @@ const Navbar = () => {
                                 </div>
                             </li>
                         )}
-                        <li><Link to="/hostel" className={`navbar__link ${location.pathname === '/hostel' ? 'navbar__link--active' : ''}`}>Hostel</Link></li>
+                        {(!user || !['PROVIDER', 'DOCTOR', 'FOOD_PROVIDER'].includes(user?.role?.toUpperCase())) && (
+                            <li><Link to="/hostel" className={`navbar__link ${location.pathname === '/hostel' ? 'navbar__link--active' : ''}`}>Hostel</Link></li>
+                        )}
 
                         {/* Medical Panel Dropdown */}
                         {visibleMedicalItems.length > 0 && (
@@ -301,7 +303,9 @@ const Navbar = () => {
                             </li>
                         )}
 
-                        <li><Link to="/hostel" onClick={() => setMenuOpen(false)}>Hostel & Boarding</Link></li>
+                        {(!user || !['PROVIDER', 'DOCTOR', 'FOOD_PROVIDER'].includes(user?.role?.toUpperCase())) && (
+                            <li><Link to="/hostel" onClick={() => setMenuOpen(false)}>Hostel & Boarding</Link></li>
+                        )}
 
                         {/* Medical Panel Mobile Dropdown */}
                         {visibleMedicalItems.length > 0 && (

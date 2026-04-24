@@ -6,12 +6,14 @@ const {
     getAllUsers,
     approveProvider,
     deleteUser,
-    updateUserProfile
+    updateUserProfile,
+    getUserCount
 } = require('../../controllers/laundry/UserControllers');
 const { protect, admin } = require('../../middleware/authMiddleware');
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
+router.get('/count', getUserCount);
 router.put('/profile', protect, updateUserProfile);
 router.get('/', protect, admin, getAllUsers);
 router.put('/:id/approve', protect, admin, approveProvider);
