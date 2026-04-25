@@ -49,8 +49,7 @@ const HostelServices = () => {
     ];
 
     const filteredHostels = hostels.filter(hostel =>
-        hostel.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        hostel.address.toLowerCase().includes(searchTerm.toLowerCase())
+        hostel.name.toLowerCase().startsWith(searchTerm.toLowerCase())
     );
 
     return (
@@ -72,7 +71,7 @@ const HostelServices = () => {
                 <div className="search-box">
                     <input
                         type="text"
-                        placeholder="Search by name or location..."
+                        placeholder="Search by hostel name..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
