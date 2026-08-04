@@ -33,8 +33,7 @@ const HostelManagement = () => {
     }, []);
 
     const filtered = hostels.filter(h => {
-        const matchesSearch = h.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            h.location?.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesSearch = h.name?.toLowerCase().startsWith(searchTerm.toLowerCase());
         const matchesFilter = filter === 'all' || (h.gender?.toLowerCase() === filter);
         return matchesSearch && matchesFilter;
     });
@@ -73,7 +72,7 @@ const HostelManagement = () => {
                 <div className="search-box">
                     <input
                         type="text"
-                        placeholder="Search by name or location..."
+                        placeholder="Search by hostel name..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
